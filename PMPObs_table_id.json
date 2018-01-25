@@ -1,0 +1,9 @@
+{
+    "table_id":[
+        "PMPObs_Amon",
+        "PMPObs_Lmon",
+        "PMPObs_Omon",
+        "PMPObs_SImon",
+        "PMPObs_fx"
+    ]
+}

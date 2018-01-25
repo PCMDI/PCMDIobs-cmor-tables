@@ -17,9 +17,9 @@ import copy,gc,json,os,re,shutil,ssl,subprocess,sys,time
 from durolib import readJsonCreateDict ; #getGitInfo
 
 #%% Determine path
-homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
 #homePath = '/export/durack1/git/obs4MIPs-cmor-tables/' ; # Linux
-#homePath = '/sync/git/obs4MIPs-cmor-tables/src' ; # OS-X
+homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
 #os.chdir(homePath)
 
 #%% Create urllib2 context to deal with lab/LLNL web certificates
@@ -426,10 +426,39 @@ Amon['variable_entry']['pme']['valid_min'] = ''
 #%% Institution
 tmp = [['institution_id','https://raw.githubusercontent.com/PCMDI/obs4mips-cmor-tables/master/obs4MIPs_institution_id.json']
       ] ;
-institution_id = readJsonCreateDict(tmp)
-institution_id = institution_id.get('institution_id')
+#institution_id = readJsonCreateDict(tmp)
+#institution_id = institution_id.get('institution_id')
 
 # Fix issues
+institution_id ={}
+institution_id['institution_id'] = {}
+institution_id['institution_id']['ECMWF'] = 'The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK'
+'''
+List from https://goo.gl/GySZ56 to be updated
+ERA-40/ECMWF
+JRA-25/MRI
+AIRS/?
+MLS/?
+CERES/?
+GPCP/UofMD
+TRMM/?
+RSS/REMSS
+ISCCP/?
+MODIS/?
+CALIPSO/?
+WOA13v2/NOAA-NCEI
+Hosoda/?
+IPRC/?
+UCSD/?
+ERSSTv3b/NOAA-NCEI
+GISTEMP/NASA-GISS
+HadCRUT4.5/MOHC
+Kaplan_Extended_V2/?
+NOC1.1/NOC
+OAFluxV3/WHOI
+Aquarius/REMSS
+SMOS/?
+'''
 #==============================================================================
 # Example new institution_id entry
 #institution_id['institution_id']['NOAA-NCEI'] = 'NOAA\'s National Centers for Environmental Information, Asheville, NC 28801, USA'
@@ -477,10 +506,27 @@ required_global_attributes = [
 #%% Source ID
 tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/obs4mips-cmor-tables/master/obs4MIPs_source_id.json']
       ] ;
-source_id = readJsonCreateDict(tmp)
-source_id = source_id.get('source_id')
+#source_id = readJsonCreateDict(tmp)
+#source_id = source_id.get('source_id')
 
 # Enter fixes or additions below
+source_id = {}
+source_id['source_id'] = {}
+key = 'ERA-40'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'ECMWF - ERA-40 (European ReAnalysis 1957-2002)'
+source_id['source_id'][key]['institution_id'] = 'ECMWF'
+source_id['source_id'][key]['release_year'] = '2005'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'ECMWF-ERA-40'
+source_id['source_id'][key]['source_name'] = 'ECMWF ERA-40'
+source_id['source_id'][key]['source_type'] = 'reanalysis'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['ta','ua','va']
+source_id['source_id'][key]['source_version_number'] = '1.0'
+
+'''
+List from https://goo.gl/GySZ56 to be updated
 ERA-40/ECMWF
 ERA-Interim/ECMWF
 JRA-25/MRI
@@ -510,6 +556,7 @@ NOC1.1/NOC
 OAFluxV3/WHOI
 Aquarius/REMSS
 SMOS
+'''
 #==============================================================================
 # Example new source_id entry
 #key = 'CMSAF-SARAH-2-0'
@@ -579,13 +626,13 @@ for key in source_id['source_id'].keys():
     # Validate source_type
     val = source_id['source_id'][key]['source_type']
     if val not in source_type:
-        print'Invalid source_type for entry:',key,'- aborting'
+        print 'Invalid source_type for entry:',key,'- aborting'
         sys.exit()
     # Validate region
     vals = source_id['source_id'][key]['region']
     for val in vals:
-        if val not in region:
-            print'Invalid region for entry:',key,'- aborting'
+        if val not in region['region']:
+            print 'Invalid region for entry:',key,'- aborting'
             sys.exit()
 
 #%% Write variables to files
@@ -656,17 +703,16 @@ inputJson = ['frequency','grid_label','institution_id','license',
              'nominal_resolution','product','realm','region',
              'required_global_attributes','source_id','source_type','table_id', # These are controlled vocabs
              'coordinate','grids','formula_terms', # These are not controlled vocabs - rather lookup tables for CMOR
-             'Aday','Amon','Lmon','Omon','SImon','fx' # Update/add if new tables are generated
+             'Amon','Lmon','Omon','SImon','fx' # Update/add if new tables are generated
             ]
-tableList = ['Aday', 'Amon', 'Lmon', 'Omon', 'SImon', 'coordinate',
-             'formula_terms', 'fx', 'grids', 'monNobs', 'monStderr']
+tableList = ['Amon', 'Lmon', 'Omon', 'SImon', 'coordinate',
+             'formula_terms', 'fx', 'grids']
 
 # Load dictionaries from local files
 CVJsonList = copy.deepcopy(inputJson)
 CVJsonList.remove('coordinate')
 CVJsonList.remove('grids')
 CVJsonList.remove('formula_terms')
-CVJsonList.remove('Aday')
 CVJsonList.remove('Amon')
 CVJsonList.remove('Lmon')
 CVJsonList.remove('Omon')
@@ -677,39 +723,39 @@ for count,CV in enumerate(inputJson):
         path = '../Tables/'
     else:
         path = '../'
-    vars()[CV] = json.load(open(''.join([path,'obs4MIPs_',CV,'.json'])))
+    vars()[CV] = json.load(open(''.join([path,'PMPObs_',CV,'.json'])))
 
 # Build CV master dictionary
 
 
-obs4MIPs_CV = {}
-obs4MIPs_CV['CV'] = {}
+PMPObs_CV = {}
+PMPObs_CV['CV'] = {}
 for count,CV in enumerate(CVJsonList):
     # Create source entry from source_id
     if CV == 'source_id':
         source_id_ = source_id['source_id']
-        obs4MIPs_CV['CV']['source_id'] = {}
+        PMPObs_CV['CV']['source_id'] = {}
         for key,values in source_id_.iteritems():
-            obs4MIPs_CV['CV']['source_id'][key] = {}
+            PMPObs_CV['CV']['source_id'][key] = {}
             string = ''.join([source_id_[key]['source_label'],' ',
                               source_id_[key]['source_version_number'],' (',
                               source_id_[key]['release_year'],'): ',
                               source_id_[key]['source_description']])
-            obs4MIPs_CV['CV']['source_id'][key]['source_label'] = values['source_label']
-            obs4MIPs_CV['CV']['source_id'][key]['source_type'] = values['source_type']
-            obs4MIPs_CV['CV']['source_id'][key]['source_version_number'] = values['source_version_number']
-            obs4MIPs_CV['CV']['source_id'][key]['region'] = ', '.join(str(a) for a in values['region'])
-            obs4MIPs_CV['CV']['source_id'][key]['source'] = string
+            PMPObs_CV['CV']['source_id'][key]['source_label'] = values['source_label']
+            PMPObs_CV['CV']['source_id'][key]['source_type'] = values['source_type']
+            PMPObs_CV['CV']['source_id'][key]['source_version_number'] = values['source_version_number']
+            PMPObs_CV['CV']['source_id'][key]['region'] = ', '.join(str(a) for a in values['region'])
+            PMPObs_CV['CV']['source_id'][key]['source'] = string
     # Rewrite table names
     elif CV == 'table_id':
-        obs4MIPs_CV['CV']['table_id'] = []
+        PMPObs_CV['CV']['table_id'] = []
         for value in table_id['table_id']:
-            obs4MIPs_CV['CV']['table_id'].append(value)
+            PMPObs_CV['CV']['table_id'].append(value)
     # Else all other CVs
     elif CV not in tableList:
-        obs4MIPs_CV['CV'].update(eval(CV))
+        PMPObs_CV['CV'].update(eval(CV))
 # Add static entries to obs4MIPs_CV.json
-obs4MIPs_CV['CV']['activity_id'] = 'obs4MIPs'
+PMPObs_CV['CV']['activity_id'] = 'PMPObs'
 
 # Dynamically update "data_specs_version": "2.0.0", in rssSsmiPrw-input.json
 #print os.getcwd()
@@ -718,39 +764,37 @@ obs4MIPs_CV['CV']['activity_id'] = 'obs4MIPs'
 #tagInd = tagTxt.find('(')
 #tagTxt = tagTxt[0:tagInd].replace('latest_tagPoint: ','').strip()
 
-# Write demo obs4MIPs_CV.json
-'''
-if os.path.exists('Tables/obs4MIPs_CV.json'):
-    print 'File existing, purging:','obs4MIPs_CV.json'
-    os.remove('Tables/obs4MIPs_CV.json')
-fH = open('Tables/obs4MIPs_CV.json','w')
-json.dump(obs4MIPs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+# Write demo PMPObs_CV.json
+if os.path.exists('Tables/PMPObs_CV.json'):
+    print 'File existing, purging:','PMPObs_CV.json'
+    os.remove('Tables/PMPObs_CV.json')
+fH = open('Tables/PMPObs_CV.json','w')
+json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
 fH.close()
 
 # Write ../Tables obs4MIPs_CV.json
-if os.path.exists('../Tables/obs4MIPs_CV.json'):
-    print 'File existing, purging:','obs4MIPs_CV.json'
-    os.remove('../Tables/obs4MIPs_CV.json')
-fH = open('../Tables/obs4MIPs_CV.json','w')
-json.dump(obs4MIPs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+if os.path.exists('../Tables/PMPObs_CV.json'):
+    print 'File existing, purging:','PMPObs_CV.json'
+    os.remove('../Tables/PMPObs_CV.json')
+fH = open('../Tables/PMPObs_CV.json','w')
+json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
 fH.close()
 
 # Loop and write all other files
 os.chdir('Tables')
 #tableList.extend(lookupList)
 for count,CV in enumerate(tableList):
-    outFile = ''.join(['obs4MIPs_',CV,'.json'])
+    outFile = ''.join(['PMPObs_',CV,'.json'])
     if os.path.exists(outFile):
         print 'File existing, purging:',outFile
         os.remove(outFile)
     fH = open(outFile,'w')
     json.dump(eval(CV),fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
     fH.close()
-'''
 
 # Cleanup
 del(coordinate,count,formula_terms,frequency,grid_label,homePath,institution_id,
-    nominal_resolution,obs4MIPs_CV,product,realm,inputJson,tableList,
+    nominal_resolution,PMPObs_CV,product,realm,inputJson,tableList,
     required_global_attributes,table_id)
 
 #%% Generate zip archive
