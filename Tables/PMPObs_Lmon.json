@@ -12,7 +12,7 @@
         "product":"observations",
         "realm":"land",
         "table_date":"09 November 2017",
-        "table_id":"Table obs4MIPs_Lmon"
+        "table_id":"Table PMPObs_Lmon"
     },
     "variable_entry":{
         "baresoilFrac":{

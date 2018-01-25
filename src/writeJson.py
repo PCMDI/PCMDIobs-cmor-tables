@@ -8,18 +8,19 @@ Paul J. Durack 24th January 2018
 This script generates all json files residing in this subdirectory
 
 PJD 24 Jan 2018     - Started, copied from https://github.com/PCMDI/obs4MIPs-cmor-tables
+PJD 25 Jan 2018     - First pass at complete tables etc, with institution_id and source_id entries to start
 
 @author: durack1
 """
 
 #%% Import statements
-import copy,gc,json,os,re,shutil,ssl,subprocess,sys,time
+import copy,gc,json,os,re,shutil,ssl,sys
 from durolib import readJsonCreateDict ; #getGitInfo
 
 #%% Determine path
-#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
 #homePath = '/export/durack1/git/obs4MIPs-cmor-tables/' ; # Linux
-homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
+#homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
 #os.chdir(homePath)
 
 #%% Create urllib2 context to deal with lab/LLNL web certificates
@@ -81,339 +82,9 @@ for count,table in enumerate(tmp.keys()):
         vars()[table] = tmp[table]
 del(tmp,count,table) ; gc.collect()
 
-'''
-None of this should be required
-# Cleanup by extracting only variable lists
-for count2,table in enumerate(tableSource):
-    tableName = table[0]
-    #print 'tableName:',tableName
-    #print eval(tableName)
-    if tableName in ['coordinate','formula_terms','frequency','grid_label','nominal_resolution']:
-        continue
-    else:
-        if tableName in ['monNobs', 'monStderr']:
-            eval(tableName)['Header'] = copy.deepcopy(Amon['Header']) ; # Copy header info from upstream file
-            del(eval(tableName)['Header']['#dataRequest_specs_version']) ; # Purge upstream identifier
-            eval(tableName)['Header']['realm'] = 'aerosol atmos atmosChem land landIce ocean ocnBgchem seaIce' ; # Append all realms
-        eval(tableName)['Header']['Conventions'] = 'CF-1.7 ODS-2.1' ; # Update "Conventions": "CF-1.7 CMIP-6.0"
-        if tableName not in ['monNobs', 'monStderr']:
-            eval(tableName)['Header']['#dataRequest_specs_version'] = eval(tableName)['Header']['data_specs_version']
-        eval(tableName)['Header']['data_specs_version'] = '2.1.0'
-        if 'mip_era' in eval(tableName)['Header'].keys():
-            eval(tableName)['Header']['#mip_era'] = eval(tableName)['Header']['mip_era']
-            del(eval(tableName)['Header']['mip_era']) ; # Remove after rewriting
-        eval(tableName)['Header']['product'] = 'observations' ; # Cannot be 'observations reanalysis'
-        eval(tableName)['Header']['table_date'] = time.strftime('%d %B %Y')
-        eval(tableName)['Header']['table_id'] = ''.join(['Table obs4MIPs_',tableName])
-        # Attempt to move information from input.json to table files - #84 - CMOR-limited
-        #eval(tableName)['Header']['activity_id'] = 'obs4MIPs'
-        #eval(tableName)['Header']['_further_info_url_tmpl'] = 'http://furtherinfo.es-doc.org/<activity_id><institution_id><source_label><source_id><variable_id>'
-        #eval(tableName)['Header']['output_file_template'] = '<variable_id><table_id><source_id><variant_label><grid_label>'
-        #eval(tableName)['Header']['output_path_template'] = '<activity_id><institution_id><source_id><table_id><variable_id><grid_label><version>'
-        #eval(tableName)['Header']['tracking_prefix'] = 'hdl:21.14102'
-        #eval(tableName)['Header']['_control_vocabulary_file'] = 'obs4MIPs_CV.json'
-        #eval(tableName)['Header']['_AXIS_ENTRY_FILE'] = 'obs4MIPs_coordinate.json'
-        #eval(tableName)['Header']['_FORMULA_VAR_FILE'] = 'obs4MIPs_formula_terms.json'
-        if 'baseURL' in eval(tableName)['Header'].keys():
-            del(eval(tableName)['Header']['baseURL']) ; # Remove spurious entry
-
-# Cleanup realms
-Amon['Header']['realm']     = 'atmos'
-Amon['variable_entry'].pop('pfull')
-Amon['variable_entry'].pop('phalf')
-Lmon['Header']['realm']     = 'land'
-Omon['Header']['realm']     = 'ocean'
-SImon['Header']['realm']    = 'seaIce'
-fx['Header']['realm']       = 'fx'
-Aday['Header']['table_id']  = 'Table obs4MIPs_Aday' ; # Cleanup from upstream
-
-# Clean out modeling_realm
-for jsonName in ['Aday','Amon','Lmon','Omon','SImon']:
-    dictToClean = eval(jsonName)
-    for key, value in dictToClean.iteritems():
-        if key == 'Header':
-            continue
-        for key1,value1 in value.iteritems():
-            if 'modeling_realm' in dictToClean[key][key1].keys():
-                dictToClean[key][key1].pop('modeling_realm')
-            if 'cell_measures' in dictToClean[key][key1].keys():
-                dictToClean[key][key1]['cell_measures'] = '' ; # Set all cell_measures entries to blank
-
-# Set missing value for integer variables
-for tab in (Aday, Amon, Lmon, Omon, SImon, fx, Aday, monNobs, monStderr):
-    tab['Header']['int_missing_value'] = str(-2**31)
-
-# Add new variables
-# Variable sponsor - NOAA-NCEI; Jim Baird (JimBiardCics)
-Amon['variable_entry'][u'ttbr'] = {}
-Amon['variable_entry']['ttbr']['cell_measures'] = ''
-Amon['variable_entry']['ttbr']['cell_methods'] = 'time: mean'
-Amon['variable_entry']['ttbr']['comment'] = ''
-Amon['variable_entry']['ttbr']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['ttbr']['frequency'] = 'mon'
-Amon['variable_entry']['ttbr']['long_name'] = 'Top of Atmosphere Brightness Temperature'
-Amon['variable_entry']['ttbr']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['ttbr']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['ttbr']['out_name'] = 'ttbr'
-Amon['variable_entry']['ttbr']['positive'] = ''
-Amon['variable_entry']['ttbr']['standard_name'] = 'toa_brightness_temperature'
-Amon['variable_entry']['ttbr']['type'] = 'real'
-Amon['variable_entry']['ttbr']['units'] = 'K'
-Amon['variable_entry']['ttbr']['valid_max'] = ''
-Amon['variable_entry']['ttbr']['valid_min'] = ''
-# Variable sponsor - NOAA-NCEI; Jim Baird (JimBiardCics) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/16
-Lmon['variable_entry'][u'ndvi'] = {}
-Lmon['variable_entry']['ndvi']['cell_measures'] = ''
-Lmon['variable_entry']['ndvi']['cell_methods'] = 'area: mean where land time: mean'
-Lmon['variable_entry']['ndvi']['comment'] = ''
-Lmon['variable_entry']['ndvi']['dimensions'] = 'longitude latitude time'
-Lmon['variable_entry']['ndvi']['frequency'] = 'mon'
-Lmon['variable_entry']['ndvi']['long_name'] = 'Normalized Difference Vegetation Index'
-Lmon['variable_entry']['ndvi']['ok_max_mean_abs'] = ''
-Lmon['variable_entry']['ndvi']['ok_min_mean_abs'] = ''
-Lmon['variable_entry']['ndvi']['out_name'] = 'ndvi'
-Lmon['variable_entry']['ndvi']['positive'] = ''
-Lmon['variable_entry']['ndvi']['standard_name'] = 'normalized_difference_vegetation_index'
-Lmon['variable_entry']['ndvi']['type'] = 'real'
-Lmon['variable_entry']['ndvi']['units'] = '1'
-Lmon['variable_entry']['ndvi']['valid_max'] = '1.0'
-Lmon['variable_entry']['ndvi']['valid_min'] = '-0.1'
-# Variable sponsor - NOAA-NCEI; Jim Baird (JimBiardCics) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/15
-Lmon['variable_entry'][u'fapar'] = {}
-Lmon['variable_entry']['fapar']['cell_measures'] = ''
-Lmon['variable_entry']['fapar']['cell_methods'] = 'area: mean where land time: mean'
-Lmon['variable_entry']['fapar']['comment'] = 'The fraction of incoming solar radiation in the photosynthetically active radiation spectral region that is absorbed by a vegetation canopy.'
-Lmon['variable_entry']['fapar']['dimensions'] = 'longitude latitude time'
-Lmon['variable_entry']['fapar']['frequency'] = 'mon'
-Lmon['variable_entry']['fapar']['long_name'] = 'Fraction of Absorbed Photosynthetically Active Radiation'
-Lmon['variable_entry']['fapar']['ok_max_mean_abs'] = ''
-Lmon['variable_entry']['fapar']['ok_min_mean_abs'] = ''
-Lmon['variable_entry']['fapar']['out_name'] = 'fapar'
-Lmon['variable_entry']['fapar']['positive'] = ''
-Lmon['variable_entry']['fapar']['standard_name'] = 'fraction_of_surface_downwelling_photosynthetic_radiative_flux_absorbed_by_vegetation'
-Lmon['variable_entry']['fapar']['type'] = 'real'
-Lmon['variable_entry']['fapar']['units'] = '1'
-Lmon['variable_entry']['fapar']['valid_max'] = '1.0'
-Lmon['variable_entry']['fapar']['valid_min'] = '0.0'
-#####################################################################################################################
-# DWD cloud variables (CM SAF CLARA & ESA Cloud_CCI) ...
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'clCCI'] = {}
-Amon['variable_entry']['clCCI']['cell_measures'] = ''
-Amon['variable_entry']['clCCI']['cell_methods'] = 'area: time: mean'
-Amon['variable_entry']['clCCI']['comment'] = 'Percentage cloud cover in optical depth categories.'
-Amon['variable_entry']['clCCI']['dimensions'] = 'longitude latitude plev7c tau time'
-Amon['variable_entry']['clCCI']['frequency'] = 'mon'
-Amon['variable_entry']['clCCI']['long_name'] = 'CCI Cloud Area Fraction'
-Amon['variable_entry']['clCCI']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['clCCI']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['clCCI']['out_name'] = 'clCCI'
-Amon['variable_entry']['clCCI']['positive'] = ''
-Amon['variable_entry']['clCCI']['standard_name'] = 'cloud_area_fraction_in_atmosphere_layer'
-Amon['variable_entry']['clCCI']['type'] = 'real'
-Amon['variable_entry']['clCCI']['units'] = '%'
-Amon['variable_entry']['clCCI']['valid_max'] = ''
-Amon['variable_entry']['clCCI']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'clCLARA'] = {}
-Amon['variable_entry']['clCLARA']['cell_measures'] = ''
-Amon['variable_entry']['clCLARA']['cell_methods'] = 'area: mean time: mean'
-Amon['variable_entry']['clCLARA']['comment'] = 'Percentage cloud cover in optical depth categories.'
-Amon['variable_entry']['clCLARA']['dimensions'] = 'longitude latitude plev7c tau time'
-Amon['variable_entry']['clCLARA']['frequency'] = 'mon'
-Amon['variable_entry']['clCLARA']['long_name'] = 'CLARA Cloud Area Fraction'
-Amon['variable_entry']['clCLARA']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['clCLARA']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['clCLARA']['out_name'] = 'clCLARA'
-Amon['variable_entry']['clCLARA']['positive'] = ''
-Amon['variable_entry']['clCLARA']['standard_name'] = 'cloud_area_fraction_in_atmosphere_layer'
-Amon['variable_entry']['clCLARA']['type'] = 'real'
-Amon['variable_entry']['clCLARA']['units'] = '%'
-Amon['variable_entry']['clCLARA']['valid_max'] = ''
-Amon['variable_entry']['clCLARA']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'cltCCI'] = {}
-Amon['variable_entry']['cltCCI']['cell_measures'] = ''
-Amon['variable_entry']['cltCCI']['cell_methods'] = 'area: time: mean'
-Amon['variable_entry']['cltCCI']['comment'] = 'Total cloud area fraction for the whole atmospheric column, as seen from the surface or the top of the atmosphere. Includes both large-scale and convective cloud.'
-Amon['variable_entry']['cltCCI']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['cltCCI']['frequency'] = 'mon'
-Amon['variable_entry']['cltCCI']['long_name'] = 'CCI Total Cloud Fraction'
-Amon['variable_entry']['cltCCI']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['cltCCI']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['cltCCI']['out_name'] = 'cltCCI'
-Amon['variable_entry']['cltCCI']['positive'] = ''
-Amon['variable_entry']['cltCCI']['standard_name'] = 'cloud_area_fraction'
-Amon['variable_entry']['cltCCI']['type'] = 'real'
-Amon['variable_entry']['cltCCI']['units'] = '%'
-Amon['variable_entry']['cltCCI']['valid_max'] = ''
-Amon['variable_entry']['cltCCI']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'cltCLARA'] = {}
-Amon['variable_entry']['cltCLARA']['cell_measures'] = ''
-Amon['variable_entry']['cltCLARA']['cell_methods'] = 'area: mean time: mean'
-Amon['variable_entry']['cltCLARA']['comment'] = 'Total cloud area fraction for the whole atmospheric column, as seen from the surface or the top of the atmosphere. Includes both large-scale and convective cloud.'
-Amon['variable_entry']['cltCLARA']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['cltCLARA']['frequency'] = 'mon'
-Amon['variable_entry']['cltCLARA']['long_name'] = 'CLARA Total Cloud Fraction'
-Amon['variable_entry']['cltCLARA']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['cltCLARA']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['cltCLARA']['out_name'] = 'cltCLARA'
-Amon['variable_entry']['cltCLARA']['positive'] = ''
-Amon['variable_entry']['cltCLARA']['standard_name'] = 'cloud_area_fraction'
-Amon['variable_entry']['cltCLARA']['type'] = 'real'
-Amon['variable_entry']['cltCLARA']['units'] = '%'
-Amon['variable_entry']['cltCLARA']['valid_max'] = ''
-Amon['variable_entry']['cltCLARA']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'clwCCI'] = {}
-Amon['variable_entry']['clwCCI']['cell_measures'] = ''
-Amon['variable_entry']['clwCCI']['cell_methods'] = 'area: time: mean'
-Amon['variable_entry']['clwCCI']['comment'] = 'Percentage liquid cloud cover in optical depth categories.'
-Amon['variable_entry']['clwCCI']['dimensions'] = 'longitude latitude plev7c tau time'
-Amon['variable_entry']['clwCCI']['frequency'] = 'mon'
-Amon['variable_entry']['clwCCI']['long_name'] = 'CCI Liquid Cloud Area Fraction'
-Amon['variable_entry']['clwCCI']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['clwCCI']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['clwCCI']['out_name'] = 'clwCCI'
-Amon['variable_entry']['clwCCI']['positive'] = ''
-Amon['variable_entry']['clwCCI']['standard_name'] = 'liquid_water_cloud_area_fraction_in_atmosphere_layer'
-Amon['variable_entry']['clwCCI']['type'] = 'real'
-Amon['variable_entry']['clwCCI']['units'] = '%'
-Amon['variable_entry']['clwCCI']['valid_max'] = ''
-Amon['variable_entry']['clwCCI']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'clwCLARA'] = {}
-Amon['variable_entry']['clwCLARA']['cell_measures'] = ''
-Amon['variable_entry']['clwCLARA']['cell_methods'] = 'area: mean time: mean'
-Amon['variable_entry']['clwCLARA']['comment'] = 'Percentage liquid cloud cover in optical depth categories.'
-Amon['variable_entry']['clwCLARA']['dimensions'] = 'longitude latitude plev7c tau time'
-Amon['variable_entry']['clwCLARA']['frequency'] = 'mon'
-Amon['variable_entry']['clwCLARA']['long_name'] = 'CLARA Liquid Cloud Area Fraction'
-Amon['variable_entry']['clwCLARA']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['clwCLARA']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['clwCLARA']['out_name'] = 'clwCLARA'
-Amon['variable_entry']['clwCLARA']['positive'] = ''
-Amon['variable_entry']['clwCLARA']['standard_name'] = 'liquid_water_cloud_area_fraction_in_atmosphere_layer'
-Amon['variable_entry']['clwCLARA']['type'] = 'real'
-Amon['variable_entry']['clwCLARA']['units'] = '%'
-Amon['variable_entry']['clwCLARA']['valid_max'] = ''
-Amon['variable_entry']['clwCLARA']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'clwtCCI'] = {}
-Amon['variable_entry']['clwtCCI']['cell_measures'] = ''
-Amon['variable_entry']['clwtCCI']['cell_methods'] = 'area: time: mean'
-Amon['variable_entry']['clwtCCI']['comment'] = ''
-Amon['variable_entry']['clwtCCI']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['clwtCCI']['frequency'] = 'mon'
-Amon['variable_entry']['clwtCCI']['long_name'] = 'CCI Total Liquid Cloud Area Fraction'
-Amon['variable_entry']['clwtCCI']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['clwtCCI']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['clwtCCI']['out_name'] = 'clwtCCI'
-Amon['variable_entry']['clwtCCI']['positive'] = ''
-Amon['variable_entry']['clwtCCI']['standard_name'] = 'liquid_water_cloud_area_fraction'
-Amon['variable_entry']['clwtCCI']['type'] = 'real'
-Amon['variable_entry']['clwtCCI']['units'] = '%'
-Amon['variable_entry']['clwtCCI']['valid_max'] = ''
-Amon['variable_entry']['clwtCCI']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'clwtCLARA'] = {}
-Amon['variable_entry']['clwtCLARA']['cell_measures'] = ''
-Amon['variable_entry']['clwtCLARA']['cell_methods'] = 'area: mean time: mean'
-Amon['variable_entry']['clwtCLARA']['comment'] = ''
-Amon['variable_entry']['clwtCLARA']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['clwtCLARA']['frequency'] = 'mon'
-Amon['variable_entry']['clwtCLARA']['long_name'] = 'CLARA Total Liquid Cloud Area Fraction'
-Amon['variable_entry']['clwtCLARA']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['clwtCLARA']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['clwtCLARA']['out_name'] = 'clwtCLARA'
-Amon['variable_entry']['clwtCLARA']['positive'] = ''
-Amon['variable_entry']['clwtCLARA']['standard_name'] = 'liquid_water_cloud_area_fraction'
-Amon['variable_entry']['clwtCLARA']['type'] = 'real'
-Amon['variable_entry']['clwtCLARA']['units'] = '%'
-Amon['variable_entry']['clwtCLARA']['valid_max'] = ''
-Amon['variable_entry']['clwtCLARA']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'pctCCI'] = {}
-Amon['variable_entry']['pctCCI']['cell_measures'] = ''
-Amon['variable_entry']['pctCCI']['cell_methods'] = 'area: time: mean'
-Amon['variable_entry']['pctCCI']['comment'] = ''
-Amon['variable_entry']['pctCCI']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['pctCCI']['frequency'] = 'mon'
-Amon['variable_entry']['pctCCI']['long_name'] = 'CCI Mean Cloud Top Pressure'
-Amon['variable_entry']['pctCCI']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['pctCCI']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['pctCCI']['out_name'] = 'pctCCI'
-Amon['variable_entry']['pctCCI']['positive'] = ''
-Amon['variable_entry']['pctCCI']['standard_name'] = 'air_pressure_at_cloud_top'
-Amon['variable_entry']['pctCCI']['type'] = 'real'
-Amon['variable_entry']['pctCCI']['units'] = 'Pa'
-Amon['variable_entry']['pctCCI']['valid_max'] = ''
-Amon['variable_entry']['pctCCI']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/48
-Amon['variable_entry'][u'pctCLARA'] = {}
-Amon['variable_entry']['pctCLARA']['cell_measures'] = ''
-Amon['variable_entry']['pctCLARA']['cell_methods'] = 'area: mean time: mean'
-Amon['variable_entry']['pctCLARA']['comment'] = ''
-Amon['variable_entry']['pctCLARA']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['pctCLARA']['frequency'] = 'mon'
-Amon['variable_entry']['pctCLARA']['long_name'] = 'CLARA Mean Cloud Top Pressure'
-Amon['variable_entry']['pctCLARA']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['pctCLARA']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['pctCLARA']['out_name'] = 'pctCLARA'
-Amon['variable_entry']['pctCLARA']['positive'] = ''
-Amon['variable_entry']['pctCLARA']['standard_name'] = 'air_pressure_at_cloud_top'
-Amon['variable_entry']['pctCLARA']['type'] = 'real'
-Amon['variable_entry']['pctCLARA']['units'] = 'Pa'
-Amon['variable_entry']['pctCLARA']['valid_max'] = ''
-Amon['variable_entry']['pctCLARA']['valid_min'] = ''
-# Variable sponsor - DWD; Stephan Finkensieper (Funkensieper) https://github.com/PCMDI/obs4MIPs-cmor-tables/issues/72
-Amon['variable_entry'][u'pme'] = {}
-Amon['variable_entry']['pme']['cell_measures'] = ''
-Amon['variable_entry']['pme']['cell_methods'] = 'area: time: mean'
-Amon['variable_entry']['pme']['comment'] = ('Net flux of water (in all phases) between the atmosphere and underlying surface '
-                                            'including vegetation), mainly resulting from the difference of precipitation '
-                                            'and evaporation')
-Amon['variable_entry']['pme']['dimensions'] = 'longitude latitude time'
-Amon['variable_entry']['pme']['frequency'] = 'mon'
-Amon['variable_entry']['pme']['long_name'] = 'Surface Downward Freshwater Flux'
-Amon['variable_entry']['pme']['ok_max_mean_abs'] = ''
-Amon['variable_entry']['pme']['ok_min_mean_abs'] = ''
-Amon['variable_entry']['pme']['out_name'] = 'pme'
-Amon['variable_entry']['pme']['positive'] = ''
-Amon['variable_entry']['pme']['standard_name'] = 'surface_downward_water_flux'
-Amon['variable_entry']['pme']['type'] = 'real'
-Amon['variable_entry']['pme']['units'] = 'kg m-2 s-1'
-Amon['variable_entry']['pme']['valid_max'] = ''
-Amon['variable_entry']['pme']['valid_min'] = ''
-
-# monNobs
-#--------
-# Example new monNobs entry
-#monNobs['variable_entry'][u'ndviNobs']['comment'] = ''
-#monNobs['variable_entry'][u'ndviNobs']['dimensions'] = 'longitude latitude time'
-#monNobs['variable_entry'][u'ndviNobs']['frequency'] = 'mon'
-#monNobs['variable_entry'][u'ndviNobs']['long_name'] = 'NDVI number of observations'
-#monNobs['variable_entry'][u'ndviNobs']['modeling_realm'] = 'atmos' ; # Overwrites table realm entry (CMOR will fail if multiple realms are set in the header and this field is missing)
-#monNobs['variable_entry'][u'ndviNobs']['out_name'] = 'ndviNobs'
-#monNobs['variable_entry'][u'ndviNobs']['standard_name'] = 'number_of_observations'
-#monNobs['variable_entry'][u'ndviNobs']['type'] = ''
-#monNobs['variable_entry'][u'ndviNobs']['units'] = '1'
-
-# monStderr
-#--------
-# Example new monStderr entry
-#monStderr['variable_entry'][u'ndviStderr'] = {}
-#monStderr['variable_entry'][u'ndviStderr']['comment'] = ''
-#monStderr['variable_entry'][u'ndviStderr']['dimensions'] = 'longitude latitude time'
-#monStderr['variable_entry'][u'ndviStderr']['frequency'] = 'mon'
-#monStderr['variable_entry'][u'ndviStderr']['long_name'] = 'NDVI standard error'
-#monStderr['variable_entry'][u'ndviStderr']['modeling_realm'] = 'atmos' ; # Overwrites table realm entry (CMOR will fail if multiple realms are set in the header and this field is missing)
-#monStderr['variable_entry'][u'ndviStderr']['out_name'] = 'ndviStderr'
-#monStderr['variable_entry'][u'ndviStderr']['standard_name'] = 'normalized_difference_vegetation_index standard_error'
-#monStderr['variable_entry'][u'ndviStderr']['type'] = 'real'
-#monStderr['variable_entry'][u'ndviStderr']['units'] = ''
-'''
+# Cleanup table_id values
+for table in ['Amon','Lmon','Omon','SImon','fx']:
+    eval(table)['Header']['table_id']  = ''.join(['Table PMPObs_',table]) ; # Cleanup from upstream
 
 #%% Coordinate
 
@@ -500,7 +171,7 @@ required_global_attributes = [
  'table_id',
  'tracking_id',
  'variable_id',
- 'variant_label'
+ 'variant_label' # Not likely required
 ] ;
 
 #%% Source ID

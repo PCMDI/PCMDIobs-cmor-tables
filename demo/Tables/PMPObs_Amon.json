@@ -12,7 +12,7 @@
         "product":"observations",
         "realm":"atmos",
         "table_date":"09 November 2017",
-        "table_id":"Table obs4MIPs_Amon"
+        "table_id":"Table PMPObs_Amon"
     },
     "variable_entry":{
         "ccb":{
