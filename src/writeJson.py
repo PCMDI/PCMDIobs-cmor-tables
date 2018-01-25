@@ -424,10 +424,10 @@ Amon['variable_entry']['pme']['valid_min'] = ''
 #%% Grid label
 
 #%% Institution
-tmp = [['institution_id','https://raw.githubusercontent.com/PCMDI/obs4mips-cmor-tables/master/obs4MIPs_institution_id.json']
+tmp = [['institution_id','https://raw.githubusercontent.com/PCMDI/PMPObs-cmor-tables/master/PMPObs_institution_id.json']
       ] ;
-#institution_id = readJsonCreateDict(tmp)
-#institution_id = institution_id.get('institution_id')
+institution_id = readJsonCreateDict(tmp)
+institution_id = institution_id.get('institution_id')
 
 # Fix issues
 institution_id ={}
@@ -504,10 +504,10 @@ required_global_attributes = [
 ] ;
 
 #%% Source ID
-tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/obs4mips-cmor-tables/master/obs4MIPs_source_id.json']
+tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/PMPObs-cmor-tables/master/PMPObs_source_id.json']
       ] ;
-#source_id = readJsonCreateDict(tmp)
-#source_id = source_id.get('source_id')
+source_id = readJsonCreateDict(tmp)
+source_id = source_id.get('source_id')
 
 # Enter fixes or additions below
 source_id = {}
