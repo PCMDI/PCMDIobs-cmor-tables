@@ -9,6 +9,7 @@ This script generates all json files residing in this subdirectory
 
 PJD 24 Jan 2018     - Started, copied from https://github.com/PCMDI/obs4MIPs-cmor-tables
 PJD 25 Jan 2018     - First pass at complete tables etc, with institution_id and source_id entries to start
+PJD 29 Jan 2018     - Updated product, realm and region format
 
 @author: durack1
 """
@@ -18,10 +19,10 @@ import copy,gc,json,os,re,shutil,ssl,sys
 from durolib import readJsonCreateDict ; #getGitInfo
 
 #%% Determine path
-homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
 #homePath = '/export/durack1/git/obs4MIPs-cmor-tables/' ; # Linux
-#homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
-#os.chdir(homePath)
+homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
+os.chdir(homePath)
 
 #%% Create urllib2 context to deal with lab/LLNL web certificates
 ctx                 = ssl.create_default_context()
@@ -76,7 +77,8 @@ tableSource = [
 tmp = readJsonCreateDict(tableSource)
 for count,table in enumerate(tmp.keys()):
     #print 'table:', table
-    if table in ['frequency','grid_label','nominal_resolution']:
+    if table in ['frequency','grid_label','nominal_resolution','product',
+                 'realm','region']:
         vars()[table] = tmp[table].get(table)
     else:
         vars()[table] = tmp[table]
@@ -302,7 +304,7 @@ for key in source_id['source_id'].keys():
     # Validate region
     vals = source_id['source_id'][key]['region']
     for val in vals:
-        if val not in region['region']:
+        if val not in region: #['region']:
             print 'Invalid region for entry:',key,'- aborting'
             sys.exit()
 
@@ -345,7 +347,7 @@ for jsonName in masterTargets:
         jsonDict[jsonName.replace('_','')] = eval(jsonName)
     elif jsonName not in ['coordinate','formula_terms','fx','grids',
                           'institution_id','source_id','Aday','Amon','Lmon',
-                          'Omon','SImon','monNobs','monStderr']:
+                          'Omon','SImon']: #,'product','realm','region']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
