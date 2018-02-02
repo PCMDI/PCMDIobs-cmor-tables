@@ -19,9 +19,9 @@ import copy,gc,json,os,re,shutil,ssl,sys
 from durolib import readJsonCreateDict ; #getGitInfo
 
 #%% Determine path
-#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
 #homePath = '/export/durack1/git/obs4MIPs-cmor-tables/' ; # Linux
-homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
+#homePath = '/sync/git/PMPObs-cmor-tables/src' ; # OS-X
 os.chdir(homePath)
 
 #%% Create urllib2 context to deal with lab/LLNL web certificates
@@ -106,6 +106,8 @@ institution_id = institution_id.get('institution_id')
 institution_id ={}
 institution_id['institution_id'] = {}
 institution_id['institution_id']['ECMWF'] = 'The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK'
+institution_id['institution_id']['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+
 '''
 List from https://goo.gl/GySZ56 to be updated
 ERA-40/ECMWF
