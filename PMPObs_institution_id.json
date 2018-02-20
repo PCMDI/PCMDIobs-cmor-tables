@@ -1,6 +1,12 @@
 {
     "institution_id":{
+        "DWD":"Deutscher Wetterdienst, Offenbach 63067, Germany",
         "ECMWF":"The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK",
-        "MRI":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan"
+        "MRI":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
+        "NASA-JPL":"NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA",
+        "NCAR":"National Center for Atmospheric Research, Boulder, CO 80307, USA",
+        "NOAA-NCEI":"NOAA National Centers for Environmental Information, Asheville, NC 28801, USA",
+        "PCMDI":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
+        "RSS":"Remote Sensing Systems, Santa Rosa, CA 95401, USA"
     }
 }
