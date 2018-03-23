@@ -7,7 +7,7 @@
     "license":                      "Data in this file produced by PCMDI is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (https://creativecommons.org/licenses/). Use of the data must be acknowledged following guidelines found at https://pcmdi.llnl.gov/CMIP6/TermsOfUse. Further information about this data, including some limitations, can be found via https://pcmdi.llnl.gov/research/metrics",
 
     "#comment": "source, source_id, source_label, source_type, source_version_number and region comes from source_id match in controlled vocabulary registered content",
-    "source_id":                    "ERA-40",
+    "source_id":                    "ERAINT",
     "grid":                         "1.5x1.5 degree latitude x longitude",
     "grid_label":                   "gn",
     "nominal_resolution":           "100 km",
@@ -20,7 +20,7 @@
     "variant_label":                "BE",
 
     "#comment": "The user may choose to define or omit/delete some or all of the following",
-    "title":                        "ERA-40 prepared for PMPObs (ODS-v2.1.0)",
+    "title":                        "ERAINT prepared for PMPObs (ODS-v2.1.0)",
     "variant_info":                 "Best Estimate",
     "comment":                      "",
     "history":                      "",
