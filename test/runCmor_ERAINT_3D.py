@@ -10,10 +10,10 @@ cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,m
 inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/clim_obs/obs/atm/mo/'
 inputFilePathend = '/ERAINT/'
-inputFileName = ['va_ERAINT_198901-201001.nc','ta_ERAINT_198901-201001.nc','ua_ERAINT_198901-201001.nc']
-inputVarName = ['va','ta','ua']
-outputVarName = ['va','ta','ua']
-outputUnits = ['m s-1','K','m s-1']
+inputFileName = ['va_ERAINT_198901-201001.nc','ta_ERAINT_198901-201001.nc','ua_ERAINT_198901-201001.nc','hur_ERAINT_198901-201001.nc','hus_ERAINT_198901-201001.nc','zg_ERAINT_198901-201001.nc']
+inputVarName = ['va','ta','ua','hur','hus','zg']
+outputVarName = ['va','ta','ua','hur','hus','zg']
+outputUnits = ['m s-1','K','m s-1','%','1.0','m']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
