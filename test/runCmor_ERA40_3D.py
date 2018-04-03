@@ -7,7 +7,7 @@ import MV2 as mv
 
 #%% User provided input
 cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
-inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
+inputJson = 'ERA40-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/clim_obs/obs/atm/mo/'
 inputFilePathend = '/ERA40/'
 inputFileName = ['va_ERA40_195709-200208.nc','ta_ERA40_195709-200208.nc','ua_ERA40_195709-200208.nc','hur_ERA40_195709-200208.nc','hus_ERA40_195709-200208.nc','zg_ERA40_195709-200208.nc']
