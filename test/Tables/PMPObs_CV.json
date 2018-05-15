@@ -71,8 +71,10 @@
             "ECMWF":"The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK",
             "MRI":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
             "NASA-JPL":"NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA",
+            "NASA-GSFC":"NASA Goddard Space Flight Center, Greenbelt, MD 20771, USA",
             "NCAR":"National Center for Atmospheric Research, Boulder, CO 80307, USA",
             "NOAA-NCEI":"NOAA National Centers for Environmental Information, Asheville, NC 28801, USA",
+            "NOAA":"National Oceanic & Atmospheric Administration, Boulder, CO 80305, USA",
             "PCMDI":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
             "JRA":"Global Environment and Marine Department, Japan Meteorological Agency, Japan",
             "RSS":"Remote Sensing Systems, Santa Rosa, CA 95401, USA"
@@ -220,6 +222,20 @@
                 "source":"JRA25 1.0 (2002): JRA25 (Japanese ReAnalysis 1957-2002)",
                 "source_label":"JRA-JRA25",
                 "source_type":"reanalysis",
+                "source_version_number":"1.0"
+            },
+            "GPCP":{
+                "region":"global",
+                "source":"NOAA-GPCP 2.3 (analysis 1979-2009)",
+                "source_label":"GPCP",
+                "source_type":"analysis",
+                "source_version_number":"1.0"
+            },
+            "TRMM":{
+                "region":"global",
+                "source":"NASA-TRMM (observation 2000-2009)",
+                "source_label":"TRMM",
+                "source_type":"observation",
                 "source_version_number":"1.0"
             }
         },
