@@ -1,5 +1,42 @@
 {
     "source_id":{
+        "ERA-40":{
+            "institution_id":"ECMWF",
+            "region":[
+                "global"
+            ],
+            "release_year":"2005",
+            "source_description":"ECMWF - ERA-40 (European ReAnalysis 1957-2002)",
+            "source_id":"ERA-40",
+            "source_label":"ECMWF-ERA-40",
+            "source_name":"ECMWF ERA-40",
+            "source_type":"reanalysis",
+            "source_variables":[
+                "ta",
+                "ua",
+                "va"
+            ],
+            "source_version_number":"1.0"
+        },
+        "ERA-INT":{
+            "institution_id":"ECMWF",
+            "region":[
+                "global"
+            ],
+            "release_year":"2010",
+            "source_description":"ECMWF-ERAINT 1.0 (2010): ECMWF - ERAINT (European ReAnalysis 1989-2010)",
+            "source_id":"ERA-INT",
+            "source_label":"ECMWF-ERAINT",
+            "source_name":"ECMWF-ERAINT",
+            "source_type":"reanalysis",
+            "source_variables":[
+                "ta",
+                "ua",
+                "va",
+                "zg"
+            ],
+            "source_version_number":"N/A"
+        },
         "GPCP-2-3":{
             "institution_id":"NOAA",
             "region":[
@@ -15,6 +52,25 @@
                 "pr"
             ],
             "source_version_number":"2.3"
+        },
+        "JRA25":{
+            "institution_id":"MRI",
+            "region":[
+                "global"
+            ],
+            "release_year":"2002",
+            "source_description":"JRA25 1.0 (2002): JRA25 (Japanese ReAnalysis 1957-2002)",
+            "source_id":"JRA25",
+            "source_label":"MRI-JRA25",
+            "source_name":"MRI-JRA25",
+            "source_type":"reanalysis",
+            "source_variables":[
+                "ta",
+                "ua",
+                "va",
+                "zg"
+            ],
+            "source_version_number":"N/A"
         }
     }
 }

@@ -200,12 +200,33 @@
             "variant_label"
         ],
         "source_id":{
+            "ERA-40":{
+                "region":"global",
+                "source":"ECMWF-ERA-40 1.0 (2005): ECMWF - ERA-40 (European ReAnalysis 1957-2002)",
+                "source_label":"ECMWF-ERA-40",
+                "source_type":"reanalysis",
+                "source_version_number":"1.0"
+            },
+            "ERA-INT":{
+                "region":"global",
+                "source":"ECMWF-ERAINT N/A (2010): ECMWF-ERAINT 1.0 (2010): ECMWF - ERAINT (European ReAnalysis 1989-2010)",
+                "source_label":"ECMWF-ERAINT",
+                "source_type":"reanalysis",
+                "source_version_number":"N/A"
+            },
             "GPCP-2-3":{
                 "region":"global",
                 "source":"GPCP-2-3 2.3 (N/A): Merged Precipitation",
                 "source_label":"GPCP-2-3",
                 "source_type":"satellite_blended",
                 "source_version_number":"2.3"
+            },
+            "JRA25":{
+                "region":"global",
+                "source":"MRI-JRA25 N/A (2002): JRA25 1.0 (2002): JRA25 (Japanese ReAnalysis 1957-2002)",
+                "source_label":"MRI-JRA25",
+                "source_type":"reanalysis",
+                "source_version_number":"N/A"
             }
         },
         "source_type":{

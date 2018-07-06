@@ -1,6 +1,6 @@
 {
     "#comment": "institution comes from institution_id match to the registered content in source_id controlled vocabulary - A user must register their institution and source_id",
-    "institution_id":               "NOAA",
+    "institution_id":               "NOAA-NCEI",
 
     "#comment": "The following attributes must be defined by the user",
     "contact":                      "PCMDI (pcmdi-metrics@llnl.gov)",
@@ -30,7 +30,7 @@
     "activity_id":                  "pmpobs1-5-1",
     "output_file_template":         "<variable_id><frequency><source_id><variant_label><grid_label>",
     "tmpoutput_path_template":      "<activity_id><institution_id><source_id><frequency><variable_id><grid_label><version>",
-    "output_path_template":         "<activity_id><realm><frequency><variable_id><institution_id><source_id><grid_label><version>",
+    "output_path_template":         "<activity_id><realm><frequency><variable_id><source_id><grid_label><version>",
     "tracking_prefix":              "hdl:21.14102",
     "_history_template":            "%s; CMOR rewrote data to be consistent with <activity_id>, and <Conventions> standards",
     "_control_vocabulary_file":     "PMPObs_CV.json",
