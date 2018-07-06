@@ -1,22 +1,20 @@
 {
     "source_id":{
-        "ERA-40":{
-            "institution_id":"ECMWF",
+        "GPCP-2-3":{
+            "institution_id":"NOAA",
             "region":[
                 "global"
             ],
-            "release_year":"2005",
-            "source_description":"ECMWF - ERA-40 (European ReAnalysis 1957-2002)",
-            "source_id":"ERA-40",
-            "source_label":"ECMWF-ERA-40",
-            "source_name":"ECMWF ERA-40",
-            "source_type":"reanalysis",
+            "release_year":"N/A",
+            "source_description":"Merged Precipitation",
+            "source_id":"GPCP-2-3",
+            "source_label":"GPCP-2-3",
+            "source_name":"GPCP-2-3",
+            "source_type":"satellite_blended",
             "source_variables":[
-                "ta",
-                "ua",
-                "va"
+                "pr"
             ],
-            "source_version_number":"1.0"
+            "source_version_number":"2.3"
         }
     }
 }
