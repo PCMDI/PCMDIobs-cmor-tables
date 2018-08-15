@@ -103,16 +103,7 @@ institution_id = readJsonCreateDict(tmp)
 institution_id = institution_id.get('institution_id')
 
 # Fix issues
-institution_id ={}
-institution_id['institution_id'] = {}
-institution_id['institution_id']['ECMWF'] = 'The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK'
-institution_id['institution_id']['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-institution_id['institution_id']['NASA-JPL'] = 'NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA'
-institution_id['institution_id']['NOAA-NCEI'] = 'NOAA National Centers for Environmental Information, Asheville, NC 28801, USA'
-institution_id['institution_id']['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-institution_id['institution_id']['RSS'] = 'Remote Sensing Systems, Santa Rosa, CA 95401, USA'
-institution_id['institution_id']['DWD'] = 'Deutscher Wetterdienst, Offenbach 63067, Germany'
-institution_id['institution_id']['NCAR'] = 'National Center for Atmospheric Research, Boulder, CO 80307, USA'
+execfile('institution_ids.py')
 
 '''
 List from https://goo.gl/GySZ56 to be updated
@@ -191,59 +182,8 @@ source_id = readJsonCreateDict(tmp)
 source_id = source_id.get('source_id')
 
 # Enter fixes or additions below
-source_id = {}
-source_id['source_id'] = {}
-key = 'ERA-40'
-source_id['source_id'][key] = {}
-source_id['source_id'][key]['source_description'] = 'ECMWF - ERA-40 (European ReAnalysis 1957-2002)'
-source_id['source_id'][key]['institution_id'] = 'ECMWF'
-source_id['source_id'][key]['release_year'] = '2005'
-source_id['source_id'][key]['source_id'] = key
-source_id['source_id'][key]['source_label'] = 'ECMWF-ERA-40'
-source_id['source_id'][key]['source_name'] = 'ECMWF ERA-40'
-source_id['source_id'][key]['source_type'] = 'reanalysis'
-source_id['source_id'][key]['region'] = ['global']
-source_id['source_id'][key]['source_variables'] = ['ta','ua','va']
-source_id['source_id'][key]['source_version_number'] = '1.0'
 
-key = 'GPCP-2-3'
-source_id['source_id'][key] = {}
-source_id['source_id'][key]['source_description'] = 'Merged Precipitation'
-source_id['source_id'][key]['institution_id'] = 'NOAA'
-source_id['source_id'][key]['release_year'] = 'N/A'
-source_id['source_id'][key]['source_id'] = key
-source_id['source_id'][key]['source_label'] = 'GPCP-2-3'
-source_id['source_id'][key]['source_name'] = 'GPCP-2-3'
-source_id['source_id'][key]['source_type'] = 'satellite_blended'
-source_id['source_id'][key]['region'] = ['global']
-source_id['source_id'][key]['source_variables'] = ['pr']
-source_id['source_id'][key]['source_version_number'] = '2.3'
-
-key = 'ERA-INT'
-source_id['source_id'][key] = {}
-source_id['source_id'][key]['source_description'] = 'ECMWF-ERAINT 1.0 (2010): ECMWF - ERAINT (European ReAnalysis 1989-2010)'
-source_id['source_id'][key]['institution_id'] = 'ECMWF'
-source_id['source_id'][key]['release_year'] = '2010'
-source_id['source_id'][key]['source_id'] = key
-source_id['source_id'][key]['source_label'] = 'ECMWF-ERAINT'
-source_id['source_id'][key]['source_name'] = 'ECMWF-ERAINT'
-source_id['source_id'][key]['source_type'] = 'reanalysis'
-source_id['source_id'][key]['region'] = ['global']
-source_id['source_id'][key]['source_variables'] = ['ta','ua','va','zg']
-source_id['source_id'][key]['source_version_number'] = 'N/A'
-
-key = 'JRA25'
-source_id['source_id'][key] = {}
-source_id['source_id'][key]['source_description'] = 'JRA25 1.0 (2002): JRA25 (Japanese ReAnalysis 1957-2002)'
-source_id['source_id'][key]['institution_id'] = 'MRI'
-source_id['source_id'][key]['release_year'] = '2002'
-source_id['source_id'][key]['source_id'] = key
-source_id['source_id'][key]['source_label'] = 'MRI-JRA25'
-source_id['source_id'][key]['source_name'] = 'MRI-JRA25'
-source_id['source_id'][key]['source_type'] = 'reanalysis'
-source_id['source_id'][key]['region'] = ['global']
-source_id['source_id'][key]['source_variables'] = ['ta','ua','va','zg']
-source_id['source_id'][key]['source_version_number'] = 'N/A'
+execfile('source_ids.py')
 
 '''
 List from https://goo.gl/GySZ56 to be updated

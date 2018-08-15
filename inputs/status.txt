@@ -1,0 +1,6 @@
+Transitioned...
+
+runCmor_ERAINT_2D.py and ERAINT-input.json
+
+runCmor_ERA40_2D.py and ERA40-input.json
+
