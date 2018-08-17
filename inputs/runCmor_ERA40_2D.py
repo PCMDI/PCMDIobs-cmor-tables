@@ -14,7 +14,8 @@ inputVarName = ['v10','t2m','u10','msl']
 outputVarName = ['vas','tas','uas','psl']
 outputUnits = ['m s-1','K','m s-1','Pa']
 
-### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
+### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE..
+###################################################################################
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
   inputFilePath = inputFilePathbgn+inputFilePathend
@@ -74,5 +75,4 @@ for fi in range(len(inputVarName)):
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
   cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds) ; # Write variable with time axis
   f.close()
-
   cmor.close()

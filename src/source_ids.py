@@ -26,6 +26,19 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['pr']
 source_id['source_id'][key]['source_version_number'] = '2.3'
 
+key = 'GPCP-1-3'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'Merged Precipitation'
+source_id['source_id'][key]['institution_id'] = 'NASA-JPL'
+source_id['source_id'][key]['release_year'] = 'N/A'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'GPCP-1-3'
+source_id['source_id'][key]['source_name'] = 'GPCP-1-3'
+source_id['source_id'][key]['source_type'] = 'satellite_blended'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['pr']
+source_id['source_id'][key]['source_version_number'] = '1.3'
+
 key = 'ERA-INT'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'ECMWF-ERAINT 1.0 (2010): ECMWF - ERAINT (European ReAnalysis 1989-2010)'

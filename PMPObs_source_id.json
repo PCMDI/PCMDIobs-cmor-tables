@@ -37,6 +37,22 @@
             ],
             "source_version_number":"N/A"
         },
+        "GPCP-1-3":{
+            "institution_id":"NASA-JPL",
+            "region":[
+                "global"
+            ],
+            "release_year":"N/A",
+            "source_description":"Merged Precipitation",
+            "source_id":"GPCP-1-3",
+            "source_label":"GPCP-1-3",
+            "source_name":"GPCP-1-3",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "pr"
+            ],
+            "source_version_number":"1.3"
+        },
         "GPCP-2-3":{
             "institution_id":"NOAA",
             "region":[
