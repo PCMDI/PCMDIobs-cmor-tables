@@ -1,23 +1,23 @@
 import cmor
 import cdms2 as cdm
 import numpy as np
-#cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
+cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
-cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
+cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/obs/atm/mo/'
-inputFilePathend = '/ERAINT/'
-inputFileName = ['vas_ERAINT_198901-200911.nc','tas_ERAINT_198901-200911.nc','uas_ERAINT_198901-200911.nc','psl_ERAINT_198901-200911.nc','ts_ERAINT_198901-200911.nc']
-inputVarName = ['vas','tas','uas','psl','ts']
+inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathend = '/interim/'
+inputFileName = ['vas_era_interim.nc','tas_era_interim.nc','uas_era_interim.nc','psl_era_interim.nc','ts_era_interim.nc']
+inputVarName = ['v10','t2m','u10','msl','sstk']
 outputVarName = ['vas','tas','uas','psl','ts']
 outputUnits = ['m s-1','K','m s-1','Pa','K']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+  inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
@@ -29,10 +29,10 @@ for fi in range(len(inputVarName)):
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
 # Deal with problematic "months since" calendar/time axis
-#####time_bounds = time.getBounds()
-#####time_bounds[:,0] = time[:]
-#####time_bounds[:-1,1] = time[1:]
-#####time_bounds[-1,1] = time_bounds[-1,0]+1
+  time_bounds = time.getBounds()
+  time_bounds[:,0] = time[:]
+  time_bounds[:-1,1] = time[1:]
+  time_bounds[-1,1] = time_bounds[-1,0]+1
 #####time.setBounds() #####time_bounds)
 #####del(time_bounds) ; # Cleanup
 
@@ -72,7 +72,7 @@ for fi in range(len(inputVarName)):
 
 # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
-  cmor.write(varid,values,time_vals=time[:],time_bnds=time.getBounds()) ; # Write variable with time axis
+  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds) ; # Write variable with time axis
   f.close()
 
   cmor.close()

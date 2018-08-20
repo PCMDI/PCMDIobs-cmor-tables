@@ -70,6 +70,7 @@
             "DWD":"Deutscher Wetterdienst, Offenbach 63067, Germany",
             "ECMWF":"The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK",
             "MRI":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
+            "NASA-GSFC":"NASA Goddard Space Flight Center, Greenbelt MD, USA",
             "NASA-JPL":"NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA",
             "NCAR":"National Center for Atmospheric Research, Boulder, CO 80307, USA",
             "NOAA-NCEI":"NOAA National Centers for Environmental Information, Asheville, NC 28801, USA",
@@ -206,6 +207,34 @@
                 "source_label":"ECMWF-ERA-40",
                 "source_type":"reanalysis",
                 "source_version_number":"1.0"
+            },
+            "ERA-INT":{
+                "region":"global",
+                "source":"ECMWF-ERAINT N/A (2010): ECMWF-ERAINT 1.0 (2010): ECMWF - ERAINT (European ReAnalysis 1989-2010)",
+                "source_label":"ECMWF-ERAINT",
+                "source_type":"reanalysis",
+                "source_version_number":"N/A"
+            },
+            "GPCP-1-3":{
+                "region":"global",
+                "source":"GPCP-1-3 1.3 (N/A): Merged Precipitation",
+                "source_label":"GPCP-1-3",
+                "source_type":"satellite_blended",
+                "source_version_number":"1.3"
+            },
+            "GPCP-2-3":{
+                "region":"global",
+                "source":"GPCP-2-3 2.3 (N/A): Merged Precipitation",
+                "source_label":"GPCP-2-3",
+                "source_type":"satellite_blended",
+                "source_version_number":"2.3"
+            },
+            "JRA25":{
+                "region":"global",
+                "source":"MRI-JRA25 N/A (2002): JRA25 1.0 (2002): JRA25 (Japanese ReAnalysis 1957-2002)",
+                "source_label":"MRI-JRA25",
+                "source_type":"reanalysis",
+                "source_version_number":"N/A"
             }
         },
         "source_type":{
@@ -216,6 +245,7 @@
         },
         "table_id":[
             "PMPObs_Amon",
+            "PMPObs_Aday",
             "PMPObs_Lmon",
             "PMPObs_Omon",
             "PMPObs_SImon",

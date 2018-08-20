@@ -7,21 +7,21 @@ import numpy as np
 #%% User provided input
 cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'CERES-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/obs/atm/mo/'
-inputFilePathend = '/CERES/'
-inputFileName = ['rlut_CERES-EBAF_L3B_Ed2-6r_200003-201206.nc','rsdt_CERES-EBAF_L3B_Ed2-6r_200003-201206.nc','rsutcs_CERES-EBAF_L3B_Ed2-6r_200003-201206.nc','rlutcs_CERES-EBAF_L3B_Ed2-6r_200003-201206.nc']
-inputVarName = ['rlut','rsdt','rsutcs','rlutcs']
-outputVarName = ['rlut','rsdt','rsutcs','rlutcs']
+inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathend = '/ceres/'
+inputFileName = 'CERES_EBAF-TOA_Ed4.0_Subset_200003-201801.nc'
+inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_mon','toa_lw_clr_mon']
+outputVarName = ['rlut','rsut','rsutcs','rlutcs']
 outputUnits = ['W m-2','W m-2','W m-2','W m-2']
-outpos = ['up','down','up','up']
+outpos = ['up','up','up','up']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+  inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
-  f = cdm.open(inputFilePath+inputFileName[fi])
+  f = cdm.open(inputFilePath+inputFileName)
   d = f(inputVarName[fi])
   lat = d.getLatitude()
   lon = d.getLongitude()
