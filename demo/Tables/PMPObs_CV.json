@@ -72,6 +72,7 @@
             "MRI":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
             "NASA-GSFC":"NASA Goddard Space Flight Center, Greenbelt MD, USA",
             "NASA-JPL":"NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA",
+            "NASA/LaRC":"NASA/LaRC (Langley Research Center) Hampton, Va",
             "NCAR":"National Center for Atmospheric Research, Boulder, CO 80307, USA",
             "NOAA-NCEI":"NOAA National Centers for Environmental Information, Asheville, NC 28801, USA",
             "PCMDI":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
@@ -201,6 +202,13 @@
             "variant_label"
         ],
         "source_id":{
+            "CERES-EBAF-4-0":{
+                "region":"global",
+                "source":"CERES-EBAF-4-0 4.0 (2018): CERES EBAF (Energy Balanced and Filled) TOA Fluxes. Monthly Averages",
+                "source_label":"CERES-EBAF-4-0",
+                "source_type":"satellite_blended",
+                "source_version_number":"4.0"
+            },
             "ERA-40":{
                 "region":"global",
                 "source":"ECMWF-ERA-40 1.0 (2005): ECMWF - ERA-40 (European ReAnalysis 1957-2002)",

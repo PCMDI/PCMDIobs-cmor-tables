@@ -4,6 +4,7 @@ institution_id['institution_id']['ECMWF'] = 'The European Centre for Medium-Rang
 institution_id['institution_id']['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
 institution_id['institution_id']['NASA-JPL'] = 'NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA'
 institution_id['institution_id']['NASA-GSFC'] = 'NASA Goddard Space Flight Center, Greenbelt MD, USA'
+institution_id['institution_id']['NASA/LaRC'] = 'NASA/LaRC (Langley Research Center) Hampton, Va'
 institution_id['institution_id']['NOAA-NCEI'] = 'NOAA National Centers for Environmental Information, Asheville, NC 28801, USA'
 institution_id['institution_id']['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 institution_id['institution_id']['RSS'] = 'Remote Sensing Systems, Santa Rosa, CA 95401, USA'
