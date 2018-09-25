@@ -5,3 +5,16 @@ runCmor_ERAINT_2D.py and ERAINT-input.json
 
 runCmor_ERA40_2D.py and ERA40-input.json
 
+runCmor_GPCP2.3.py and GPCP2.3-input.json 
+
+runCmor_CERES4.0_2D.py and CERES4.0-input.json  
+
+runCmor_TRMM.py and TRMM-input.json  
+
+runCmor_JRA25_2D.py and JRA25-input.json  
+
+runCmor_RSS_2D.py and rssSsmiPrw-input.json xxxxx 
+	Error: The source_id, "REMSS-PRW-6-6-0",  which you specified in your 
+	! input file could not be found in 
+	! your Controlled Vocabulary file. (Tables/PMPObs_CV.json) 
+
