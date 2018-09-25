@@ -79,3 +79,16 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['ta','ua','va','zg']
 source_id['source_id'][key]['source_version_number'] = 'N/A'
 
+key = 'TRMM' #
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'Merged Precipitation'  #
+source_id['source_id'][key]['institution_id'] = 'NASA-GSFC'
+source_id['source_id'][key]['release_year'] = 'N/A'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'TRMM'
+source_id['source_id'][key]['source_name'] = 'TRMM'
+source_id['source_id'][key]['source_type'] = 'satellite_blended'  #
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['pr']
+source_id['source_id'][key]['source_version_number'] = '2.3'  #
+
