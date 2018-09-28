@@ -2,35 +2,44 @@ import cmor
 import cdms2 as cdm
 import numpy as np
 import MV2 as mv
-#cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
+cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
 cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/obs/atm/mo/'
-inputFilePathend = '/ERAINT/'
-inputFileName = ['va_ERAINT_198901-201001.nc','ta_ERAINT_198901-201001.nc','ua_ERAINT_198901-201001.nc','hur_ERAINT_198901-201001.nc','hus_ERAINT_198901-201001.nc','zg_ERAINT_198901-201001.nc']
-inputVarName = ['va','ta','ua','hur','hus','zg']
+inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathend = 'interim/'
+inputFileName = ['va_era_interim.nc','ta_era_interim.nc','ua_era_interim.nc','hur_era_interim.nc','hus_era_interim.nc','zg_era_interim.nc']
+inputVarName = ['v','t','u','r','q','z']
 outputVarName = ['va','ta','ua','hur','hus','zg']
-outputUnits = ['m s-1','K','m s-1','%','1.0','m']
+outputUnits = ['m s-1','K','m s-1','%','kg kg**-1','m']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+  inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
   d1 = f(inputVarName[fi])
-  plev17 = d1.getLevel()
+  if inputVarName[fi] in ['z']:
+     d1.data[:,:,:,:] = d1.data[:,:,:,:] / 9.8
+  plev17 = d1.getAxis(1)  #getLevel()
   lat = d1.getLatitude()
   lon = d1.getLongitude()
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d1.getAxis(0) ; # Rather use a file dimension-based load statement
 
+# Deal with problematic "months since" calendar/time axis
+  time_bounds = time.getBounds()
+  time_bounds[:,0] = time[:]
+  time_bounds[:-1,1] = time[1:]
+  time_bounds[-1,1] = time_bounds[-1,0]+1
+
 # Deal with plev17 to plev19 conversion
-  plev19 = np.append(plev17,[500.,100.]) ; # Add missing upper two values
+  plev17[:] = plev17[:]*100.
+  plev19 = np.append(plev17[-1::-1],[500.,100.]) ; # Add missing upper two values
   plev19 = cdm.createAxis(plev19,id='plev')
   plev19.designateLevel()
   plev19.axis = 'Z'
@@ -42,9 +51,11 @@ for fi in range(len(inputVarName)):
 
 # Pad data array with missing values
   d2 = np.ma.array(np.ma.ones([d1.shape[0],2,d1.shape[2],d1.shape[3]]),mask=True)*1e20
-  d = mv.concatenate((d1,d2),axis=1)
+  d11 = d1[:,-1::-1,:,:]
+  print d2.shape,d11.shape
+  d = mv.concatenate((d11,d2),axis=1)
 
-  del(d1,d2,plev17) ; # Cleanup
+  del(d1,d11,d2,plev17) ; # Cleanup
 
 #%% Initialize and run CMOR
 # For more information see https://cmor.llnl.gov/mydoc_cmor3_api/

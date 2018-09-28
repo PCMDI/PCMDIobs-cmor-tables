@@ -2,27 +2,28 @@ import cmor
 import cdms2 as cdm
 import numpy as np
 import MV2 as mv
-#cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
+cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
 cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERA40-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/obs/atm/mo/'
-inputFilePathend = '/ERA40/'
-inputFileName = ['va_ERA40_195709-200208.nc','ta_ERA40_195709-200208.nc','ua_ERA40_195709-200208.nc','hur_ERA40_195709-200208.nc','hus_ERA40_195709-200208.nc','zg_ERA40_195709-200208.nc']
-inputVarName = ['va','ta','ua','hur','hus','zg']
+inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathend = 'era_40/'
+inputFileName = ['va_era_40.nc','ta_era_40.nc','ua_era_40.nc','hur_era_40.nc','hus_era_40.nc','zg_era_40.nc']
+inputVarName = ['v','t','u','r','q','z']
 outputVarName = ['va','ta','ua','hur','hus','zg']
-outputUnits = ['m s-1','K','m s-1','%','1.0','m']
+outputUnits = ['m s-1','K','m s-1','%','kg kg**-1','m']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+  inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
-  d1 = f(inputVarName[fi],plev=(100000., 85000.))
+  d1 = f(inputVarName[fi],plev=(1000., 850.))
+  #d11 = d1[:,-1::-1,:,:]
 #[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
   plev1 = d1.getLevel()
   lat = d1.getLatitude()
@@ -30,22 +31,27 @@ for fi in range(len(inputVarName)):
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d1.getAxis(0) ; # Rather use a file dimension-based load statement
 
-  d2 = f(inputVarName[fi],plev=(70000., 1000.))
-#[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
-  plev2 = d2.getLevel()
+# Deal with problematic "months since" calendar/time axis
+  time_bounds = time.getBounds()
+  time_bounds[:,0] = time[:]
+  time_bounds[:-1,1] = time[1:]
+  time_bounds[-1,1] = time_bounds[-1,0]+1
 
-  d3 = f(inputVarName[fi],plev=500.)
-#[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
+  d2 = f(inputVarName[fi],plev=(700., 10.))
+  plev2 = d2.getLevel()
+  #d22 = d2[:,-1::-1,:,:]
+
+  d3 = f(inputVarName[fi],plev=5.)
   plev3 = d3.getLevel()
 
-  d4 = f(inputVarName[fi],plev=100.)
-#[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
+  d4 = f(inputVarName[fi],plev=1.)
   plev4 = d4.getLevel()
 
 # Deal with plev17 to plev19 conversion
   plev19 = np.append(plev1,plev2)
   plev19 = np.append(plev19,plev3)
   plev19 = np.append(plev19,plev4) ; # Add missing upper two values
+  plev19[:] = plev19[:]*100.
   plev19 = cdm.createAxis(plev19,id='plev')
   plev19.designateLevel()
   plev19.axis = 'Z'
@@ -58,6 +64,9 @@ for fi in range(len(inputVarName)):
 # Pad data array with missing values
 #  d2 = np.ma.array(np.ma.ones([d1.shape[0],2,d1.shape[2],d1.shape[3]]),mask=True)*1e20
   d = mv.concatenate((d1,d2,d3,d4),axis=1)
+  print d.shape
+  if inputVarName[fi] in ['z']:
+     d.data[:,:,:,:] = d.data[:,:,:,:] / 9.8
 
   del(d1,d2,d3,d4,plev1,plev2,plev3,plev4) ; # Cleanup
 

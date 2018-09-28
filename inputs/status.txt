@@ -13,8 +13,25 @@ runCmor_TRMM.py and TRMM-input.json
 
 runCmor_JRA25_2D.py and JRA25-input.json  
 
-runCmor_RSS_2D.py and rssSsmiPrw-input.json xxxxx 
+runCmor_RSS_2D.py and rssSsmiPrw-input.json XXXXX 
 	Error: The source_id, "REMSS-PRW-6-6-0",  which you specified in your 
 	! input file could not be found in 
 	! your Controlled Vocabulary file. (Tables/PMPObs_CV.json) 
+
+
+The codes to process 3D variables from the original data are ready...
+
+runCmor_ERAINT_3D.py
+
+runCmor_ERA40_3D.py
+
+runCmor_JRA25_3D.py XXXXX
+(cmor331) -bash-4.1$ python -i runCmor_JRA25_3D.py
+0 vgrdprs
+/work/zhang24/anaconda2/envs/cmor331/lib/python2.7/site-packages/cdms2/axis.py:762: UserWarning: genutil module not present, was not able to determine if axis is level based on units
+  "genutil module not present, was not able to determine if axis is level based on units")
+Traceback (most recent call last):
+  File "runCmor_JRA25_3D_orig.py", line 108, in <module>
+    cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds()) ; # Write variable with time axis
+TypeError: 'numpy.ndarray' object is not callable
 

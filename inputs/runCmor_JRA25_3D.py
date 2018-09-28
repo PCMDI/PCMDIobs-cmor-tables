@@ -2,27 +2,27 @@ import cmor
 import cdms2 as cdm
 import numpy as np
 import MV2 as mv
-#cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
+cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
 cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'JRA25-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/obs/atm/mo/'
-inputFilePathend = '/JRA25/'
-inputFileName = ['va_JRA25_197901-201006.nc','ta_JRA25_197901-201006.nc','ua_JRA25_197901-201006.nc','zg_JRA25_197901-201006.nc']
-inputVarName = ['va','ta','ua','zg']
+inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathend = '/JRA-25/anl_p/'
+inputFileName = 'anl_p.monthly.ctl'
+inputVarName = ['vgrdprs','tmpprs','ugrdprs','hgtprs']
 outputVarName = ['va','ta','ua','zg']
 outputUnits = ['m s-1','K','m s-1','m']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+  inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
-  f = cdm.open(inputFilePath+inputFileName[fi])
-  d1 = f(inputVarName[fi],plev=(100000., 1000.))
+  f = cdm.open(inputFilePath+inputFileName)
+  d1 = f(inputVarName[fi],plev=(1000., 850.))
 #[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
   plev1 = d1.getLevel()
   lat = d1.getLatitude()
@@ -30,17 +30,26 @@ for fi in range(len(inputVarName)):
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d1.getAxis(0) ; # Rather use a file dimension-based load statement
 
-  d3 = f(inputVarName[fi],plev=500.)
-#[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
+# Deal with problematic "months since" calendar/time axis
+  time_bounds = time.getBounds()
+  time_bounds[:,0] = time[:]
+  time_bounds[:-1,1] = time[1:]
+  time_bounds[-1,1] = time_bounds[-1,0]+1
+
+  d2 = f(inputVarName[fi],plev=(700.,10.))
+  plev2 = d2.getLevel()
+
+  d3 = f(inputVarName[fi],plev=5.)
   plev3 = d3.getLevel()
 
-  d4 = f(inputVarName[fi],plev=100.)
-#[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
+  d4 = f(inputVarName[fi],plev=1.)
   plev4 = d4.getLevel()
 
 # Deal with plev17 to plev19 conversion
-  plev19 = np.append(plev1,plev3)
+  plev19 = np.append(plev1,plev2)
+  plev19 = np.append(plev19,plev3)
   plev19 = np.append(plev19,plev4) ; # Add missing upper two values
+  plev19[:] = plev19[:]*100.
   plev19 = cdm.createAxis(plev19,id='plev')
   plev19.designateLevel()
   plev19.axis = 'Z'
@@ -52,9 +61,9 @@ for fi in range(len(inputVarName)):
 
 # Pad data array with missing values
 #  d2 = np.ma.array(np.ma.ones([d1.shape[0],2,d1.shape[2],d1.shape[3]]),mask=True)*1e20
-  d = mv.concatenate((d1,d3,d4),axis=1)
+  d = mv.concatenate((d1,d2,d3,d4),axis=1)
 
-  del(d1,d3,d4,plev1,plev3,plev4) ; # Cleanup
+  del(d1,d2,d3,d4,plev1,plev2,plev3,plev4) ; # Cleanup
 
 #%% Initialize and run CMOR
 # For more information see https://cmor.llnl.gov/mydoc_cmor3_api/
@@ -96,6 +105,6 @@ for fi in range(len(inputVarName)):
 
 # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
-  cmor.write(varid,values,time_vals=time[:],time_bnds=time.getBounds()) ; # Write variable with time axis
+  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds()) ; # Write variable with time axis
   f.close()
   cmor.close()
