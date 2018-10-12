@@ -43,7 +43,7 @@ for fi in range(len(inputVarName)):
   cmor.load_table(cmorTable)
 #cmor.set_cur_dataset_attribute('history',f.history) ; # Force input file attribute as history
   axes    = [ {'table_entry': 'time',
-             'units': time.units, # 'days since 1870-01-01',
+             'units': 'days since 1979-01-01', #time.units, # 'days since 1870-01-01',
              },
              {'table_entry': 'latitude',
               'units': 'degrees_north',

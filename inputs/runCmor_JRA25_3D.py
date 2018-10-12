@@ -6,7 +6,7 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
-cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
+cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'JRA25-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/clim_obs/orig/data/'
 inputFilePathend = '/JRA-25/anl_p/'
@@ -63,7 +63,7 @@ for fi in range(len(inputVarName)):
 #  d2 = np.ma.array(np.ma.ones([d1.shape[0],2,d1.shape[2],d1.shape[3]]),mask=True)*1e20
   d = mv.concatenate((d1,d2,d3,d4),axis=1)
 
-  del(d1,d2,d3,d4,plev1,plev2,plev3,plev4) ; # Cleanup
+  #del(d1,d2,d3,d4,plev1,plev2,plev3,plev4) ; # Cleanup
 
 #%% Initialize and run CMOR
 # For more information see https://cmor.llnl.gov/mydoc_cmor3_api/
@@ -72,7 +72,7 @@ for fi in range(len(inputVarName)):
   cmor.load_table(cmorTable)
 #cmor.set_cur_dataset_attribute('history',f.history) ; # Force input file attribute as history
   axes    = [ {'table_entry': 'time',
-             'units': time.units, # 'days since 1870-01-01',
+             'units': 'days since 1979-01-01',  #time.units, #'days since 1979-01-01',
              },
              {'table_entry': 'plev19',
               'units': 'Pa',
@@ -105,6 +105,8 @@ for fi in range(len(inputVarName)):
 
 # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
-  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds()) ; # Write variable with time axis
+  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds) ; # Write variable with time axis
+
+  del(d1,d2,d3,d4,plev1,plev2,plev3,plev4) ; # Cleanup
   f.close()
   cmor.close()

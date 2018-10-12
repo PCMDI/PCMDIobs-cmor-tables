@@ -79,7 +79,7 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['ta','ua','va','zg']
 source_id['source_id'][key]['source_version_number'] = 'N/A'
 
-key = 'TRMM-3B43v.7'
+key = 'TRMM'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'NASA-TRMM (observation 2000-2009)'
 source_id['source_id'][key]['institution_id'] = 'NASA-GSFC'
@@ -87,12 +87,12 @@ source_id['source_id'][key]['release_year'] = 'N/A'
 source_id['source_id'][key]['source_id'] = key
 source_id['source_id'][key]['source_label'] = 'TRMM'
 source_id['source_id'][key]['source_name'] = 'TRMM'
-source_id['source_id'][key]['source_type'] = 'observation'
+source_id['source_id'][key]['source_type'] = 'satellite_blended'
 source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['pr']
 source_id['source_id'][key]['source_version_number'] = '3B43v.7'
 
-key = 'RSS'
+key = 'REMSS-PRW-6-6-0'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'REMSS-PRW 6.6.0 (2017): Water Vapor Path'
 source_id['source_id'][key]['institution_id'] = 'RSS'
