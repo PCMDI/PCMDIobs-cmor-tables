@@ -1,5 +1,22 @@
 {
     "source_id":{
+        "20CR":{
+            "institution_id":"NOAA-ESRL/PSD",
+            "region":[
+                "global"
+            ],
+            "release_year":"2006",
+            "source_description":"Monthly NOAA-CIRES 20th Century Reanalysis V2",
+            "source_id":"20CR",
+            "source_label":"20CR",
+            "source_name":"20CR",
+            "source_type":"reanalysis",
+            "source_variables":[
+                "psl",
+                "ts"
+            ],
+            "source_version_number":"N/A"
+        },
         "CERES-EBAF-4-0":{
             "institution_id":"NASA/LaRC",
             "region":[

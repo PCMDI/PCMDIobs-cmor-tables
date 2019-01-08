@@ -79,6 +79,32 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['ta','ua','va','zg']
 source_id['source_id'][key]['source_version_number'] = 'N/A'
 
+key = '20CR'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'Monthly NOAA-CIRES 20th Century Reanalysis V2'
+source_id['source_id'][key]['institution_id'] = 'NOAA-ESRL/PSD'
+source_id['source_id'][key]['release_year'] = '2006'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = '20CR'
+source_id['source_id'][key]['source_name'] = '20CR'
+source_id['source_id'][key]['source_type'] = 'reanalysis'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['ts','psl']
+source_id['source_id'][key]['source_version_number'] = 'N/A'
+
+key = 'ERA-20C'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'ECMWF - ERA-20C (European ReAnalysis 1900-2010)'
+source_id['source_id'][key]['institution_id'] = 'ECMWF'
+source_id['source_id'][key]['release_year'] = '2014'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'ECMWF-ERA-20C'
+source_id['source_id'][key]['source_name'] = 'ECMWF ERA-20C'
+source_id['source_id'][key]['source_type'] = 'reanalysis'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['ts','psl']
+source_id['source_id'][key]['source_version_number'] = '1.0'
+
 key = 'TRMM'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'NASA-TRMM (observation 2000-2009)'
