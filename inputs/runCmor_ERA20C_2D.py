@@ -6,13 +6,13 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
-inputJson = 'JRA25-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/orig/data/'
-inputFilePathend = '/JRA-25/anl_p/'
-inputFileName = 'anl_p.monthly.ctl'
-inputVarName = ['vgrdsfc','tmpsfc','ugrdsfc']
-outputVarName = ['vas','tas','uas']
-outputUnits = ['m s-1','K','m s-1']
+inputJson = 'ERA20C-input.json' ; # Update contents of this file to set your global_attributes
+inputFilePathbgn = '/p/user_pub/pmp/pmp_obs/orig/data/'
+inputFilePathend = 'ERA20C/'
+inputFileName = ['psl_ERA20C_190001-201012.nc','sst_ERA20C_190001-201012.nc']
+inputVarName = ['msl','sst']
+outputVarName = ['psl','ts']
+outputUnits = ['Pa','K']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
@@ -20,7 +20,7 @@ for fi in range(len(inputVarName)):
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
-  f = cdm.open(inputFilePath+inputFileName)
+  f = cdm.open(inputFilePath+inputFileName[fi])
   d = f(inputVarName[fi])
   lat = d.getLatitude()
   lon = d.getLongitude()

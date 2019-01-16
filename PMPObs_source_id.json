@@ -1,5 +1,22 @@
 {
     "source_id":{
+        "20CR":{
+            "institution_id":"NOAA-ESRL/PSD",
+            "region":[
+                "global"
+            ],
+            "release_year":"2006",
+            "source_description":"Monthly NOAA-CIRES 20th Century Reanalysis V2",
+            "source_id":"20CR",
+            "source_label":"20CR",
+            "source_name":"20CR",
+            "source_type":"reanalysis",
+            "source_variables":[
+                "psl",
+                "ts"
+            ],
+            "source_version_number":"N/A"
+        },
         "CERES-EBAF-4-0":{
             "institution_id":"NASA/LaRC",
             "region":[
@@ -64,8 +81,8 @@
             "release_year":"N/A",
             "source_description":"Merged Precipitation",
             "source_id":"GPCP-1-3",
-            "source_label":"GPCP-1-3",
-            "source_name":"GPCP-1-3",
+            "source_label":"GPCP",
+            "source_name":"GPCP",
             "source_type":"satellite_blended",
             "source_variables":[
                 "pr"
@@ -80,8 +97,8 @@
             "release_year":"N/A",
             "source_description":"Merged Precipitation",
             "source_id":"GPCP-2-3",
-            "source_label":"GPCP-2-3",
-            "source_name":"GPCP-2-3",
+            "source_label":"GPCP",
+            "source_name":"GPCP",
             "source_type":"satellite_blended",
             "source_variables":[
                 "pr"
@@ -106,6 +123,38 @@
                 "zg"
             ],
             "source_version_number":"N/A"
+        },
+        "REMSS-PRW-6-6-0":{
+            "institution_id":"RSS",
+            "region":[
+                "global"
+            ],
+            "release_year":"2017",
+            "source_description":"REMSS-PRW 6.6.0 (2017): Water Vapor Path",
+            "source_id":"REMSS-PRW-6-6-0",
+            "source_label":"REMSS-PRW",
+            "source_name":"REMSS-PRW",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "prw"
+            ],
+            "source_version_number":"6.6.0"
+        },
+        "TRMM":{
+            "institution_id":"NASA-GSFC",
+            "region":[
+                "global"
+            ],
+            "release_year":"N/A",
+            "source_description":"NASA-TRMM (observation 2000-2009)",
+            "source_id":"TRMM",
+            "source_label":"TRMM",
+            "source_name":"TRMM",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "pr"
+            ],
+            "source_version_number":"3B43v.7"
         }
     }
 }

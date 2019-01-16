@@ -13,8 +13,15 @@ runCmor_TRMM.py and TRMM-input.json
 
 runCmor_JRA25_2D.py and JRA25-input.json  
 
-runCmor_RSS_2D.py and rssSsmiPrw-input.json xxxxx 
-	Error: The source_id, "REMSS-PRW-6-6-0",  which you specified in your 
-	! input file could not be found in 
-	! your Controlled Vocabulary file. (Tables/PMPObs_CV.json) 
+runCmor_RSS_2D.py and rssSsmiPrw-input.json 
 
+src/writeJson.py and source_ids.py (add TRMM and RSS)
+
+
+The codes to process 3D variables from the original data are ready...
+
+runCmor_ERAINT_3D.py
+
+runCmor_ERA40_3D.py
+
+runCmor_JRA25_3D.py 
