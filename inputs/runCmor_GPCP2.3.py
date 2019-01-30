@@ -5,7 +5,7 @@ import numpy as np
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
-cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
+cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'GPCP2.3-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/clim_obs/obs/atm/mo/'
 inputFilePathend = '/GPCP/'
