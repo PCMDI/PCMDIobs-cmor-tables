@@ -20,7 +20,9 @@ for l in lst:
    f.close()
 
 ###########
-   d['outpath'] = '/p/user_pub/pmp/pmp_results/pmp_v1.1.2/data/PMPObs/'
+# THIS IS THE INFO THAT GETS MODIFIED
+#  d['outpath'] = '/p/user_pub/pmp/pmp_results/pmp_v1.1.2/data/PMPObs/'
+   d['outpath'] = '/p/user_pub/pmp/PMPObs/'
 
 ###########
 ### SAVE CHANGED VALUES
