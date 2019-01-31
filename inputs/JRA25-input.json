@@ -14,7 +14,7 @@
     "institution_id":"MRI",
     "license":"Data in this file produced by PCMDI is to be used for analysis with the PMP and for research purposes only.",
     "nominal_resolution":"100 km",
-    "outpath":"/p/user_pub/pmp/PMPObs/",
+    "outpath":"/p/user_pub/pmp/pmp_obs/",
     "output_file_template":"<variable_id><frequency><source_id><variant_label><grid_label>",
     "output_path_template":"<activity_id><realm><frequency><variable_id><source_id><grid_label><version>",
     "references":"",

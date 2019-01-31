@@ -8,7 +8,7 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'JRA25-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/JRA-25/anl_p/'
 inputFileName = 'anl_p.monthly.ctl'
 inputVarName = ['vgrdprs','tmpprs','ugrdprs','hgtprs']
