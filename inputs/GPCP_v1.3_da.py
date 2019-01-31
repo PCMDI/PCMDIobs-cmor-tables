@@ -7,7 +7,7 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Aday.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'GPCP_v1.3_da-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/p/user_pub/pmp/pmp_obs/orig/data/'
+inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/GPCP_v1.3_da/'
 inputFileName = ['pr_GPCP-1DD_L3_v1.3_19961001-20161231.nc']
 inputVarName = ['pr']
