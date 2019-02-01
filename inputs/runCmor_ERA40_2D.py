@@ -5,9 +5,9 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
-cmorTable = 'Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
+cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERA40-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/era_40/'
 inputFileName = ['vas_era_40.nc','tas_era_40.nc','uas_era_40.nc','psl_era_40.nc']
 inputVarName = ['v10','t2m','u10','msl']

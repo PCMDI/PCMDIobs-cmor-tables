@@ -7,7 +7,7 @@ import numpy as np
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'rssSsmiPrw-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/clim_obs/orig/data/'
+inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/RSS/'
 inputFileName = 'rss_ssmi_pw_v06_6.nc'
 inputVarName = 'prw'

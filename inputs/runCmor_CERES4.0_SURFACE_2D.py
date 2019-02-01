@@ -7,7 +7,7 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'CERES4.0-input.json' ; # Update contents of this file to set your global_attributes
-inputFilePathbgn = '/p/user_pub/pmp/pmp_obs/orig/data/'
+inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/CERES_SURFACE/'
 inputFileName = 'CERES_EBAF-Surface_Ed4.0_Subset_200003-201803.nc' 
 inputVarName = ['sfc_lw_up_all_mon','sfc_sw_up_all_mon','sfc_sw_up_clr_mon','sfc_sw_down_all_mon','sfc_sw_down_clr_mon']
