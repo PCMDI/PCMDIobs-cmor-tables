@@ -3,6 +3,7 @@ import cdms2 as cdm
 import numpy as np
 cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
+import cdutil
 
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
@@ -23,6 +24,7 @@ for fi in range(len(inputVarName)):
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
   d = f(inputVarName[fi])
+  cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print d.shape

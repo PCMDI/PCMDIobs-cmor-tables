@@ -1,6 +1,7 @@
 import cmor
 import cdms2 as cdm
 import numpy as np
+import cdutil
 #cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
@@ -20,6 +21,7 @@ outputUnits = 'kg m-2'
 inputFilePath = inputFilePathbgn+inputFilePathend
 f = cdm.open(inputFilePath+inputFileName)
 d = f(inputVarName)
+#cdutil.times.setTimeBoundsMonthly(d)
 lat = d.getLatitude()
 lon = d.getLongitude()
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
