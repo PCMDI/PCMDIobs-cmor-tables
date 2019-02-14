@@ -24,7 +24,7 @@ for fi in range(len(inputVarName)):
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
   d1 = f(inputVarName[fi],plev=(1000., 850.))
-  cdutil.times.setTimeBoundsMonthly(d)
+  cdutil.times.setTimeBoundsMonthly(d1)
   #d11 = d1[:,-1::-1,:,:]
 #[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
   plev1 = d1.getLevel()
@@ -34,10 +34,10 @@ for fi in range(len(inputVarName)):
   time = d1.getAxis(0) ; # Rather use a file dimension-based load statement
 
 # Deal with problematic "months since" calendar/time axis
-  time_bounds = time.getBounds()
-  time_bounds[:,0] = time[:]
-  time_bounds[:-1,1] = time[1:]
-  time_bounds[-1,1] = time_bounds[-1,0]+1
+# time_bounds = time.getBounds()
+# time_bounds[:,0] = time[:]
+# time_bounds[:-1,1] = time[1:]
+# time_bounds[-1,1] = time_bounds[-1,0]+1
 
   d2 = f(inputVarName[fi],plev=(700., 10.))
   plev2 = d2.getLevel()
