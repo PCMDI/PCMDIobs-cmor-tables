@@ -234,6 +234,20 @@ SMOS
 #source_id['source_id'][key]['source_variables'] = list('rsds')
 #source_id['source_id'][key]['source_version_number'] = '2.0'
 
+key = "REMSS-PRW-v07r01"
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'Monthly Average Precipitable Water over Ice-Free Oceans'
+source_id['source_id'][key]['institution_id'] = 'RSS'
+source_id['source_id'][key]['release_year'] = '2019'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'REMSS-PRW'
+source_id['source_id'][key]['source_name'] = 'REMSS PRW'
+source_id['source_id'][key]['source_type'] = 'satellite_retrieval'
+source_id['source_id'][key]['region'] = ['global_ocean']
+source_id['source_id'][key]['source_variables'] = list('prw')
+source_id['source_id'][key]['source_version_number'] = 'v07r01'
+
+
 # Example rename source_id entry
 #key = 'CMSAF-SARAH-2-0'
 #source_id['source_id'][key] = {}

@@ -36,6 +36,23 @@
             ],
             "source_version_number":"4.0"
         },
+        "ERA-20C":{
+            "institution_id":"ECMWF",
+            "region":[
+                "global"
+            ],
+            "release_year":"2014",
+            "source_description":"ECMWF - ERA-20C (European ReAnalysis 1900-2010)",
+            "source_id":"ERA-20C",
+            "source_label":"ECMWF-ERA-20C",
+            "source_name":"ECMWF ERA-20C",
+            "source_type":"reanalysis",
+            "source_variables":[
+                "psl",
+                "ts"
+            ],
+            "source_version_number":"1.0"
+        },
         "ERA-40":{
             "institution_id":"ECMWF",
             "region":[
@@ -140,14 +157,32 @@
             ],
             "source_version_number":"6.6.0"
         },
-        "TRMM":{
+        "REMSS-PRW-v07r01":{
+            "institution_id":"RSS",
+            "region":[
+                "global_ocean"
+            ],
+            "release_year":"2019",
+            "source_description":"Monthly Average Precipitable Water over Ice-Free Oceans",
+            "source_id":"REMSS-PRW-v07r01",
+            "source_label":"REMSS-PRW",
+            "source_name":"REMSS PRW",
+            "source_type":"satellite_retrieval",
+            "source_variables":[
+                "p",
+                "r",
+                "w"
+            ],
+            "source_version_number":"v07r01"
+        },
+        "TRMM-3B43v-7":{
             "institution_id":"NASA-GSFC",
             "region":[
                 "global"
             ],
             "release_year":"N/A",
             "source_description":"NASA-TRMM (observation 2000-2009)",
-            "source_id":"TRMM",
+            "source_id":"TRMM-3B43v-7",
             "source_label":"TRMM",
             "source_name":"TRMM",
             "source_type":"satellite_blended",

@@ -105,7 +105,7 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['ts','psl']
 source_id['source_id'][key]['source_version_number'] = '1.0'
 
-key = 'TRMM'
+key = 'TRMM-3B43v-7'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'NASA-TRMM (observation 2000-2009)'
 source_id['source_id'][key]['institution_id'] = 'NASA-GSFC'

@@ -9,21 +9,24 @@ import cdutil
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'GPCP2.3-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/GPCP/'
-inputFileName = ['pr_GPCP_197901-200909.nc']
-inputVarName = ['pr']
+inputFilePathend = '/GPCP_06112018/'
+inputFileName = ['precip.mon.mean_v2.3.nc']
+#inputFileName = ['pr_GPCP_197901-200909.nc']
+inputVarName = ['precip']
 outputVarName = ['pr']
 outputUnits = ['kg m-2 s-1']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+# inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
+  inputFilePath = inputFilePathbgn+ inputFilePathend
+
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
   d = f(inputVarName[fi])
-
+  cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print d.shape

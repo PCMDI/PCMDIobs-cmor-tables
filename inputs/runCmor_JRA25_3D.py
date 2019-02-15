@@ -24,7 +24,7 @@ for fi in range(len(inputVarName)):
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName)
   d1 = f(inputVarName[fi],plev=(1000., 850.))
-  cdutil.times.setTimeBoundsMonthly(d)
+  cdutil.times.setTimeBoundsMonthly(d1)
 #[100000.,92500.,85000.,70000.,60000.,50000.,40000.,30000.,25000.,20000.,15000.,10000.,7000.,5000.,3000.,2000.,1000.,500.,100.])
   plev1 = d1.getLevel()
   lat = d1.getLatitude()

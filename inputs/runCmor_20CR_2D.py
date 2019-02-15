@@ -32,9 +32,9 @@ for fi in range(len(inputVarName)):
 
 # Deal with problematic "months since" calendar/time axis
   time_bounds = time.getBounds()
-  time_bounds[:,0] = time[:]
-  time_bounds[:-1,1] = time[1:]
-  time_bounds[-1,1] = time_bounds[-1,0]+1
+# time_bounds[:,0] = time[:]
+# time_bounds[:-1,1] = time[1:]
+# time_bounds[-1,1] = time_bounds[-1,0]+1
 #####time.setBounds() #####time_bounds)
 #####del(time_bounds) ; # Cleanup
 
@@ -45,7 +45,7 @@ for fi in range(len(inputVarName)):
   cmor.load_table(cmorTable)
 #cmor.set_cur_dataset_attribute('history',f.history) ; # Force input file attribute as history
   axes    = [ {'table_entry': 'time',
-             'units': 'days since 1979-01-01', #time.units, # 'days since 1870-01-01',
+             'units':'hours since 1800-1-1 00:00:0.0' # 'days since 1979-01-01', #time.units, # 'days since 1870-01-01',
              },
              {'table_entry': 'latitude',
               'units': 'degrees_north',

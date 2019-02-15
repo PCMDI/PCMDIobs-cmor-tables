@@ -23,7 +23,7 @@ for fi in range(len(inputVarName)):
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName)
   d = f(inputVarName[fi])
-  cdutil.times.setTimeBoundsMonthly(d)
+# cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print d.shape

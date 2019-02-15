@@ -24,7 +24,7 @@ for fi in range(len(inputVarName)):
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
   d1 = f(inputVarName[fi])
-  cdutil.times.setTimeBoundsMonthly(d)
+  cdutil.times.setTimeBoundsMonthly(d1)
   if inputVarName[fi] in ['z']:
      d1.data[:,:,:,:] = d1.data[:,:,:,:] / 9.8
   plev17 = d1.getAxis(1)  #getLevel()
