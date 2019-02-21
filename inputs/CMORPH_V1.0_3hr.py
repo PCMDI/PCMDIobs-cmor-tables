@@ -1,21 +1,18 @@
 import cmor
 import cdms2 as cdm
 import numpy as np
-import cdutil
 cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
 #%% User provided input
-cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
-inputJson = 'CERES4.0-input.json' ; # Update contents of this file to set your global_attributes
+cmorTable = '../Tables/PMPObs_Aday.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
+inputJson = 'GPCP_v1.3_da-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/CERES-EBAF4/'
-#inputFileName = 'CERES_EBAF-TOA_Ed4.0_Subset_200003-201801.nc' 
-inputFileName = 'CERES_EBAF-TOA_Ed4.0_Subset_200003-201810.nc'
-inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_mon','toa_lw_clr_mon']
-outputVarName = ['rlut','rsut','rsutcs','rlutcs']
-outputUnits = ['W m-2','W m-2','W m-2','W m-2']
-outpos = ['up','up','up','up']
+inputFilePathend = '/GPCP_v1.3_da/'
+inputFileName = ['pr_GPCP-1DD_L3_v1.3_19961001-20161231.nc']
+inputVarName = ['pr']
+outputVarName = ['pr']
+outputUnits = ['kg m-2 s-1']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
@@ -23,24 +20,21 @@ for fi in range(len(inputVarName)):
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
-  f = cdm.open(inputFilePath+inputFileName)
+  f = cdm.open(inputFilePath+inputFileName[fi])
   d = f(inputVarName[fi])
-  cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print d.shape
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
-
 # Deal with problematic "months since" calendar/time axis
-#####time_bounds = time.getBounds()
-#####time_bounds[:,0] = time[:]
-#####time_bounds[:-1,1] = time[1:]
-#####time_bounds[-1,1] = time_bounds[-1,0]+1
+  time_bounds = time.getBounds()
+  time_bounds[:,0] = time[:]
+  time_bounds[:-1,1] = time[1:]
+  time_bounds[-1,1] = time_bounds[-1,0]+1
 #####time.setBounds() #####time_bounds)
 #####del(time_bounds) ; # Cleanup
-  d.positive = outpos[fi]
 
 #%% Initialize and run CMOR
 # For more information see https://cmor.llnl.gov/mydoc_cmor3_api/
@@ -69,8 +63,7 @@ for fi in range(len(inputVarName)):
 
 # Setup units and create variable to write using cmor - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   d.units = outputUnits[fi]
-  d.positive = outpos[fi]
-  varid   = cmor.variable(outputVarName[fi],d.units,axisIds,missing_value=d.missing,positive=d.positive)
+  varid   = cmor.variable(outputVarName[fi],d.units,axisIds,missing_value=d.missing)
   values  = np.array(d[:],np.float32)
 
 # Append valid_min and valid_max to variable before writing using cmor - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
@@ -79,7 +72,7 @@ for fi in range(len(inputVarName)):
 
 # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
-  cmor.write(varid,values,time_vals=time[:],time_bnds=time.getBounds()) ; # Write variable with time axis
+  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds) ; # Write variable with time axis
   f.close()
 
   cmor.close()

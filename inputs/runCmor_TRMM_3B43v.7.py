@@ -7,13 +7,13 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
-inputJson = 'ERA20C-input.json' ; # Update contents of this file to set your global_attributes
+inputJson = 'TRMM_3B43v.7-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = 'ERA20C/'
-inputFileName = ['psl_ERA20C_190001-201012.nc','sst_ERA20C_190001-201012.nc']
-inputVarName = ['msl','sst']
-outputVarName = ['psl','ts']
-outputUnits = ['Pa','K']
+inputFilePathend = '/TRMM_3B43v.7_mo_03162018/python_rewrite/'
+inputFileName = ['3B42_1998-2017_mo.nc']
+inputVarName = ['pr']
+outputVarName = ['pr']
+outputUnits = ['kg m-2 s-1']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
@@ -32,10 +32,10 @@ for fi in range(len(inputVarName)):
 
 # Deal with problematic "months since" calendar/time axis
   time_bounds = time.getBounds()
-# time_bounds[:,0] = time[:]
-# time_bounds[:-1,1] = time[1:]
-# time_bounds[-1,1] = time_bounds[-1,0]+1
-#####time.setBounds() #####time_bounds)
+  time_bounds[:,0] = time[:]
+  time_bounds[:-1,1] = time[1:]
+  time_bounds[-1,1] = time_bounds[-1,0]+1
+  #time.setBounds() #####time_bounds)
 #####del(time_bounds) ; # Cleanup
 
 #%% Initialize and run CMOR
@@ -45,7 +45,7 @@ for fi in range(len(inputVarName)):
   cmor.load_table(cmorTable)
 #cmor.set_cur_dataset_attribute('history',f.history) ; # Force input file attribute as history
   axes    = [ {'table_entry': 'time',
-             'units': 'hours since 1900-01-01', #time.units, # 'days since 1870-01-01',
+             'units': time.units, # 'days since 1870-01-01',
              },
              {'table_entry': 'latitude',
               'units': 'degrees_north',
@@ -74,7 +74,7 @@ for fi in range(len(inputVarName)):
 
 # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
-  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds) ; # Write variable with time axis
+  cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds)  #time.getBounds()) ; # Write variable with time axis
   f.close()
 
   cmor.close()
