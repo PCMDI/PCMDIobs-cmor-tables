@@ -23,7 +23,8 @@ for l in lst:
 # THIS IS THE INFO THAT GETS MODIFIED
 #  d['outpath'] = '/p/user_pub/pmp/pmp_results/pmp_v1.1.2/data/PMPObs/'
 #  d['outpath'] = '/p/user_pub/pmp/pmp_obs/'
-   d['outpath'] = '/p/user_pub/pmp/PCMDIobs/'
+#  d['outpath'] = '/p/user_pub/pmp/PCMDIobs/'
+   d['outpath'] = '/p/user_pub/PCMDIobs/'
    d['activity_id'] = 'PCMDIobs2.0'
 
 ###########

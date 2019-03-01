@@ -217,6 +217,13 @@
                 "source_type":"satellite_blended",
                 "source_version_number":"4.0"
             },
+            "CMAP-V1902":{
+                "region":"global",
+                "source":"CMAP V1902 (N/A): CMAP Precipitation",
+                "source_label":"CMAP",
+                "source_type":"satellite_blended",
+                "source_version_number":"V1902"
+            },
             "ERA-20C":{
                 "region":"global",
                 "source":"ECMWF-ERA-20C 1.0 (2014): ECMWF - ERA-20C (European ReAnalysis 1900-2010)",

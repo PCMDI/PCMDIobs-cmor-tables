@@ -27,6 +27,19 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['ta','ua','va']
 source_id['source_id'][key]['source_version_number'] = '1.0'
 
+key = 'CMAP-V1902'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'CMAP Precipitation'
+source_id['source_id'][key]['institution_id'] = 'NOAA'
+source_id['source_id'][key]['release_year'] = 'N/A'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'CMAP'
+source_id['source_id'][key]['source_name'] = 'CMAP'
+source_id['source_id'][key]['source_type'] = 'satellite_blended'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['pr']
+source_id['source_id'][key]['source_version_number'] = 'V1902'
+
 key = 'GPCP-2-3'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'Merged Precipitation'

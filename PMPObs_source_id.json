@@ -36,6 +36,22 @@
             ],
             "source_version_number":"4.0"
         },
+        "CMAP-V1902":{
+            "institution_id":"NOAA",
+            "region":[
+                "global"
+            ],
+            "release_year":"N/A",
+            "source_description":"CMAP Precipitation",
+            "source_id":"CMAP-V1902",
+            "source_label":"CMAP",
+            "source_name":"CMAP",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "pr"
+            ],
+            "source_version_number":"V1902"
+        },
         "ERA-20C":{
             "institution_id":"ECMWF",
             "region":[
