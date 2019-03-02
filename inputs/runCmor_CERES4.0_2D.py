@@ -12,10 +12,16 @@ inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/CERES-EBAF4/'
 #inputFileName = 'CERES_EBAF-TOA_Ed4.0_Subset_200003-201801.nc' 
 inputFileName = 'CERES_EBAF-TOA_Ed4.0_Subset_200003-201810.nc'
-inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_mon','toa_lw_clr_mon']
-outputVarName = ['rlut','rsut','rsutcs','rlutcs']
-outputUnits = ['W m-2','W m-2','W m-2','W m-2']
-outpos = ['up','up','up','up']
+inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_mon','toa_lw_clr_mon','toa_cre_lw_mon','toa_cre_sw_mon','toa_net_all_mon']
+outputVarName = ['rlut','rsut','rsutcs','rlutcs','rltcre','rstcre','rt']
+outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']
+outpos = ['up','up','up','up','up','up','up']
+
+#inputVarName = ['toa_cre_lw_mon']
+#outputVarName = ['rltcre']
+#outputUnits = ['W m-2']
+#outpos = ['up']
+
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):

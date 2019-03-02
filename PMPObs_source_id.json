@@ -52,6 +52,22 @@
             ],
             "source_version_number":"V1902"
         },
+        "CMORPH-1-0":{
+            "institution_id":"NOAA",
+            "region":[
+                "global"
+            ],
+            "release_year":"N/A",
+            "source_description":"CMORPH",
+            "source_id":"CMORPH-1-0",
+            "source_label":"CMORPH",
+            "source_name":"CMORPH",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "pr"
+            ],
+            "source_version_number":"1.0"
+        },
         "ERA-20C":{
             "institution_id":"ECMWF",
             "region":[

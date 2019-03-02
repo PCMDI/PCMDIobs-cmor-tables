@@ -224,6 +224,13 @@
                 "source_type":"satellite_blended",
                 "source_version_number":"V1902"
             },
+            "CMORPH-1-0":{
+                "region":"global",
+                "source":"CMORPH 1.0 (N/A): CMORPH",
+                "source_label":"CMORPH",
+                "source_type":"satellite_blended",
+                "source_version_number":"1.0"
+            },
             "ERA-20C":{
                 "region":"global",
                 "source":"ECMWF-ERA-20C 1.0 (2014): ECMWF - ERA-20C (European ReAnalysis 1900-2010)",
