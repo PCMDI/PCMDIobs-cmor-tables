@@ -211,6 +211,13 @@
                 "source_type":"reanalysis",
                 "source_version_number":"N/A"
             },
+            "AVISO-1-0":{
+                "region":"global",
+                "source":"AVISO-1-0 1.0 (2016): Gridded sea surface heights above geoid",
+                "source_label":"AVISO-1-0",
+                "source_type":"satellite_blended",
+                "source_version_number":"1.0"
+            },
             "CERES-EBAF-4-0":{
                 "region":"global",
                 "source":"CERES-EBAF-4-0 4.0 (2018): CERES EBAF (Energy Balanced and Filled) TOA Fluxes. Monthly Averages",

@@ -17,6 +17,22 @@
             ],
             "source_version_number":"N/A"
         },
+        "AVISO-1-0":{
+            "institution_id":"NASA-JPL",
+            "region":[
+                "global"
+            ],
+            "release_year":"2016",
+            "source_description":"Gridded sea surface heights above geoid",
+            "source_id":"AVISO-1-0",
+            "source_label":"AVISO-1-0",
+            "source_name":"AVISO-1-0",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "zos"
+            ],
+            "source_version_number":"1.0"
+        },
         "CERES-EBAF-4-0":{
             "institution_id":"NASA/LaRC",
             "region":[
@@ -235,7 +251,13 @@
             "source_name":"CERES-EBAF4-0",
             "source_type":"satellite_blended",
             "source_variables":[
-                "tas"
+                "hfls",
+                "hfns",
+                "hfss",
+                "tas",
+                "tauu",
+                "tauv",
+                "ts"
             ],
             "source_version_number":"1.0"
         }

@@ -11,9 +11,21 @@ source_id['source_id'][key]['source_label'] = 'CERES-EBAF-4-0'
 source_id['source_id'][key]['source_name'] = 'CERES-EBAF4-0'
 source_id['source_id'][key]['source_type'] = 'satellite_blended'
 source_id['source_id'][key]['region'] = ['global']
-source_id['source_id'][key]['source_variables'] = ['tas']
+source_id['source_id'][key]['source_variables'] = ['tas','ts','hfls','hfss','hfns','tauu','tauv']
 source_id['source_id'][key]['source_version_number'] = '1.0'
 
+key = 'AVISO-1-0'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'Gridded sea surface heights above geoid'
+source_id['source_id'][key]['institution_id'] = 'NASA-JPL'
+source_id['source_id'][key]['release_year'] = '2016'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'AVISO-1-0'
+source_id['source_id'][key]['source_name'] = 'AVISO-1-0'
+source_id['source_id'][key]['source_type'] = 'satellite_blended'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['zos']
+source_id['source_id'][key]['source_version_number'] = '1.0'
 
 key = 'CERES-EBAF-4-0'
 source_id['source_id'][key] = {}
