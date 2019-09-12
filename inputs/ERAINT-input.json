@@ -19,7 +19,7 @@
     "output_path_template":"<activity_id><realm><frequency><variable_id><source_id><grid_label><version>",
     "references":"",
     "source_id":"ERA-INT",
-    "title":"ERAINT prepared for PMPObs (ODS-v2.1.0)",
+    "title":"ERAINT prepared for PCMDIObs (ODS-v2.1.0)",
     "tracking_prefix":"hdl:21.14102",
     "variant_info":"Best Estimate",
     "variant_label":"BE"

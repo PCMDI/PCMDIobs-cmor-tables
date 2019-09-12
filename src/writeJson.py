@@ -370,8 +370,24 @@ Amon['variable_entry']['rt']['units'] = 'W m-2'
 Amon['variable_entry']['rt']['valid_max'] = ''
 Amon['variable_entry']['rt']['valid_min'] = ''
 
-
-
+# Add new variables
+# Variable sponsor - PCMDI; PjG 
+Amon['variable_entry'][u'hfns'] = {}
+Amon['variable_entry']['hfns']['cell_measures'] = ''
+Amon['variable_entry']['hfns']['cell_methods'] = 'time: mean'
+Amon['variable_entry']['hfns']['comment'] = ''
+Amon['variable_entry']['hfns']['dimensions'] = 'longitude latitude time'
+Amon['variable_entry']['hfns']['frequency'] = 'mon'
+Amon['variable_entry']['hfns']['long_name'] = 'Net Surface Energy'
+Amon['variable_entry']['hfns']['ok_max_mean_abs'] = ''
+Amon['variable_entry']['hfns']['ok_min_mean_abs'] = ''
+Amon['variable_entry']['hfns']['out_name'] = 'hfns'
+Amon['variable_entry']['hfns']['positive'] = ''
+Amon['variable_entry']['hfns']['standard_name'] = 'Net_Surface_Energy'
+Amon['variable_entry']['hfns']['type'] = 'real'
+Amon['variable_entry']['hfns']['units'] = 'W m-2'
+Amon['variable_entry']['hfns']['valid_max'] = ''
+Amon['variable_entry']['hfns']['valid_min'] = ''
 
 
 #%% Write variables to files

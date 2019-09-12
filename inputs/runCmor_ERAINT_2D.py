@@ -9,15 +9,22 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/interim/'
-inputFileName = ['vas_era_interim.nc','tas_era_interim.nc','uas_era_interim.nc','psl_era_interim.nc','ts_era_interim.nc']
-inputVarName = ['v10','t2m','u10','msl','sstk']
-outputVarName = ['vas','tas','uas','psl','ts']
-outputUnits = ['m s-1','K','m s-1','Pa','K']
+inputFilePathend = '/ERA-INT/'
+#inputFileName = ['vas_era_interim.nc','tas_era_interim.nc','uas_era_interim.nc','psl_era_interim.nc','ts_era_interim.nc']
+#inputVarName = ['v10','t2m','u10','msl','sstk']
+#outputVarName = ['vas','tas','uas','psl','ts']
+#outputUnits = ['m s-1','K','m s-1','Pa','K']
+inputFileName = ['hfls_Amon_reanalysis_ERA-Interim_197901-201903.nc','hfss_Amon_reanalysis_ERA-Interim_197901-201903.nc','psl_Amon_reanalysis_ERA-Interim_197901-201903.nc','pr_Amon_reanalysis_ERA-Interim_197901-201903.nc','rlus_Amon_reanalysis_ERA-Interim_197901-201903.nc','rlds_Amon_reanalysis_ERA-Interim_197901-201903.nc','rsds_Amon_reanalysis_ERA-Interim_197901-201903.nc','rsus_Amon_reanalysis_ERA-Interim_197901-201903.nc','sfcWind_Amon_reanalysis_ERA-Interim_197901-201903.nc','uas_Amon_reanalysis_ERA-Interim_197901-201903.nc','vas_Amon_reanalysis_ERA-Interim_197901-201903.nc','tauu_Amon_reanalysis_ERA-Interim_197901-201903.nc','tauv_Amon_reanalysis_ERA-Interim_197901-201903.nc','ts_Amon_reanalysis_ERA-Interim_197901-201903.nc']
+inputVarName = ['hfls','hfss','psl','pr','rlus','rlds','rsds','rsus','sfcWind','uas','vas','tauu','tauv','ts']
+outputVarName = ['hfls','hfss','psl','pr','rlus','rlds','rsds','rsus','sfcWind','uas','vas','tauu','tauv','ts'] 
+outputUnits = ['W m-2',"W m-2","Pa",'kg m-2 s-1','W m-2','W m-2','W m-2','W m-2',"m s-1",'m s-1','m s-1','Pa','Pa','K']
+outpos = ['up','up','','','up','down','down','up','','','','down','down','']
+
+
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
-  print fi, inputVarName[fi]
+  print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
@@ -26,7 +33,7 @@ for fi in range(len(inputVarName)):
   cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
-  print d.shape
+  print(d.shape)
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
@@ -35,6 +42,9 @@ for fi in range(len(inputVarName)):
   time_bounds[:,0] = time[:]
   time_bounds[:-1,1] = time[1:]
   time_bounds[-1,1] = time_bounds[-1,0]+1
+
+  d.positive = outpos[fi]
+
 #####time.setBounds() #####time_bounds)
 #####del(time_bounds) ; # Cleanup
 
@@ -65,7 +75,7 @@ for fi in range(len(inputVarName)):
 
 # Setup units and create variable to write using cmor - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   d.units = outputUnits[fi]
-  varid   = cmor.variable(outputVarName[fi],d.units,axisIds,missing_value=d.missing)
+  varid   = cmor.variable(outputVarName[fi],d.units,axisIds,missing_value=d.missing,positive=d.positive)
   values  = np.array(d[:],np.float32)
 
 # Append valid_min and valid_max to variable before writing using cmor - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
