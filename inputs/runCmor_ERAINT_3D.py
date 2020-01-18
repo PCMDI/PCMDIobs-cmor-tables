@@ -10,7 +10,7 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = 'interim/'
+inputFilePathend = '/ERA-INT/'
 inputFileName = ['va_era_interim.nc','ta_era_interim.nc','ua_era_interim.nc','hur_era_interim.nc','hus_era_interim.nc','zg_era_interim.nc']
 inputVarName = ['v','t','u','r','q','z']
 outputVarName = ['va','ta','ua','hur','hus','zg']
@@ -35,9 +35,9 @@ for fi in range(len(inputVarName)):
 
 # Deal with problematic "months since" calendar/time axis
   time_bounds = time.getBounds()
-  time_bounds[:,0] = time[:]
-  time_bounds[:-1,1] = time[1:]
-  time_bounds[-1,1] = time_bounds[-1,0]+1
+# time_bounds[:,0] = time[:]
+# time_bounds[:-1,1] = time[1:]
+# time_bounds[-1,1] = time_bounds[-1,0]+1
 
 # Deal with plev17 to plev19 conversion
   plev17[:] = plev17[:]*100.

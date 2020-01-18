@@ -39,9 +39,9 @@ for fi in range(len(inputVarName)):
 
 # Deal with problematic "months since" calendar/time axis
   time_bounds = time.getBounds()
-  time_bounds[:,0] = time[:]
-  time_bounds[:-1,1] = time[1:]
-  time_bounds[-1,1] = time_bounds[-1,0]+1
+# time_bounds[:,0] = time[:]
+# time_bounds[:-1,1] = time[1:]
+# time_bounds[-1,1] = time_bounds[-1,0]+1
 
   d.positive = outpos[fi]
 
