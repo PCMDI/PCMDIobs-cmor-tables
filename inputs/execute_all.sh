@@ -25,5 +25,5 @@ python CMORPH_V1.0_3hr.py
 
 
 
-chmod -R 777 /p/user_pub/pmp/PCMDIobs
+chmod -R 777 /p/user_pub/PCMDIobs
 
