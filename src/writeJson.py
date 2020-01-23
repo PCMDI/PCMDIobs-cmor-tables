@@ -33,6 +33,7 @@ ctx.verify_mode     = ssl.CERT_NONE
 masterTargets = [
  'Amon',
  'Aday',
+ 'A3hr',
  'Lmon',
  'Omon',
  'SImon',
@@ -69,6 +70,7 @@ tableSource = [
  ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
  ['Amon','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_Amon.json'],
  ['Aday','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_Aday.json'],
+ ['A3hr','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_A3hr.json'],
  ['Lmon','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_Lmon.json'],
  ['Omon','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_Omon.json'],
  ['SImon','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_SImon.json']
@@ -87,7 +89,7 @@ for count,table in enumerate(tmp.keys()):
 del(tmp,count,table) ; gc.collect()
 
 # Cleanup table_id values
-for table in ['Amon','Aday','Lmon','Omon','SImon','fx']:
+for table in ['Amon','Aday','A3hr','Lmon','Omon','SImon','fx']:
     eval(table)['Header']['table_id']  = ''.join(['Table PMPObs_',table]) ; # Cleanup from upstream
 
 #%% Coordinate
@@ -273,6 +275,7 @@ source_type['satellite_retrieval'] = 'gridded product based on satellite measure
 table_id = [
   'PMPObs_Amon',
   'PMPObs_Aday',
+  'PMPObs_A3hr',
   'PMPObs_Lmon',
   'PMPObs_Omon',
   'PMPObs_SImon',
@@ -410,7 +413,7 @@ for jsonName in masterTargets:
                 dictToClean[key][value2[0]] = string
         vars()[jsonName] = dictToClean
     # Write file
-    if jsonName in ['Aday', 'Amon', 'Lmon', 'Omon', 'SImon', 'coordinate',
+    if jsonName in ['Aday', 'Amon','A3hr', 'Lmon', 'Omon', 'SImon', 'coordinate',
                     'formula_terms', 'fx', 'grids', 'monNobs', 'monStderr']:
         outFile = ''.join(['../Tables/PMPObs_',jsonName,'.json'])
     elif jsonName == 'license_':
@@ -428,7 +431,7 @@ for jsonName in masterTargets:
         jsonDict = {}
         jsonDict[jsonName.replace('_','')] = eval(jsonName)
     elif jsonName not in ['coordinate','formula_terms','fx','grids',
-                          'institution_id','source_id','Aday','Amon','Lmon',
+                          'institution_id','source_id','Aday','Amon','A3hr','Lmon',
                           'Omon','SImon']: #,'product','realm','region']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
