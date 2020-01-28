@@ -53,6 +53,19 @@ source_id['source_id'][key]['region'] = ['global']
 source_id['source_id'][key]['source_variables'] = ['ta','ua','va']
 source_id['source_id'][key]['source_version_number'] = '1.0'
 
+key = 'ERA-5'
+source_id['source_id'][key] = {}
+source_id['source_id'][key]['source_description'] = 'ECMWF - ERA5 (European ReAnalysis)'
+source_id['source_id'][key]['institution_id'] = 'ECMWF'
+source_id['source_id'][key]['release_year'] = '2019'
+source_id['source_id'][key]['source_id'] = key
+source_id['source_id'][key]['source_label'] = 'ECMWF-ERA-5'
+source_id['source_id'][key]['source_name'] = 'ECMWF ERA-5'
+source_id['source_id'][key]['source_type'] = 'reanalysis'
+source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['source_variables'] = ['tas','psl','zg','ta','ua','va']
+source_id['source_id'][key]['source_version_number'] = '1.0'
+
 key = 'CMAP-V1902'
 source_id['source_id'][key] = {}
 source_id['source_id'][key]['source_description'] = 'CMAP Precipitation'
