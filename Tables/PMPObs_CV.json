@@ -253,6 +253,13 @@
                 "source_type":"reanalysis",
                 "source_version_number":"1.0"
             },
+            "ERA-5":{
+                "region":"global",
+                "source":"ECMWF-ERA-5 1.0 (2019): ECMWF - ERA5 (European ReAnalysis)",
+                "source_label":"ECMWF-ERA-5",
+                "source_type":"reanalysis",
+                "source_version_number":"1.0"
+            },
             "ERA-INT":{
                 "region":"global",
                 "source":"ECMWF-ERAINT N/A (2010): ECMWF-ERAINT 1.0 (2010): ECMWF - ERAINT (European ReAnalysis 1989-2010)",
