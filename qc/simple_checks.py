@@ -23,5 +23,5 @@ for l in lst:
   print(l)
   print(c[0].year,'-', c[0].month,'   ', c[lc-1].year,'-',c[lc-1].month,'   ', tu)
   print(c[0:12])
-  print('T0 global average ', d0ga)
+  #print('T0 global average ', d0ga)
   print('------------------------------------------------------') 
