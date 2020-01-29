@@ -225,6 +225,13 @@
                 "source_type":"satellite_blended",
                 "source_version_number":"4.0"
             },
+            "CERES-EBAF-4-1":{
+                "region":"global",
+                "source":"CERES-EBAF-4-1 4.1 (2019): CERES EBAF (Energy Balanced and Filled) TOA Fluxes. Monthly Averages",
+                "source_label":"CERES-EBAF-4-1",
+                "source_type":"satellite_blended",
+                "source_version_number":"4.1"
+            },
             "CMAP-V1902":{
                 "region":"global",
                 "source":"CMAP V1902 (N/A): CMAP Precipitation",

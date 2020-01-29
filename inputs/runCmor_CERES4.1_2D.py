@@ -12,7 +12,7 @@ inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/CERES_EBAF4.1/'
 
 inputFileName = 'CERES_EBAF-TOA_Ed4.1_Subset_200003-201906.nc'
-inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_mon','toa_lw_clr_mon','toa_net_all_mon']   #,'toa_cre_lw_mon','toa_cre_sw_mon'
+inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_c_mon','toa_lw_clr_c_mon','toa_net_all_mon']   #,'toa_cre_lw_mon','toa_cre_sw_mon'
 outputVarName = ['rlut','rsut','rsutcs','rlutcs','rt']   #,'rltcre','rstcre'
 outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2']   #,'W m-2','W m-2'
 outpos = ['up','up','up','up','up']   #,'up','up'
