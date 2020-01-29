@@ -10,18 +10,11 @@ cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNob
 inputJson = 'CERES4.1-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/CERES_EBAF4.1/'
-
-inputFileName = 'CERES_EBAF-TOA_Ed4.1_Subset_200003-201906.nc'
-inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_c_mon','toa_lw_clr_c_mon','toa_net_all_mon','solar_mon']   #,'toa_cre_lw_mon','toa_cre_sw_mon'
-outputVarName = ['rlut','rsut','rsutcs','rlutcs','rt','rsdt']   #,'rltcre','rstcre'
-outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']   #,'W m-2','W m-2'
-outpos = ['up','up','up','up','','down']   #,'up','up'
-
-#inputVarName = ['toa_cre_lw_mon']
-#outputVarName = ['rltcre']
-#outputUnits = ['W m-2']
-#outpos = ['up']
-
+inputFileName = 'CERES_EBAF-SURFACE_Ed4.1_Subset_200003-201905.nc' 
+inputVarName = ['sfc_lw_up_all_mon','sfc_sw_up_all_mon','sfc_sw_up_clr_c_mon','sfc_lw_down_all_mon','sfc_lw_down_clr_c_mon','sfc_sw_down_all_mon','sfc_sw_down_clr_c_mon']
+outputVarName = ['rlus','rsus','rsuscs','rlds','rldscs','rsds','rsdscs']
+outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']
+outpos = ['up','up','up','down','down','down','down']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
