@@ -12,8 +12,8 @@ inputJson = 'ERA5-MARS-input.json' ; # Update contents of this file to set your 
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/ERA5/fromMARS/'
 inputFileName = ['adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc','adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc','adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc','adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc']
-inputVarName = ['z_0001']  #,'u_0001','v_0001','t_0001'] 
-outputVarName = ['zgplev3a']   #,'ualev3','valev3','talev3']  
+inputVarName = ['z_0001',,'u_0001','v_0001','t_0001'] 
+outputVarName = ['zgplev3a','uaplev3','vaplev3','taplev3']  
 outputUnits = ['m','m s-1','m s-1','K']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
