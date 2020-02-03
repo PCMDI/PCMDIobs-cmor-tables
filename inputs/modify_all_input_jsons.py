@@ -25,7 +25,7 @@ for l in lst:
 #  d['outpath'] = '/p/user_pub/pmp/pmp_obs/'
 #  d['outpath'] = '/p/user_pub/pmp/PCMDIobs/'
    d['outpath'] = '/p/user_pub/PCMDIobs/'
-   d['activity_id'] = 'PCMDIobs2.0'
+   d['activity_id'] = 'PCMDIobs2.0-tmp'
 
 ###########
 ### SAVE CHANGED VALUES

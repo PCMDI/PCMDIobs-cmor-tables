@@ -1442,6 +1442,33 @@
             "z_bounds_factors":"",
             "z_factors":""
         },
+        "plev3a":{
+            "axis":"Z",
+            "bounds_values":"",
+            "climatology":"",
+            "formula":"",
+            "generic_level_name":"",
+            "long_name":"pressure",
+            "must_have_bounds":"no",
+            "out_name":"plev",
+            "positive":"down",
+            "requested":[
+                "85000.",
+                "50000.",
+                "20000."
+            ],
+            "requested_bounds":"",
+            "standard_name":"air_pressure",
+            "stored_direction":"decreasing",
+            "tolerance":"",
+            "type":"double",
+            "units":"Pa",
+            "valid_max":"",
+            "valid_min":"",
+            "value":"",
+            "z_bounds_factors":"",
+            "z_factors":""
+        },
         "plev39":{
             "axis":"Z",
             "bounds_values":"",

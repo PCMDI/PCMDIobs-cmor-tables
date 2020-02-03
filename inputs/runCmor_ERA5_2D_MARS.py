@@ -14,12 +14,12 @@ inputFilePathend = '/ERA5/fromMARS/'
 #inputVarName = ['v10','t2m','u10','msl','sstk']
 #outputVarName = ['vas','tas','uas','psl','ts']
 #outputUnits = ['m s-1','K','m s-1','Pa','K']
-inputFileName = ['adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc']
+inputFileName = ['adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580190896.023251-25621-38-f188c480-a5cd-4284-84a7-5757315ca044.nc']
 
-inputVarName = ['t2m_0001','u10_0001','v10_0001'] 
-outputVarName = ['tas','uas','vas']  #'hfls','hfss','psl','pr','rlus','rlds','rsds','rsus','sfcWind','uas','vas','tauu','tauv','ts'] 
-outputUnits = ['K','m s-1','m s-1']   #W m-2',"W m-2","Pa",'kg m-2 s-1','W m-2','W m-2','W m-2','W m-2',"m s-1",'m s-1','m s-1','Pa','Pa','K']
-outpos = ['','','']  #'up','up','','','up','down','down','up','','','','down','down','']
+inputVarName = ['t2m_0001','u10_0001','v10_0001','msl_0001'] 
+outputVarName = ['tas','uas','vas','psl']  #'hfls','hfss','psl','pr','rlus','rlds','rsds','rsus','sfcWind','uas','vas','tauu','tauv','ts'] 
+outputUnits = ['K','m s-1','m s-1','Pa']   #W m-2',"W m-2","Pa",'kg m-2 s-1','W m-2','W m-2','W m-2','W m-2',"m s-1",'m s-1','m s-1','Pa','Pa','K']
+outpos = ['','','','']  #'up','up','','','up','down','down','up','','','','down','down','']
 
 
 

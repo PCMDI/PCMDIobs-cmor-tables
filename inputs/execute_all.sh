@@ -2,7 +2,7 @@
 # MONTHLY
 
 python runCmor_ERA5_3D.py
-runCmor_ERA5_2D_MARS.py
+python runCmor_ERA5_2D_MARS.py
 python runCmor_CERES4.1_2D.py
 python runCmor_CERES4.1_SURFACE_2D.py
 python runCmor_CERES4.0_2D.py
@@ -15,6 +15,7 @@ python runCmor_ERA40_2D.py
 python runCmor_ERA40_3D.py
 python runCmor_ERAINT_2D.py
 python runCmor_ERAINT_3D.py
+python runCmor_AVISO-1-0.py
 
 # LONGER TIME SCALE MONTHLY 
 python runCmor_20CR_2D.py

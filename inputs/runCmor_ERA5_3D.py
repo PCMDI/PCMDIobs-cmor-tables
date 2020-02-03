@@ -12,7 +12,7 @@ inputJson = 'ERA5-MARS-input.json' ; # Update contents of this file to set your 
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/ERA5/fromMARS/'
 inputFileName = ['adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc','adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc','adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc','adaptor.mars.internal-1580176461.3999553-15526-5-337023bb-5748-4ecb-82cd-756b011747e8.nc']
-inputVarName = ['z_0001','u_0001','v_0001','t_0001'] 
+inputVarName = ['z_0001']  #,'u_0001','v_0001','t_0001'] 
 outputVarName = ['zglev3','ualev3','valev3','talev3']  
 outputUnits = ['m','m s-1','m s-1','K']
 
@@ -37,7 +37,7 @@ for fi in range(len(inputVarName)):
   plev1.positive = 'down'
   plev1.realtopology = 'linear'
   plev1.standard_name = 'air_pressure'
-  plev1.units = 'Pa'
+  plev1.units = 'm'
 
   lat = d1.getLatitude()
   lon = d1.getLongitude()
