@@ -4,7 +4,7 @@
     "_FORMULA_VAR_FILE":"PMPObs_formula_terms.json",
     "_control_vocabulary_file":"PMPObs_CV.json",
     "_history_template":"%s; CMOR rewrote data to be consistent with <activity_id>, and <Conventions> standards",
-    "activity_id":"PCMDIobs2.0",
+    "activity_id":"PCMDIobs2.0-tmp",
     "calendar":"gregorian",
     "comment":"",
     "contact":"PCMDI (pcmdi-metrics@llnl.gov)",

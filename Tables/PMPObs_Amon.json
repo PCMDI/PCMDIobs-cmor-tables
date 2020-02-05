@@ -1477,6 +1477,23 @@
             "valid_max":"",
             "valid_min":""
         },
+        "uaplev37_ERA5":{
+            "cell_measures":"",
+            "cell_methods":"time: mean",
+            "comment":"Zonal wind (positive in a eastward direction).",
+            "dimensions":"longitude latitude plev37_ERA5 time",
+            "frequency":"mon",
+            "long_name":"Eastward Wind",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"ua",
+            "positive":"",
+            "standard_name":"eastward_wind",
+            "type":"real",
+            "units":"m s-1",
+            "valid_max":"",
+            "valid_min":""
+        },
         "uas":{
             "cell_measures":"",
             "cell_methods":"area: time: mean",
