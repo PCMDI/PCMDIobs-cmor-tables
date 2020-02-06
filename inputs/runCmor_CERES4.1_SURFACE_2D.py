@@ -2,6 +2,8 @@ import cmor
 import cdms2 as cdm
 import numpy as np
 import cdutil
+import cdtime
+
 cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
@@ -23,7 +25,8 @@ for fi in range(len(inputVarName)):
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName)
-  d = f(inputVarName[fi])
+  d = f(inputVarName[fi],time = (cdtime.comptime(2003,0),cdtime.comptime(2019,1)))
+
   cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()

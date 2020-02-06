@@ -19,7 +19,7 @@ python runCmor_ERA40_2D.py
 python runCmor_ERA40_3D.py
 python runCmor_ERAINT_2D.py
 python runCmor_ERAINT_3D.py
-python runCmor_ERA5_3D.py
+python runCmor_ERA5_alllevs.py
 python runCmor_ERA5_2D_MARS.py
 
 # LONGER TIME SCALE MONTHLY 
@@ -32,7 +32,7 @@ python runCmor_ERA20C_2D.py
 
 # DAILY
 
-python runCmor_GPCP_v1.3_da.py
+#python runCmor_GPCP_v1.3_da.py
 
 # 3HR Data
 

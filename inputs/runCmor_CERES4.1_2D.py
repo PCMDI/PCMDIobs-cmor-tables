@@ -2,6 +2,8 @@ import cmor
 import cdms2 as cdm
 import numpy as np
 import cdutil
+import cdtime
+
 cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
@@ -34,22 +36,14 @@ for fi in range(len(inputVarName)):
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName)
-  d = f(inputVarName[fi])
-  cdutil.times.setTimeBoundsMonthly(d)
+  d = f(inputVarName[fi],time = (cdtime.comptime(2003,0),cdtime.comptime(2019,1)))
+# cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print (d.shape)
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
-
-# Deal with problematic "months since" calendar/time axis
-#####time_bounds = time.getBounds()
-#####time_bounds[:,0] = time[:]
-#####time_bounds[:-1,1] = time[1:]
-#####time_bounds[-1,1] = time_bounds[-1,0]+1
-#####time.setBounds() #####time_bounds)
-#####del(time_bounds) ; # Cleanup
   d.positive = outpos[fi]
 
 #%% Initialize and run CMOR

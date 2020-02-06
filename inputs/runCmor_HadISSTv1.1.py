@@ -9,7 +9,7 @@ import cdutil
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'RSS_prw_v07r01.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/RSS_02142019/'
+inputFilePathend = '/HadISSTv1.1/'
 inputFileName = ['tpw_v07r01_198801_201812.nc3.nc','ws_v07r01_198801_201812.nc3.nc']
 inputVarName = ['precipitable_water','wind_speed']
 outputVarName = ['prw','sfcWind']

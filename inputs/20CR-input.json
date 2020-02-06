@@ -8,6 +8,7 @@
     "calendar":"gregorian",
     "comment":"",
     "contact":"PCMDI (pcmdi-metrics@llnl.gov)",
+    "curation_provenance":"work-in-progress",
     "grid":"2.0x2.0 degree latitude x longitude",
     "grid_label":"gn",
     "history":"",
