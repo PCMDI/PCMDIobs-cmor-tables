@@ -12,10 +12,10 @@ inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/CERES_EBAF4.1/'
 
 inputFileName = 'CERES_EBAF-TOA_Ed4.1_Subset_200003-201906.nc'
-inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_c_mon','toa_lw_clr_c_mon','toa_net_all_mon','solar_mon']   #,'toa_cre_lw_mon','toa_cre_sw_mon'
-outputVarName = ['rlut','rsut','rsutcs','rlutcs','rt','rsdt']   #,'rltcre','rstcre'
-outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']   #,'W m-2','W m-2'
-outpos = ['up','up','up','up','','down']   #,'up','up'
+inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_c_mon','toa_lw_clr_c_mon','toa_net_all_mon','solar_mon','toa_cre_lw_mon','toa_cre_sw_mon']
+outputVarName = ['rlut','rsut','rsutcs','rlutcs','rt','rsdt','rltcre','rstcre']
+outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']
+outpos = ['up','up','up','up','','down','up','up']
 
 #inputVarName = ['toa_cre_lw_mon']
 #outputVarName = ['rltcre']
@@ -25,6 +25,10 @@ outpos = ['up','up','up','up','','down']   #,'up','up'
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
+
+  inputFileName = 'CERES_EBAF-TOA_Ed4.1_Subset_200003-201906.nc' 
+  if inputVarName[fi] in ['toa_cre_lw_mon','toa_cre_sw_mon']: inputFileName = 'CERES_EBAF_Ed4.1_Subset_200003-201905-CRE.nc'
+
   print (fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
