@@ -11,6 +11,9 @@ def readJsonCreateDict(buildList):
     can be included by generating additional embedded lists
     Usage:
     ------
+
+    Taken from Durolib to be used in PCMDIObs.  NEEDS TO BE CONVERTED TO PY3
+
         >>> from durolib import readJsonCreateDict
         >>> tmp = readJsonCreateDict([['Omon','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/Tables/obs4MIPs_Omon.json']])
         >>> Omon = tmp.get('Omon')
@@ -18,6 +21,9 @@ def readJsonCreateDict(buildList):
     -----
         ...
     """
+
+    import os, json, ssl, urllib2   # urllib.request this is for PY3
+
     # Test for list input of length == 2
     if len(buildList[0]) != 2:
         print('Invalid inputs, exiting..')
@@ -46,8 +52,3 @@ def readJsonCreateDict(buildList):
         jsonDict[table[0]] = eval(table[0]) ; # Write to dictionary
 
     return jsonDict
-
-def testy(a):
-  b = a + 5
-  return b
-

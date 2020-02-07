@@ -16,7 +16,10 @@ PJD 29 Jan 2018     - Updated product, realm and region format
 
 #%% Import statements
 import copy,gc,json,os,re,shutil,ssl,sys
-from durolib import readJsonCreateDict ; #getGitInfo
+#from durolib import readJsonCreateDict ; #getGitInfo
+
+from jsonFcns import readJsonCreateDict
+
 
 #%% Determine path
 homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
@@ -80,7 +83,7 @@ tableSource = [
 # Loop through tableSource and create output tables
 tmp = readJsonCreateDict(tableSource)
 for count,table in enumerate(tmp.keys()):
-    #print 'table:', table
+    #print('table:', table)
     if table in ['frequency','grid_label','nominal_resolution','product',
                  'realm','region']:
         vars()[table] = tmp[table].get(table)
@@ -290,7 +293,7 @@ def entryCheck(entry,search=re.compile(r'[^a-zA-Z0-9-]').search):
 for key in source_id['source_id'].keys():
     # Validate source_id format
     if not entryCheck(key):
-        print 'Invalid source_id format for entry:',key,'- aborting'
+        print('Invalid source_id format for entry:',key,'- aborting')
         sys.exit()
     # Sort variable entries
     vals = source_id['source_id'][key]['source_variables']
@@ -301,18 +304,18 @@ for key in source_id['source_id'].keys():
     # Validate source_label format
     val = source_id['source_id'][key]['source_label']
     if not entryCheck(key):
-        print 'Invalid source_label format for entry:',key,'- aborting'
+        print('Invalid source_label format for entry:',key,'- aborting')
         sys.exit()
     # Validate source_type
     val = source_id['source_id'][key]['source_type']
     if val not in source_type:
-        print 'Invalid source_type for entry:',key,'- aborting'
+        print('Invalid source_type for entry:',key,'- aborting')
         sys.exit()
     # Validate region
     vals = source_id['source_id'][key]['region']
     for val in vals:
         if val not in region: #['region']:
-            print 'Invalid region for entry:',key,'- aborting'
+            print('Invalid region for entry:',key,'- aborting')
             sys.exit()
 
 
@@ -422,7 +425,7 @@ for jsonName in masterTargets:
         outFile = ''.join(['../PMPObs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
-        print 'File existing, purging:',outFile
+        print('File existing, purging:',outFile)
         os.remove(outFile)
     if not os.path.exists('../Tables'):
         os.mkdir('../Tables')
@@ -524,7 +527,7 @@ PMPObs_CV['CV']['activity_id'] = 'PMPObs'
 
 # Write demo PMPObs_CV.json
 if os.path.exists('Tables/PMPObs_CV.json'):
-    print 'File existing, purging:','PMPObs_CV.json'
+    print('File existing, purging:','PMPObs_CV.json')
     os.remove('Tables/PMPObs_CV.json')
 fH = open('Tables/PMPObs_CV.json','w')
 json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
@@ -532,7 +535,7 @@ fH.close()
 
 # Write ../Tables obs4MIPs_CV.json
 if os.path.exists('../Tables/PMPObs_CV.json'):
-    print 'File existing, purging:','PMPObs_CV.json'
+    print('File existing, purging:','PMPObs_CV.json')
     os.remove('../Tables/PMPObs_CV.json')
 fH = open('../Tables/PMPObs_CV.json','w')
 json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
@@ -544,7 +547,7 @@ os.chdir('Tables')
 for count,CV in enumerate(tableList):
     outFile = ''.join(['PMPObs_',CV,'.json'])
     if os.path.exists(outFile):
-        print 'File existing, purging:',outFile
+        print('File existing, purging:',outFile)
         os.remove(outFile)
     fH = open(outFile,'w')
     json.dump(eval(CV),fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
