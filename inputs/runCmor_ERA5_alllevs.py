@@ -12,12 +12,12 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERA5-MARS-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = 'ERA5-pressurelevel/u_component/'
-inputFileName = ['ERA-5_ua_alllevs.xml']
+inputFilePathend = ['ERA5-pressurelevel/u_component/','ERA5-pressurelevel/v_component/']
+inputFileName = ['ERA-5_ua_alllevs.xml','ERA-5_va_alllevs.xml']
 
-inputVarName = ['u']   #['z_0001','u_0001','v_0001','t_0001'] 
-outputVarName = ['uaplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
-outputUnits = ['m s-1']   #['m','m s-1','m s-1','K']
+inputVarName = ['u','v']   #['z_0001','u_0001','v_0001','t_0001'] 
+outputVarName = ['uaplev37_ERA5','vaplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
+outputUnits = ['m s-1','m s-1']   #['m','m s-1','m s-1','K']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
@@ -25,7 +25,7 @@ for fi in range(len(inputVarName)):
   yr = 1979 + i
 
   print fi, inputVarName[fi]
-  inputFilePath = inputFilePathbgn+inputFilePathend
+  inputFilePath = inputFilePathbgn+inputFilePathend[fi]
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])

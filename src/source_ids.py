@@ -3,14 +3,14 @@ source_id['source_id'] = {}
 
 key = 'TropFlux-1-0'
 source_id['source_id'][key] = {}
-source_id['source_id'][key]['source_description'] = 'CERES EBAF (Energy Balanced and Filled) TOA Fluxes. Monthly Averages'
-source_id['source_id'][key]['institution_id'] = 'NASA/LaRC'
+source_id['source_id'][key]['source_description'] = 'TropFlux - Air-Sea Fluxes for the Global Tropical Oceans'
+source_id['source_id'][key]['institution_id'] = 'INCOIS-NIO-IPSL'
 source_id['source_id'][key]['release_year'] = '2018'
 source_id['source_id'][key]['source_id'] = key
-source_id['source_id'][key]['source_label'] = 'CERES-EBAF-4-0'
-source_id['source_id'][key]['source_name'] = 'CERES-EBAF4-0'
+source_id['source_id'][key]['source_label'] = 'TropFlux-1-0'
+source_id['source_id'][key]['source_name'] = 'TropFlux-1-0'
 source_id['source_id'][key]['source_type'] = 'satellite_blended'
-source_id['source_id'][key]['region'] = ['global']
+source_id['source_id'][key]['region'] = ['global_ocean']
 source_id['source_id'][key]['source_variables'] = ['tas','ts','hfls','hfss','hfns','tauu','tauv']
 source_id['source_id'][key]['source_version_number'] = '1.0'
 

@@ -1528,6 +1528,23 @@
             "valid_max":"",
             "valid_min":""
         },
+        "vaplev37_ERA5":{
+            "cell_measures":"",
+            "cell_methods":"time: mean",
+            "comment":"Meridional wind (positive in a northward direction).",
+            "dimensions":"longitude latitude plev37_ERA5 time",
+            "frequency":"mon",
+            "long_name":"Northward Wind",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"va",
+            "positive":"",
+            "standard_name":"northward_wind",
+            "type":"real",
+            "units":"m s-1",
+            "valid_max":"",
+            "valid_min":""
+        },
         "vaplev3a":{
             "cell_measures":"",
             "cell_methods":"time: mean",
