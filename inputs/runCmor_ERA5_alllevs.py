@@ -12,12 +12,27 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERA5-MARS-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
+
 inputFilePathend = ['ERA5-pressurelevel/u_component/','ERA5-pressurelevel/v_component/']
 inputFileName = ['ERA-5_ua_alllevs.xml','ERA-5_va_alllevs.xml']
-
 inputVarName = ['u','v']   #['z_0001','u_0001','v_0001','t_0001'] 
 outputVarName = ['uaplev37_ERA5','vaplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
 outputUnits = ['m s-1','m s-1']   #['m','m s-1','m s-1','K']
+
+inputFilePathend = ['ERA5-pressurelevel/geopotential/','ERA5-pressurelevel/temperature/']
+inputFileName = ['ERA-5_zg_alllevs.xml','ERA-5_ta_alllevs.xml']
+inputVarName = ['z','t']   #,'v']   #['z_0001','u_0001','v_0001','t_0001'] 
+outputVarName = ['zgplev37_ERA5','taplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
+outputUnits = ['m','K'] 
+
+inputFilePathend = ['ERA5-pressurelevel/temperature/']
+inputFileName = ['ERA-5_ta_alllevs.xml']
+inputVarName = ['t']   #,'v']   #['z_0001','u_0001','v_0001','t_0001'] 
+outputVarName = ['taplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
+outputUnits = ['K']
+
+
+
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
@@ -31,6 +46,8 @@ for fi in range(len(inputVarName)):
   f = cdm.open(inputFilePath+inputFileName[fi])
 # d1 = f(inputVarName[fi], time = (cdtime.comptime(yr,0,),cdtime.comptime(yr,12)),longitude=(6,10),latitude=(6,10))
   d1 = f(inputVarName[fi], time = (cdtime.comptime(yr,0,),cdtime.comptime(yr,12)))
+
+  if inputVarName[fi] == 'z': d1 = mv.divide(d1,9.81)
 
   plev1 = d1.getLevel()
 

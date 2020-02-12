@@ -1307,6 +1307,23 @@
             "valid_max":"",
             "valid_min":""
         },
+        "taplev37_ERA5":{
+            "cell_measures":"",
+            "cell_methods":"time: mean",
+            "comment":"Temperature",
+            "dimensions":"longitude latitude plev37_ERA5 time",
+            "frequency":"mon",
+            "long_name":"Temperature",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"ua",
+            "positive":"",
+            "standard_name":"air_temperature",
+            "type":"real",
+            "units":"K",
+            "valid_max":"",
+            "valid_min":""
+        },
         "taplev3a":{
             "cell_measures":"",
             "cell_methods":"time: mean",
@@ -1528,6 +1545,23 @@
             "valid_max":"",
             "valid_min":""
         },
+        "vaplev37_ERA5":{
+            "cell_measures":"",
+            "cell_methods":"time: mean",
+            "comment":"Meridional wind (positive in a northward direction).",
+            "dimensions":"longitude latitude plev37_ERA5 time",
+            "frequency":"mon",
+            "long_name":"Northward Wind",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"va",
+            "positive":"",
+            "standard_name":"northward_wind",
+            "type":"real",
+            "units":"m s-1",
+            "valid_max":"",
+            "valid_min":""
+        },
         "vaplev3a":{
             "cell_measures":"",
             "cell_methods":"time: mean",
@@ -1596,6 +1630,27 @@
             "valid_max":"",
             "valid_min":""
         },
+        "zgplev37_ERA5":{
+            "cell_measures":"",
+            "cell_methods":"time: mean",
+            "comment":"Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.",
+            "dimensions":"longitude latitude plev37_ERA5 time",
+            "frequency":"mon",
+            "long_name":"Geopotential Height",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"zg",
+            "positive":"",
+            "standard_name":"geopotential_height",
+            "type":"real",
+            "units":"m",
+            "valid_max":"",
+            "valid_min":""
+        },
+
+
+
+
         "zgplev3a":{
             "cell_measures":"",
             "cell_methods":"time: mean",
