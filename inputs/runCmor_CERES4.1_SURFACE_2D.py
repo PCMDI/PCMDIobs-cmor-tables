@@ -13,13 +13,16 @@ inputJson = 'CERES4.1-input.json' ; # Update contents of this file to set your g
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/CERES_EBAF4.1/'
 inputFileName = 'CERES_EBAF-SURFACE_Ed4.1_Subset_200003-201905.nc' 
-inputVarName = ['sfc_lw_up_all_mon','sfc_sw_up_all_mon','sfc_sw_up_clr_c_mon','sfc_lw_down_all_mon','sfc_lw_down_clr_c_mon','sfc_sw_down_all_mon','sfc_sw_down_clr_c_mon']
-outputVarName = ['rlus','rsus','rsuscs','rlds','rldscs','rsds','rsdscs']
-outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']
-outpos = ['up','up','up','down','down','down','down']
+inputVarName = ['sfc_lw_up_all_mon','sfc_sw_up_all_mon','sfc_sw_up_clr_c_mon','sfc_lw_down_all_mon','sfc_lw_down_clr_c_mon','sfc_sw_down_all_mon','sfc_sw_down_clr_c_mon','sfc_cre_net_sw_mon','sfc_cre_net_lw_mon','sfc_cre_net_tot_mon']
+outputVarName = ['rlus','rsus','rsuscs','rlds','rldscs','rsds','rsdscs','rsscre','rlscre','rnscre']
+outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']
+outpos = ['up','up','up','down','down','down','down','down','down','down']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
+  inputFileName = 'CERES_EBAF-SURFACE_Ed4.1_Subset_200003-201905.nc'
+  if inputVarName[fi] in ['sfc_cre_net_sw_mon','sfc_cre_net_lw_mon','sfc_cre_net_tot_mon']: inputFileName = 'CERES_EBAF_SurfaceCRE_Ed4.1_Subset_200003-201905.nc' 
+
   print (fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
