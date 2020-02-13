@@ -1368,7 +1368,7 @@
             "long_name":"Temperature",
             "ok_max_mean_abs":"",
             "ok_min_mean_abs":"",
-            "out_name":"ua",
+            "out_name":"ta",
             "positive":"",
             "standard_name":"air_temperature",
             "type":"real",

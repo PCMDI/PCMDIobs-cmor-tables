@@ -27,11 +27,14 @@ if len(sys.argv) > 1:
     data_path = sys.argv[1]
 else:
 #   data_path = '/work/gleckler1/processed_data/obs'
-    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2.0-tmp'
+    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2.0-beta'
 
 if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/gn/*/ac/*.nc'
 
 if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
+
+pathout = '/p/user_pub/PCMDIobs/misc_meta_info/'
+
 
 #lst = glob.glob(os.path.join(data_path, '/atmos/mon/rlut/*/gn/*/ac/*.nc'))
 
@@ -194,8 +197,8 @@ gc.collect()
 #gc.collect()
 
 # Save dictionary locally and in doc subdir
-if datatype == 'clim':  json_name = 'pcmdiobs_clims_info_' + ver + '.json'
-if datatype == 'timeSeries':  json_name = 'pcmdiobs_timeSeries_info_' + ver + '.json'
+if datatype == 'clim':  json_name = pathout + 'pcmdiobs_clims_info_' + ver + '.json'
+if datatype == 'timeSeries':  json_name = pathout + 'pcmdiobs_timeSeries_info_' + ver + '.json'
 
 
 json.dump(obs_dic, open(json_name, 'w'), sort_keys=True, indent=4,
