@@ -1,11 +1,8 @@
 #!/bin/env python
 
 # PJG 10212014 NOW INCLUDES SFTLF FROM
-# PJG 02012016 RESURRECTING...
 # /obs AND HARDWIRED TEST CASE WHICH
 # NEEDS FIXIN
-# PJD 171121 Attempting to fix issue with default missing for thetao and
-# CMOR Table being wrong
 
 import cdms2
 import gc
