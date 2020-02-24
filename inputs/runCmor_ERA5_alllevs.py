@@ -31,6 +31,13 @@ inputVarName = ['t']   #,'v']   #['z_0001','u_0001','v_0001','t_0001']
 outputVarName = ['taplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
 outputUnits = ['K']
 
+inputFilePathend = ['ERA5-pressurelevel/v_component/']
+inputFileName = ['ERA-5_va_alllevs.xml']
+inputVarName = ['v']   #['z_0001','u_0001','v_0001','t_0001'] 
+outputVarName = ['vaplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
+outputUnits = ['m s-1']
+
+
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
