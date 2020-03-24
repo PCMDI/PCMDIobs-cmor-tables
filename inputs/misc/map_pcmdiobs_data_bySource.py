@@ -42,6 +42,11 @@ for p in products:
    fn = l.split('/')[12]
    if 'ERA-5' not in fn and 'TRMM-3B43v-7' not in fn:
     print('----- ', fn) 
+
+    try:
+     os.remove(new_root + '/' + p + '/' + fn)
+    except:
+     pass
     print(l,new_root + '/' + p + '/' + fn)
     os.symlink(l,new_root + '/' + p + '/' + fn)
 
@@ -49,6 +54,10 @@ for l in lstx:
     fn = l.split('/')[12]
     p = l.split('/')[9]
     print('+++++ ', ) 
+    try:
+     os.remove(new_root + '/' + p + '/' + fn)
+    except:
+     pass
     print(new_root + '/' + p + '/' + fn)
     os.symlink(l,new_root + '/' + p + '/' + fn)
 

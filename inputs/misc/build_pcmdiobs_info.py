@@ -17,8 +17,7 @@ ver = datetime.datetime.now().strftime('v%Y%m%d')
 
 
 datatype = 'clim'  #'timeSeries'
-datatype = 'timeSeries'
-
+#datatype = 'timeSeries'
 
 if len(sys.argv) > 1:
     data_path = sys.argv[1]
@@ -26,16 +25,13 @@ else:
 #   data_path = '/work/gleckler1/processed_data/obs'
     data_path = '/p/user_pub/PCMDIobs/PCMDIobs2.0-beta'
 
-if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/gn/*/ac/*.nc'
+if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
 
 if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
 
 pathout = '/p/user_pub/PCMDIobs/misc_meta_info/'
 
-
 #lst = glob.glob(os.path.join(data_path, '/atmos/mon/rlut/*/gn/*/ac/*.nc'))
-
-
 
 lst = glob.glob(comb)
 
@@ -65,9 +61,10 @@ obs_dic_in = {'rlut': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0
               'psl': {'default': 'ERA-INT',
                       'alternate2': 'JRA25',
                       'alternate1': 'ERA-40'},
-              'ua': {'default': 'ERA-INT',
-                     'alternate2': 'JRA25',
-                     'alternate1': 'ERA-40'},
+              'ua':  {'default': 'ERA-5',
+                     'alternate1': 'ERA-INT',
+                     'alternate3': 'JRA25',
+                     'alternate2': 'ERA-40'},
               'va': {'default': 'ERA-INT',
                      'alternate2': 'JRA25',
                      'alternate1': 'ERA-40'},

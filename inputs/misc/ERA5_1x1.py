@@ -4,11 +4,11 @@ import os
 from regrid2 import Regridder
 
 dbver = 'PCMDIobs2.0-beta'
-ver = 'v20200206'
+ver = 'v20200224'  #'v20200212'   #'v20200213'  #'v20200219'  #'v20200224'   #'v20200206'
 target = '1x1'
 
 pin = '/p/user_pub/PCMDIobs/' + dbver + '/atmos/mon/*/CERES-EBAF-4-1/gn/' + ver + '/'
-pin = '/p/user_pub/PCMDIobs/' + dbver + '/atmos/mon/ua/ERA-5/gn/' + ver + '/'
+pin = '/p/user_pub/PCMDIobs/' + dbver + '/atmos/mon/tau*/ERA-5/gn/' + ver + '/'
 
 lst = glob.glob(pin + '*.nc')
 
