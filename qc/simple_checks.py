@@ -4,10 +4,11 @@ import cdutil
 
 
 var = 'pr'
-var = 'tauv'
+#var = 'tauv'
 
 #lst = glob.glob('/p/user_pub/PCMDIobs/PCMDIobs2.0/atmos/mon/*/*/gn/v20200117/*.nc')
 lst = glob.glob('/p/user_pub/PCMDIobs/PCMDIobs2.0-beta/atmos/mon/' + var + '/*/gn/*/*.nc')
+lst = glob.glob('/p/user_pub/PCMDIobs/PCMDIobs2.0-beta/atmos/mon/' + var + '/*/gn/latest/*.nc')
 
 
 for l in lst:

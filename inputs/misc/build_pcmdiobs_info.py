@@ -17,7 +17,7 @@ ver = datetime.datetime.now().strftime('v%Y%m%d')
 
 
 datatype = 'clim'  #'timeSeries'
-#datatype = 'timeSeries'
+datatype = 'timeSeries'
 
 if len(sys.argv) > 1:
     data_path = sys.argv[1]
@@ -28,6 +28,7 @@ else:
 if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
 
 if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
+if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/*/*/*.nc'
 
 pathout = '/p/user_pub/PCMDIobs/misc_meta_info/'
 
@@ -53,7 +54,8 @@ obs_dic_in = {'rlut': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0
               'rstcre': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0'},
               'rltcre': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0'},
               'pr': {'default': 'GPCP-2-3',
-                     'alternate1': 'TRMM-3B43v-7'},
+                     'alternate1': 'TRMM-3B43v-7',
+                     'alternate2': 'CMAP-V1902'},
               'prw': {'default': 'REMSS-PRW-v07r01'},
               'tas': {'default': 'ERA-INT',
                       'alternate2': 'JRA25',

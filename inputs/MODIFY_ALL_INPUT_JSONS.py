@@ -8,13 +8,14 @@ import time
 
 lst = glob.glob('./*.json')
 
-for l in lst:
+for l in lst:  #[0:2]:
 ## MV all FILE.json to FILE_cp.json 
-   cpf = l.replace('.json','_cp.json')
-   os.rename(l,cpf)
-   time.sleep(0.5)
+ cpf = l.replace('.json','_cp.json')
+ os.rename(l,cpf)
+ time.sleep(0.5)
 
 # LOAD DICTIONARY CONTENTS 
+ try:  
    f =  open(cpf,'r')
    d = json.load(f)
    f.close()
@@ -22,18 +23,22 @@ for l in lst:
 ###########
 # THIS IS THE INFO THAT GETS MODIFIED
    d['outpath'] = '/p/user_pub/PCMDIobs/'
-   d['activity_id'] = 'PCMDIobs2.0-tmp'
+   d['activity_id'] = 'PCMDIobs2'
    d['curation_provenance'] = 'work-in-progress'
 
 ###########
 ### SAVE CHANGED VALUES
    time.sleep(0.5)
    g =  open(l,'w+')
-   print l,' ', d.keys()
-   print '---------------------------'
+   print(l,' ', d.keys())
+   print('---------------------------')
 #  json.dumps(d,g)
    json.dump(d,g,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
    g.close()
+ except:
+   print('failed with ', l)
+
+os.popen('mv *cp.json older').readlines()
 
 
     
