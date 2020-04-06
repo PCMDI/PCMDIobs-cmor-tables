@@ -50,7 +50,6 @@ inputVarName = ['t']   #,'v']   #['z_0001','u_0001','v_0001','t_0001']
 outputVarName = ['taplev37_ERA5']   #['zgplev3a','uaplev3a','vaplev3a','taplev3a']  
 outputUnits = ['K']
 
-
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
  for i in range(40):

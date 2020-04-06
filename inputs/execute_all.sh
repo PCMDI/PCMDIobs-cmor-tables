@@ -19,8 +19,8 @@ python runCmor_ERA40_2D.py
 python runCmor_ERA40_3D.py
 python runCmor_ERAINT_2D.py
 python runCmor_ERAINT_3D.py
-python runCmor_ERA5_alllevs.py
-python runCmor_ERA5_2D_MARS.py
+#python runCmor_ERA5_alllevs.py
+#python runCmor_ERA5_2D_MARS.py
 
 # LONGER TIME SCALE MONTHLY 
 python runCmor_20CR_2D.py

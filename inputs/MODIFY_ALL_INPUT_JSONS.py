@@ -8,15 +8,17 @@ import time
 
 lst = glob.glob('./*.json')
 
-for l in lst:  #[0:2]:
+for l in lst:   #[0:2]:
 ## MV all FILE.json to FILE_cp.json 
  cpf = l.replace('.json','_cp.json')
- os.rename(l,cpf)
+ print(l,'  ', cpf)
+ copyfile(l, cpf)
+#os.rename(l,cpf)
  time.sleep(0.5)
 
 # LOAD DICTIONARY CONTENTS 
  try:  
-   f =  open(cpf,'r')
+   f =  open(l,'r')
    d = json.load(f)
    f.close()
 
@@ -25,6 +27,7 @@ for l in lst:  #[0:2]:
    d['outpath'] = '/p/user_pub/PCMDIobs/'
    d['activity_id'] = 'PCMDIobs2'
    d['curation_provenance'] = 'work-in-progress'
+   d['output_file_template'] = '<variable_id><frequency><source_id><variant_label><grid_label><version>'
 
 ###########
 ### SAVE CHANGED VALUES
@@ -39,7 +42,6 @@ for l in lst:  #[0:2]:
    print('failed with ', l)
 
 os.popen('mv *cp.json older').readlines()
-
 
     
 
