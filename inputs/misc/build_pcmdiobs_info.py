@@ -16,21 +16,30 @@ import datetime
 ver = datetime.datetime.now().strftime('v%Y%m%d')
 
 
+###############################################################
 datatype = 'clim'  #'timeSeries'
 datatype = 'timeSeries'
+datatype = 'monthly'
+#datatype = 'day'
+#datatype = '3hr'
+
+
 
 if len(sys.argv) > 1:
     data_path = sys.argv[1]
 else:
 #   data_path = '/work/gleckler1/processed_data/obs'
-    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2.0-beta'
+    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2'
 
 if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
 
 if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
-if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/*/*/*.nc'
+if datatype == 'timeSeries': comb = data_path + '/atmos/*/pr/*/*/*/*.nc'
+if datatype == 'monthly': comb = data_path + '/atmos/mon/*/*/*/*/*.nc'
+if datatype == 'day': comb = data_path + '/atmos/day/*/*/*/*/*.nc'
+if datatype == '3hr': comb = data_path + '/atmos/3hr/*/*/*/*/*.nc'
 
-pathout = '/p/user_pub/PCMDIobs/misc_meta_info/'
+pathout = '/p/user_pub/PCMDIobs/catalogue/'
 
 #lst = glob.glob(os.path.join(data_path, '/atmos/mon/rlut/*/gn/*/ac/*.nc'))
 
@@ -132,8 +141,9 @@ for filePath in lst:
         period = fileName.split('_')[-1]
         period = period.replace('.nc', '')
     else:
-        period = fileName.split('_')[-2]
+        period = fileName.split('_')[-1]
     period = period.replace('-clim.nc', '')  # .replace('ac.nc','')
+    period = period.replace('.nc','')
     print('period:', period)
 
     # TRAP FILE NAME FOR OBS DATA
@@ -143,7 +153,7 @@ for filePath in lst:
         obs_dic[var][product] = {}
         obs_dic[var][product]['template'] = template 
         obs_dic[var][product]['filename'] = fileName
-        obs_dic[var][product]['CMIP_CMOR_TABLE'] = tableId
+#       obs_dic[var][product]['CMIP_CMOR_TABLE'] = tableId
         obs_dic[var][product]['period'] = period
         obs_dic[var][product]['RefName'] = product
         obs_dic[var][product]['RefTrackingDate'] = time.ctime(
@@ -193,8 +203,11 @@ gc.collect()
 #gc.collect()
 
 # Save dictionary locally and in doc subdir
-if datatype == 'clim':  json_name = pathout + 'pcmdiobs_clims_info_' + ver + '.json'
-if datatype == 'timeSeries':  json_name = pathout + 'pcmdiobs_timeSeries_info_' + ver + '.json'
+if datatype == 'clim':  json_name = pathout + 'pcmdiobs2_clims_catalogue_' + ver + '.json'
+if datatype == 'timeSeries':  json_name = pathout + 'pcmdiobs_timeSeries_catalogue_' + ver + '.json'
+if datatype == 'monthly':  json_name = pathout + 'pcmdiobs_monthly_catalogue_' + ver + '.json'
+if datatype == 'day':  json_name = pathout + 'pcmdiobs_day_catalogue_' + ver + '.json'
+if datatype == '3hr':  json_name = pathout + 'pcmdiobs_3hr_catalogue_' + ver + '.json'
 
 
 json.dump(obs_dic, open(json_name, 'w'), sort_keys=True, indent=4,

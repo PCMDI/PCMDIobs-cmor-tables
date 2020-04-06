@@ -3,7 +3,7 @@ import os, glob
 # THIS SCRIPT USES CDSCAN TO PRODUCE XMLS IN PCMDIobs IN CASES WHERE A TIME SERIES SPANS MULTIPLE netCDF FILES
 
 
-pin = '/p/user_pub/PCMDIobs/PCMDIobs2.0-beta/atmos/'
+pin = '/p/user_pub/PCMDIobs/PCMDIobs2.0/atmos/'
 
 
 xmls_needed =  ['*/*/ERA-5/*/*/']
