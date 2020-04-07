@@ -20,7 +20,7 @@ ver = datetime.datetime.now().strftime('v%Y%m%d')
 datatype = 'clim'  #'timeSeries'
 datatype = 'timeSeries'
 datatype = 'monthly'
-#datatype = 'day'
+datatype = 'day'
 #datatype = '3hr'
 
 
@@ -34,7 +34,7 @@ else:
 if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
 
 if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
-if datatype == 'timeSeries': comb = data_path + '/atmos/*/pr/*/*/*/*.nc'
+if datatype == 'timeSeries': comb = data_path + '/atmos/*/*/*/*/*/*.nc'
 if datatype == 'monthly': comb = data_path + '/atmos/mon/*/*/*/*/*.nc'
 if datatype == 'day': comb = data_path + '/atmos/day/*/*/*/*/*.nc'
 if datatype == '3hr': comb = data_path + '/atmos/3hr/*/*/*/*/*.nc'
@@ -118,6 +118,7 @@ for filePath in lst:
     realm = subp[5]
     var = subp[7]
     product = subp[8]
+    grid = subp[9]
     # Assign tableId
     if realm == 'atmos':
         tableId = 'Amon'
@@ -150,7 +151,11 @@ for filePath in lst:
     if var not in list(obs_dic.keys()):
         obs_dic[var] = {}
     if product not in list(obs_dic[var].keys()) and os.path.isfile(filePath):
+#       if isinstance(obs_dic[var][product],dict) is False: obs_dic[var][product] = {}
+#       obs_dic[var][product][grid] = {}
+
         obs_dic[var][product] = {}
+
         obs_dic[var][product]['template'] = template 
         obs_dic[var][product]['filename'] = fileName
 #       obs_dic[var][product]['CMIP_CMOR_TABLE'] = tableId
