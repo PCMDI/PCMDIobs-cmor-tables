@@ -1,0 +1,14 @@
+{
+    "pr": {
+        "TRMM-3B43v-7": {
+            "MD5sum": "fac0932c523e69b68dc015819d18751c",
+            "RefName": "TRMM-3B43v-7",
+            "RefTrackingDate": "Thu Apr  2 18:53:52 2020",
+            "filename": "pr_3hr_TRMM-3B43v-7_BE_gn_v20200402_200810010130-200810312230.nc",
+            "period": "200810010130-200810312230",
+            "shape": "(248, 400, 1440)",
+            "template": "/atmos/3hr/pr/TRMM-3B43v-7/gn/v20200402/pr_3hr_TRMM-3B43v-7_BE_gn_v20200402_200810010130-200810312230.nc"
+        },
+        "alternate1": "TRMM-3B43v-7"
+    }
+}
