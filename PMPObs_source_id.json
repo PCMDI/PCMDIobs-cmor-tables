@@ -210,6 +210,22 @@
             ],
             "source_version_number":"2.3"
         },
+        "HadISST-1-1":{
+            "institution_id":"MOHC",
+            "region":[
+                "global_ocean"
+            ],
+            "release_year":"2016",
+            "source_description":"HadISST 1.1 monthly average sea surface temperature",
+            "source_id":"HadISST-1-1",
+            "source_label":"HadISST-1-1",
+            "source_name":"HadISST-1-1",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "ts"
+            ],
+            "source_version_number":"1-1"
+        },
         "JRA25":{
             "institution_id":"MRI",
             "region":[
@@ -228,6 +244,22 @@
                 "zg"
             ],
             "source_version_number":"N/A"
+        },
+        "OISST-L4-AVHRR-only-v2":{
+            "institution_id":"NOAA-NCEI",
+            "region":[
+                "global_ocean"
+            ],
+            "release_year":"2016",
+            "source_description":"SST-AVHRR_only.v2 2008 NOAA 1/4 Degree Daily Optimum Interpolation Sea Surface Temperature Analysis using AVHRR, Version 2",
+            "source_id":"OISST-L4-AVHRR-only-v2",
+            "source_label":"OISST_L4_AVHRR-only-v2",
+            "source_name":"OISST_L4_AVHRR-only-v2",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "ts"
+            ],
+            "source_version_number":"v2"
         },
         "REMSS-PRW-6-6-0":{
             "institution_id":"RSS",

@@ -20,8 +20,8 @@ ver = datetime.datetime.now().strftime('v%Y%m%d')
 datatype = 'clim'  #'timeSeries'
 datatype = 'timeSeries'
 datatype = 'monthly'
-datatype = 'day'
-#datatype = '3hr'
+#datatype = 'day'
+##datatype = '3hr'
 
 
 

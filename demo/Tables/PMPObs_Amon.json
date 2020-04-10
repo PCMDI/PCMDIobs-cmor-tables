@@ -11,7 +11,7 @@
         "missing_value":"1e20",
         "product":"observations",
         "realm":"atmos",
-        "table_date":"21 January 2020",
+        "table_date":"24 February 2020",
         "table_id":"Table PMPObs_Amon"
     },
     "variable_entry":{
@@ -1126,7 +1126,7 @@
             "comment":"",
             "dimensions":"longitude latitude time",
             "frequency":"mon",
-            "long_name":"Top of Atmosphere Longwave CRE",
+            "long_name":"Top of Atmosphere Shortwave CRE",
             "ok_max_mean_abs":"",
             "ok_min_mean_abs":"",
             "out_name":"rstcre",

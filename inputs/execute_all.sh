@@ -25,6 +25,8 @@ python runCmor_ERAINT_3D.py
 # LONGER TIME SCALE MONTHLY 
 python runCmor_20CR_2D.py
 python runCmor_ERA20C_2D.py
+python runCmor_HadISSTv1.1.py
+
 
 ## PROBLEM DATA
 #python runCmor_JRA25_2D.py BAD TIME MODEL

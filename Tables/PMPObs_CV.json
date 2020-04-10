@@ -71,6 +71,7 @@
             "ECMWF":"The European Centre for Medium-Range Weather Forecasts, Shinfield Park, Reading RG2 9AX, UK",
             "ESSO":"Indian National Centre for Ocean Information Services",
             "INCOIS-NIO-IPSL":"Joint research colloboration between INCOIS(India), NIO(India) and IPSL(France)",
+            "MOHC":"Met Office Hadley Centre",
             "MRI":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
             "NASA-GSFC":"NASA Goddard Space Flight Center, Greenbelt MD, USA",
             "NASA-JPL":"NASA Jet Propulsion Laboratory, Pasadena, CA 91109, USA",
@@ -289,12 +290,26 @@
                 "source_type":"satellite_blended",
                 "source_version_number":"2.3"
             },
+            "HadISST-1-1":{
+                "region":"global_ocean",
+                "source":"HadISST-1-1 1-1 (2016): HadISST 1.1 monthly average sea surface temperature",
+                "source_label":"HadISST-1-1",
+                "source_type":"satellite_blended",
+                "source_version_number":"1-1"
+            },
             "JRA25":{
                 "region":"global",
                 "source":"MRI-JRA25 N/A (2002): JRA25 1.0 (2002): JRA25 (Japanese ReAnalysis 1957-2002)",
                 "source_label":"MRI-JRA25",
                 "source_type":"reanalysis",
                 "source_version_number":"N/A"
+            },
+            "OISST-L4-AVHRR-only-v2":{
+                "region":"global_ocean",
+                "source":"OISST_L4_AVHRR-only-v2 v2 (2016): SST-AVHRR_only.v2 2008 NOAA 1/4 Degree Daily Optimum Interpolation Sea Surface Temperature Analysis using AVHRR, Version 2",
+                "source_label":"OISST_L4_AVHRR-only-v2",
+                "source_type":"satellite_blended",
+                "source_version_number":"v2"
             },
             "REMSS-PRW-6-6-0":{
                 "region":"global",

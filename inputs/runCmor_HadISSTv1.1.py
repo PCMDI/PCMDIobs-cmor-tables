@@ -7,13 +7,14 @@ import cdutil
 
 #%% User provided input
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
-inputJson = 'RSS_prw_v07r01.json' ; # Update contents of this file to set your global_attributes
+inputJson = 'HadISSTv1.1.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/HadISSTv1.1/'
-inputFileName = ['tpw_v07r01_198801_201812.nc3.nc','ws_v07r01_198801_201812.nc3.nc']
-inputVarName = ['precipitable_water','wind_speed']
-outputVarName = ['prw','sfcWind']
-outputUnits = ['kg m-2','m s-1']
+inputFilePathend = '/HadISSTv1.1/'   #xmls/'
+#inputFilePathend = '/TMP/'
+inputFileName = ['HadISST_sst.nc']   #['HadISST.xml']
+inputVarName = ['sst']
+outputVarName = ['ts']
+outputUnits = ['K']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 #%% Process variable (with time axis)
@@ -23,8 +24,11 @@ for fi in range(len(inputVarName)):
 
  inputFilePath = inputFilePathbgn+inputFilePathend
  f = cdm.open(inputFilePath+inputFileName[fi])
- d = f(inputVarName[fi])
- cdutil.times.setTimeBoundsMonthly(d)
+ cdm.setAutoBounds('on')
+ d = f(inputVarName[fi]) 
+ d = d + 273.15
+ cdm.setAutoBounds('off')
+#cdutil.times.setTimeBoundsMonthly(d)
  lat = d.getLatitude()
  lon = d.getLongitude()
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
@@ -32,11 +36,11 @@ for fi in range(len(inputVarName)):
 
 # Deal with problematic "months since" calendar/time axis
  time_bounds = time.getBounds()
- time_bounds[:,0] = time[:]
- time_bounds[:-1,1] = time[1:]
- time_bounds[-1,1] = time_bounds[-1,0]+1
+#time_bounds[:,0] = time[:]
+#time_bounds[:-1,1] = time[1:]
+#time_bounds[-1,1] = time_bounds[-1,0]+1
  time.setBounds(time_bounds)
- del(time_bounds) ; # Cleanup
+#del(time_bounds) ; # Cleanup
 
 #%% Initialize and run CMOR
 # For more information see https://cmor.llnl.gov/mydoc_cmor3_api/
