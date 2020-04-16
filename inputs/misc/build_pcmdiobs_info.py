@@ -33,9 +33,9 @@ else:
 
 if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
 
-if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
-if datatype == 'timeSeries': comb = data_path + '/atmos/*/*/*/*/*/*.nc'
-if datatype == 'monthly': comb = data_path + '/atmos/mon/*/*/*/*/*.nc'
+#if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
+#if datatype == 'timeSeries': comb = data_path + '/*/mon/*/*/*/*/*.nc'
+if datatype == 'monthly': comb = data_path + '/*/mon/*/*/*/*/*.nc'
 if datatype == 'day': comb = data_path + '/atmos/day/*/*/*/*/*.nc'
 if datatype == '3hr': comb = data_path + '/atmos/3hr/*/*/*/*/*.nc'
 
@@ -101,7 +101,7 @@ obs_dic_in = {'rlut': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0
                        'alternate2': 'JRA25',
                        'alternate1': 'ERA-40'},
               'tos': {'default': 'UKMETOFFICE-HadISST-v1-1'},
-              'zos': {'default': 'CNES-AVISO-L4'},
+              'zos': {'default': 'AVISO-1-0'},
               'sos': {'default': 'NODC-WOA09'},
               'ts': {'default': 'HadISST1'},
               'thetao': {'default': 'WOA13v2',
@@ -122,7 +122,7 @@ for filePath in lst:
     # Assign tableId
     if realm == 'atmos':
         tableId = 'Amon'
-    elif realm == 'ocn':
+    elif realm == 'ocean':   #'ocn':
         tableId = 'Omon'
     elif realm == 'fx':
         tableId = 'fx'
@@ -210,12 +210,65 @@ gc.collect()
 # Save dictionary locally and in doc subdir
 if datatype == 'clim':  json_name = pathout + 'pcmdiobs2_clims_catalogue_' + ver + '.json'
 if datatype == 'timeSeries':  json_name = pathout + 'pcmdiobs_timeSeries_catalogue_' + ver + '.json'
-if datatype == 'monthly':  json_name = pathout + 'pcmdiobs_monthly_catalogue_' + ver + '.json'
-if datatype == 'day':  json_name = pathout + 'pcmdiobs_day_catalogue_' + ver + '.json'
-if datatype == '3hr':  json_name = pathout + 'pcmdiobs_3hr_catalogue_' + ver + '.json'
+if datatype == 'monthly':  json_name = pathout + 'pcmdiobs_monthly_byVar_catalogue_' + ver + '.json'
+if datatype == 'day':  json_name = pathout + 'pcmdiobs_day_byVar_catalogue_' + ver + '.json'
+if datatype == '3hr':  json_name = pathout + 'pcmdiobs_3hr_byVar_catalogue_' + ver + '.json'
 
 
 json.dump(obs_dic, open(json_name, 'w'), sort_keys=True, indent=4,
           separators=(',', ': '))
-#json.dump(obs_dic, open('../../../../doc/' + json_name, 'wb'), sort_keys=True,
-#          indent=4, separators=(',', ': '))
+
+time.sleep(2)
+
+### REMAP JSON BY SOURCE
+
+catalogue_json_bySourceID = json_name.replace('byVar','bySource')
+
+print(catalogue_json_bySourceID)
+
+f_catalogue  = open(json_name)  #open(catalogue_json)
+dict_catalogue = json.loads(f_catalogue.read())
+
+#
+# Collect variables
+#
+var_list = sorted(list(dict_catalogue.keys()))
+print('var_list:', var_list)
+
+#
+# Collect data sources
+#
+data_source_list = []
+for var in var_list:
+    data_source_list.extend(list(dict_catalogue[var].keys()))
+# Remove any duplicates
+data_source_list = sorted(list(dict.fromkeys(data_source_list)))
+# Remove other than data source
+remove_elements_list = ['default', 'alternate1', 'alternate2']
+for element in remove_elements_list:
+    try:
+        data_source_list.remove(element)
+    except:
+        pass
+
+print('data_source_list:', data_source_list)
+
+#
+# New dictionary with layer switched (var/dataSource to dataSource/var)
+#
+dict_catalogue_new = {}
+for data_source in data_source_list:
+    dict_catalogue_new[data_source] = {}
+    for var in var_list:
+        try:
+            dict_catalogue_new[data_source][var] = dict_catalogue[var][data_source]
+        except:
+            pass
+#
+# Rewrite
+#
+with open(catalogue_json_bySourceID, "w") as f_catalogue_new:
+    json.dump(dict_catalogue_new, f_catalogue_new, indent=4, sort_keys=True)
+
+
+
