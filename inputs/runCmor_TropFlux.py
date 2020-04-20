@@ -1,6 +1,7 @@
 import cmor
 import cdms2 as cdm
 import numpy as np
+import MV2
 import cdutil
 cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
@@ -26,9 +27,8 @@ for fi in range(len(inputVarName)):
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
   d = f(inputVarName[fi])
-  if inputVarName[fi] in ['tas','ts']: d = numpy.add(d,273.15)
-
-  cdutil.times.setTimeBoundsMonthly(d)
+  if inputVarName[fi] in ['t2m','sst']: d = MV2.add(d,273.15)
+# cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print(d.shape)

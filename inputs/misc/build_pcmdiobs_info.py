@@ -18,26 +18,28 @@ ver = datetime.datetime.now().strftime('v%Y%m%d')
 
 ###############################################################
 datatype = 'clim'  #'timeSeries'
-datatype = 'timeSeries'
-datatype = 'monthly'
+#datatype = 'timeSeries'
+#datatype = 'monthly'
 #datatype = 'day'
 ##datatype = '3hr'
-
 
 
 if len(sys.argv) > 1:
     data_path = sys.argv[1]
 else:
 #   data_path = '/work/gleckler1/processed_data/obs'
-    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2'
+    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2/'
 
-if datatype == 'clim': comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
+if datatype == 'clim': 
+    data_path = '/p/user_pub/PCMDIobs/PCMDIobs2_clims/'
+    comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
+    comb = data_path + 'atmos/pr/*/*AC.nc'
 
 #if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
 #if datatype == 'timeSeries': comb = data_path + '/*/mon/*/*/*/*/*.nc'
-if datatype == 'monthly': comb = data_path + '/*/mon/*/*/*/*/*.nc'
-if datatype == 'day': comb = data_path + '/atmos/day/*/*/*/*/*.nc'
-if datatype == '3hr': comb = data_path + '/atmos/3hr/*/*/*/*/*.nc'
+if datatype == 'monthly': comb = data_path + '*/mon/*/*/*/*/*.nc'
+if datatype == 'day': comb = data_path + 'atmos/day/*/*/*/*/*.nc'
+if datatype == '3hr': comb = data_path + 'atmos/3hr/*/*/*/*/*.nc'
 
 pathout = '/p/user_pub/PCMDIobs/catalogue/'
 
@@ -114,11 +116,21 @@ obs_dic = {}
 
 for filePath in lst:
     subp = filePath.split('/')
-    template = filePath.split(data_path)[1]
-    realm = subp[5]
-    var = subp[7]
-    product = subp[8]
-    grid = subp[9]
+    if datatype != 'clim':
+     template = filePath.split(data_path)[1]
+     realm = subp[5]
+     var = subp[7]
+     product = subp[8]
+     grid = subp[9]
+
+    if datatype == 'clim':
+     template = filePath.split(data_path)[1]
+     realm = subp[5]
+     var = subp[6]
+     product = subp[7]
+     grid = subp[8].split('_')[4]
+
+
     # Assign tableId
     if realm == 'atmos':
         tableId = 'Amon'
@@ -146,6 +158,9 @@ for filePath in lst:
     period = period.replace('-clim.nc', '')  # .replace('ac.nc','')
     period = period.replace('.nc','')
     print('period:', period)
+
+    if datatype == 'clim':  period = period.split('.')[0]
+
 
     # TRAP FILE NAME FOR OBS DATA
     if var not in list(obs_dic.keys()):
