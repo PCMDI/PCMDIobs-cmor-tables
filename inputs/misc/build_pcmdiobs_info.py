@@ -33,7 +33,7 @@ else:
 if datatype == 'clim': 
     data_path = '/p/user_pub/PCMDIobs/PCMDIobs2_clims/'
     comb = data_path + '/atmos/mon/*/*/*/*/climo/*AC.nc'
-    comb = data_path + 'atmos/pr/*/*AC.nc'
+    comb = data_path + 'atmos/*/*/*AC.nc'
 
 #if datatype == 'timeSeries': comb = data_path + '/atmos/mon/*/*/gn/*/*.nc'
 #if datatype == 'timeSeries': comb = data_path + '/*/mon/*/*/*/*/*.nc'
@@ -68,34 +68,35 @@ obs_dic_in = {'rlut': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0
                      'alternate1': 'TRMM-3B43v-7',
                      'alternate2': 'CMAP-V1902'},
               'prw': {'default': 'REMSS-PRW-v07r01'},
-              'tas': {'default': 'ERA-INT',
-                      'alternate2': 'JRA25',
-                      'alternate1': 'ERA-40'},
-              'psl': {'default': 'ERA-INT',
-                      'alternate2': 'JRA25',
-                      'alternate1': 'ERA-40'},
+              'sfcWind': {'default': 'REMSS-PRW-v07r01','alternate1':'ERA-INT'},
+              'tas': {'default': 'ERA-5',
+                      'alternate1': 'ERA-INT',
+                      'alternate2': 'ERA-40'},
+              'psl': {'default': 'ERA-5',
+                      'alternate2': 'ERA-40',
+                      'alternate1': 'ERA-INT'},
               'ua':  {'default': 'ERA-5',
                      'alternate1': 'ERA-INT',
                      'alternate3': 'JRA25',
                      'alternate2': 'ERA-40'},
-              'va': {'default': 'ERA-INT',
-                     'alternate2': 'JRA25',
-                     'alternate1': 'ERA-40'},
-              'uas': {'default': 'ERA-INT',
-                      'alternate2': 'JRA25',
-                      'alternate1': 'ERA-40'},
+              'va': {'default': 'ERA-5',
+                     'alternate1': 'ERA-INT',
+                     'alternate2': 'ERA-40'},
+              'uas': {'default': 'ERA-5',
+                      'alternate1': 'ERA-INT',
+                      'alternate2': 'ERA-40'},
               'hus': {'default': 'ERA-INT',
                       'alternate2': 'JRA25',
                       'alternate1': 'ERA-40'},
-              'vas': {'default': 'ERA-INT',
-                      'alternate2': 'JRA25',
+              'vas': {'default': 'ERA-5',
+                      'alternate2': 'ERA-INT',
                       'alternate1': 'ERA-40'},
-              'ta': {'default': 'ERA-INT',
-                     'alternate2': 'JRA25',
+              'ta': {'default': 'ERA-5',
+                     'alternate2': 'ERA-INT',
                      'alternate1': 'ERA-40'},
-              'zg': {'default': 'ERA-INT',
-                     'alternate2': 'JRA25',
-                     'alternate1': 'ERA-40'},
+              'zg': {'default': 'ERA-5',
+                     'alternate1': 'ERA-INT',
+                     'alternate2': 'ERA-40'},
               'tauu': {'default': 'ERA-INT',
                        'alternate2': 'JRA25',
                        'alternate1': 'ERA-40'},
@@ -173,7 +174,7 @@ for filePath in lst:
 
         obs_dic[var][product]['template'] = template 
         obs_dic[var][product]['filename'] = fileName
-#       obs_dic[var][product]['CMIP_CMOR_TABLE'] = tableId
+        obs_dic[var][product]['CMIP_CMOR_TABLE'] = tableId
         obs_dic[var][product]['period'] = period
         obs_dic[var][product]['RefName'] = product
         obs_dic[var][product]['RefTrackingDate'] = time.ctime(
@@ -223,8 +224,7 @@ gc.collect()
 #gc.collect()
 
 # Save dictionary locally and in doc subdir
-if datatype == 'clim':  json_name = pathout + 'pcmdiobs2_clims_catalogue_' + ver + '.json'
-if datatype == 'timeSeries':  json_name = pathout + 'pcmdiobs_timeSeries_catalogue_' + ver + '.json'
+if datatype == 'clim':  json_name = pathout + 'pcmdiobs2_clims_byVar_catalogue_' + ver + '.json'
 if datatype == 'monthly':  json_name = pathout + 'pcmdiobs_monthly_byVar_catalogue_' + ver + '.json'
 if datatype == 'day':  json_name = pathout + 'pcmdiobs_day_byVar_catalogue_' + ver + '.json'
 if datatype == '3hr':  json_name = pathout + 'pcmdiobs_3hr_byVar_catalogue_' + ver + '.json'
