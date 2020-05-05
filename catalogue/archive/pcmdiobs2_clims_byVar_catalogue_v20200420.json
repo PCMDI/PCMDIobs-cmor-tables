@@ -1,0 +1,47 @@
+{
+    "pr": {
+        "CMAP-V1902": {
+            "CMIP_CMOR_TABLE": "Amon",
+            "MD5sum": "686480f001135c57a5a3ccb7e9088f47",
+            "RefName": "CMAP-V1902",
+            "RefTrackingDate": "Mon Apr 20 15:21:32 2020",
+            "filename": "pr_mon_CMAP-V1902_BE_gn_197901-201901.v20200420.AC.nc",
+            "period": "197901-201901",
+            "shape": "(12, 72, 144)",
+            "template": "atmos/pr/CMAP-V1902/pr_mon_CMAP-V1902_BE_gn_197901-201901.v20200420.AC.nc"
+        },
+        "ERA-INT": {
+            "CMIP_CMOR_TABLE": "Amon",
+            "MD5sum": "1946f511d928dcc29412ffc681e0dd95",
+            "RefName": "ERA-INT",
+            "RefTrackingDate": "Mon Apr 20 15:21:45 2020",
+            "filename": "pr_mon_ERA-INT_BE_gn_197901-201903.v20200420.AC.nc",
+            "period": "197901-201903",
+            "shape": "(12, 241, 480)",
+            "template": "atmos/pr/ERA-INT/pr_mon_ERA-INT_BE_gn_197901-201903.v20200420.AC.nc"
+        },
+        "GPCP-2-3": {
+            "CMIP_CMOR_TABLE": "Amon",
+            "MD5sum": "d773f68878d213db1c253417f7c7d380",
+            "RefName": "GPCP-2-3",
+            "RefTrackingDate": "Mon Apr 20 15:21:34 2020",
+            "filename": "pr_mon_GPCP-2-3_BE_gn_197901-201907.v20200420.AC.nc",
+            "period": "197901-201907",
+            "shape": "(12, 72, 144)",
+            "template": "atmos/pr/GPCP-2-3/pr_mon_GPCP-2-3_BE_gn_197901-201907.v20200420.AC.nc"
+        },
+        "TRMM-3B43v-7": {
+            "CMIP_CMOR_TABLE": "Amon",
+            "MD5sum": "fa6a4140bc9d880982b67f2cbef57690",
+            "RefName": "TRMM-3B43v-7",
+            "RefTrackingDate": "Mon Apr 20 15:22:16 2020",
+            "filename": "pr_mon_TRMM-3B43v-7_BE_gn_199801-201712.v20200420.AC.nc",
+            "period": "199801-201712",
+            "shape": "(12, 400, 1440)",
+            "template": "atmos/pr/TRMM-3B43v-7/pr_mon_TRMM-3B43v-7_BE_gn_199801-201712.v20200420.AC.nc"
+        },
+        "alternate1": "TRMM-3B43v-7",
+        "alternate2": "CMAP-V1902",
+        "default": "GPCP-2-3"
+    }
+}
