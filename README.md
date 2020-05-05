@@ -1,4 +1,4 @@
-<img src="share/pcmdi_logo.png" width="15%" height="15%" align="right" />
+<img src="share/PCMDI_logo.png" width="15%" height="15%" align="right" />
 <h5 align="right"></h5> 
 
 # PCMDIObs-cmor-tables
