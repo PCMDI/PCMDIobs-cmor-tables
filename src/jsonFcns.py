@@ -21,10 +21,9 @@ def readJsonCreateDict(buildList):
     -----
         ...
     """
-
-    import os, json, ssl, urllib2   # urllib.request this is for PY3
-
-    # Test for list input of length == 2
+    import ssl
+    from urllib.request import urlopen
+   # Test for list input of length == 2
     if len(buildList[0]) != 2:
         print('Invalid inputs, exiting..')
         sys.exit()
@@ -37,8 +36,8 @@ def readJsonCreateDict(buildList):
     for count,table in enumerate(buildList):
         #print 'Processing:',table[0]
         # Read web file
-        jsonOutput = urllib2.urlopen(table[1], context=ctx) # Py2
-        #jsonOutput = urlopen(table[1], context=ctx) # Py3
+    #   jsonOutput = urllib2.urlopen(table[1], context=ctx) # Py2
+        jsonOutput = urlopen(table[1], context=ctx) # Py3
         tmp = jsonOutput.read()
         vars()[table[0]] = tmp
         jsonOutput.close()
@@ -52,3 +51,4 @@ def readJsonCreateDict(buildList):
         jsonDict[table[0]] = eval(table[0]) ; # Write to dictionary
 
     return jsonDict
+

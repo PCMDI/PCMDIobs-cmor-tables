@@ -27,7 +27,6 @@ for fi in range(len(inputFileName)):
 # f = cdm.open(inputFilePath+inputFileName[fi])
   f = cdm.open(inputFileName[fi])
   d = f(inputVarName[0])
-  cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print d.shape
@@ -36,8 +35,8 @@ for fi in range(len(inputFileName)):
 
 # Deal with problematic "months since" calendar/time axis
   time_bounds = time.getBounds()
-  time_bounds[:,0] = time[:]
-  time_bounds[:,1] = time[:] + 3.
+  time_bounds[:,0] = time[:] -1.5
+  time_bounds[:,1] = time[:] + 1.5 
 # time_bounds[-1,1] = time_bounds[-1,0]+1
   time.setBounds(time_bounds) #####time_bounds)
 #####del(time_bounds) ; # Cleanup
