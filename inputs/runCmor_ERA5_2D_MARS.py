@@ -10,28 +10,29 @@ cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNob
 inputJson = 'ERA5-MARS-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/ERA5/fromMARS/'
-#inputFileName = ['vas_era_interim.nc','tas_era_interim.nc','uas_era_interim.nc','psl_era_interim.nc','ts_era_interim.nc']
-#inputVarName = ['v10','t2m','u10','msl','sstk']
-#outputVarName = ['vas','tas','uas','psl','ts']
-#outputUnits = ['m s-1','K','m s-1','Pa','K']
+
 inputFileName = ['adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580171536.0444872-8315-37-02e9201d-5e7b-41b5-98ff-3b9b3a83d82d.nc','adaptor.mars.internal-1580190896.023251-25621-38-f188c480-a5cd-4284-84a7-5757315ca044.nc']
-
 inputVarName = ['t2m_0001','u10_0001','v10_0001','msl_0001'] 
-outputVarName = ['tas','uas','vas','psl']  #'hfls','hfss','psl','pr','rlus','rlds','rsds','rsus','sfcWind','uas','vas','tauu','tauv','ts'] 
-outputUnits = ['K','m s-1','m s-1','Pa']   #W m-2',"W m-2","Pa",'kg m-2 s-1','W m-2','W m-2','W m-2','W m-2',"m s-1",'m s-1','m s-1','Pa','Pa','K']
-outpos = ['','','','']  #'up','up','','','up','down','down','up','','','','down','down','']
+outputVarName = ['tas','uas','vas','psl']  
+outputUnits = ['K','m s-1','m s-1','Pa'] 
+outpos = ['','','',''] 
 
+'''
+inputFileName = ['adaptor.mars.internal-1582240823.3820484-23715-16-fe2f1d48-67a6-479f-9d83-6356ce7cbecb.nc','adaptor.mars.internal-1582240823.3820484-23715-16-fe2f1d48-67a6-479f-9d83-6356ce7cbecb.nc']
+inputVarName = ['ewss', 'nsss']
+outputVarName = ['tauu','tauv']
+outputUnits = ['Pa','Pa']
+outpos = ['down','down']
+'''
 
-
-### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
+### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE..
 for fi in range(len(inputVarName)):
   print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
-  d = f(inputVarName[fi])
-# cdutil.times.setTimeBoundsMonthly(d)
+  d = f(inputVarName[fi])(squeeze=1)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print(d.shape)
@@ -68,7 +69,6 @@ for fi in range(len(inputVarName)):
     axisId = cmor.axis(**axis)
     axisIds.append(axisId)
 
-#pdb.set_trace() ; # Debug statement
 
 # Setup units and create variable to write using cmor - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
   d.units = outputUnits[fi]

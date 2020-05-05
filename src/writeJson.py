@@ -16,7 +16,12 @@ PJD 29 Jan 2018     - Updated product, realm and region format
 
 #%% Import statements
 import copy,gc,json,os,re,shutil,ssl,sys
-from durolib import readJsonCreateDict ; #getGitInfo
+import shutil 
+
+#from durolib import readJsonCreateDict ; #getGitInfo
+
+from jsonFcns_py2 import readJsonCreateDict
+
 
 #%% Determine path
 homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
@@ -80,7 +85,7 @@ tableSource = [
 # Loop through tableSource and create output tables
 tmp = readJsonCreateDict(tableSource)
 for count,table in enumerate(tmp.keys()):
-    #print 'table:', table
+    #print('table:', table)
     if table in ['frequency','grid_label','nominal_resolution','product',
                  'realm','region']:
         vars()[table] = tmp[table].get(table)
@@ -290,7 +295,7 @@ def entryCheck(entry,search=re.compile(r'[^a-zA-Z0-9-]').search):
 for key in source_id['source_id'].keys():
     # Validate source_id format
     if not entryCheck(key):
-        print 'Invalid source_id format for entry:',key,'- aborting'
+        print('Invalid source_id format for entry:',key,'- aborting')
         sys.exit()
     # Sort variable entries
     vals = source_id['source_id'][key]['source_variables']
@@ -301,18 +306,18 @@ for key in source_id['source_id'].keys():
     # Validate source_label format
     val = source_id['source_id'][key]['source_label']
     if not entryCheck(key):
-        print 'Invalid source_label format for entry:',key,'- aborting'
+        print('Invalid source_label format for entry:',key,'- aborting')
         sys.exit()
     # Validate source_type
     val = source_id['source_id'][key]['source_type']
     if val not in source_type:
-        print 'Invalid source_type for entry:',key,'- aborting'
+        print('Invalid source_type for entry:',key,'- aborting')
         sys.exit()
     # Validate region
     vals = source_id['source_id'][key]['region']
     for val in vals:
         if val not in region: #['region']:
-            print 'Invalid region for entry:',key,'- aborting'
+            print('Invalid region for entry:',key,'- aborting')
             sys.exit()
 
 
@@ -343,7 +348,7 @@ Amon['variable_entry']['rstcre']['cell_methods'] = 'time: mean'
 Amon['variable_entry']['rstcre']['comment'] = ''
 Amon['variable_entry']['rstcre']['dimensions'] = 'longitude latitude time'
 Amon['variable_entry']['rstcre']['frequency'] = 'mon'
-Amon['variable_entry']['rstcre']['long_name'] = 'Top of Atmosphere Longwave CRE'
+Amon['variable_entry']['rstcre']['long_name'] = 'Top of Atmosphere Shortwave CRE'
 Amon['variable_entry']['rstcre']['ok_max_mean_abs'] = ''
 Amon['variable_entry']['rstcre']['ok_min_mean_abs'] = ''
 Amon['variable_entry']['rstcre']['out_name'] = 'rstcre'
@@ -392,7 +397,110 @@ Amon['variable_entry']['hfns']['units'] = 'W m-2'
 Amon['variable_entry']['hfns']['valid_max'] = ''
 Amon['variable_entry']['hfns']['valid_min'] = ''
 
+# Add new variables
 
+Amon['variable_entry']['uaplev37_ERA5'] = {}
+Amon['variable_entry']['uaplev37_ERA5']['cell_measures'] = ''
+Amon['variable_entry']['uaplev37_ERA5']['cell_methods'] = 'time: mean'
+Amon['variable_entry']['uaplev37_ERA5']['comment'] = ''
+Amon['variable_entry']['uaplev37_ERA5']['dimensions'] = 'longitude latitude plev37_ERA5 time'
+Amon['variable_entry']['uaplev37_ERA5']['frequency'] = 'mon'
+Amon['variable_entry']['uaplev37_ERA5']['long_name'] = 'Eastward Wind'
+Amon['variable_entry']['uaplev37_ERA5']['ok_max_mean_abs'] = ''
+Amon['variable_entry']['uaplev37_ERA5']['ok_min_mean_abs'] = ''
+Amon['variable_entry']['uaplev37_ERA5']['out_name'] = 'ua'
+Amon['variable_entry']['uaplev37_ERA5']['positive'] = ''
+Amon['variable_entry']['uaplev37_ERA5']['standard_name'] = 'eastward_wind'
+Amon['variable_entry']['uaplev37_ERA5']['type'] = 'real'
+Amon['variable_entry']['uaplev37_ERA5']['units'] = 'm s-1'
+Amon['variable_entry']['uaplev37_ERA5']['valid_max'] = ''
+Amon['variable_entry']['uaplev37_ERA5']['valid_min'] = ''
+
+# Add new variables
+
+Amon['variable_entry']['vaplev37_ERA5'] = {}
+Amon['variable_entry']['vaplev37_ERA5']['cell_measures'] = ''
+Amon['variable_entry']['vaplev37_ERA5']['cell_methods'] = 'time: mean'
+Amon['variable_entry']['vaplev37_ERA5']['comment'] = ''
+Amon['variable_entry']['vaplev37_ERA5']['dimensions'] = 'longitude latitude plev37_ERA5 time'
+Amon['variable_entry']['vaplev37_ERA5']['frequency'] = 'mon'
+Amon['variable_entry']['vaplev37_ERA5']['long_name'] = 'Northward Wind'
+Amon['variable_entry']['vaplev37_ERA5']['ok_max_mean_abs'] = ''
+Amon['variable_entry']['vaplev37_ERA5']['ok_min_mean_abs'] = ''
+Amon['variable_entry']['vaplev37_ERA5']['out_name'] = 'va'
+Amon['variable_entry']['vaplev37_ERA5']['positive'] = ''
+Amon['variable_entry']['vaplev37_ERA5']['standard_name'] = 'northward_wind'
+Amon['variable_entry']['vaplev37_ERA5']['type'] = 'real'
+Amon['variable_entry']['vaplev37_ERA5']['units'] = 'm s-1'
+Amon['variable_entry']['vaplev37_ERA5']['valid_max'] = ''
+Amon['variable_entry']['vaplev37_ERA5']['valid_min'] = ''
+
+# Add new variables
+
+Amon['variable_entry']['zgplev37_ERA5'] = {}
+Amon['variable_entry']['zgplev37_ERA5']['cell_measures'] = ''
+Amon['variable_entry']['zgplev37_ERA5']['cell_methods'] = 'time: mean'
+Amon['variable_entry']['zgplev37_ERA5']['comment'] = ''
+Amon['variable_entry']['zgplev37_ERA5']['dimensions'] = 'longitude latitude plev37_ERA5 time'
+Amon['variable_entry']['zgplev37_ERA5']['frequency'] = 'mon'
+Amon['variable_entry']['zgplev37_ERA5']['long_name'] = 'Geopotential Height'
+Amon['variable_entry']['zgplev37_ERA5']['ok_max_mean_abs'] = ''
+Amon['variable_entry']['zgplev37_ERA5']['ok_min_mean_abs'] = ''
+Amon['variable_entry']['zgplev37_ERA5']['out_name'] = 'zg'
+Amon['variable_entry']['zgplev37_ERA5']['positive'] = ''
+Amon['variable_entry']['zgplev37_ERA5']['standard_name'] = 'geopotential_height'
+Amon['variable_entry']['zgplev37_ERA5']['type'] = 'real'
+Amon['variable_entry']['zgplev37_ERA5']['units'] = 'm'
+Amon['variable_entry']['zgplev37_ERA5']['valid_max'] = ''
+Amon['variable_entry']['zgplev37_ERA5']['valid_min'] = ''
+
+# Add new variables
+
+Amon['variable_entry']['taplev37_ERA5'] = {}
+Amon['variable_entry']['taplev37_ERA5']['cell_measures'] = ''
+Amon['variable_entry']['taplev37_ERA5']['cell_methods'] = 'time: mean'
+Amon['variable_entry']['taplev37_ERA5']['comment'] = ''
+Amon['variable_entry']['taplev37_ERA5']['dimensions'] = 'longitude latitude plev37_ERA5 time'
+Amon['variable_entry']['taplev37_ERA5']['frequency'] = 'mon'
+Amon['variable_entry']['taplev37_ERA5']['long_name'] = 'Temperature'
+Amon['variable_entry']['taplev37_ERA5']['ok_max_mean_abs'] = ''
+Amon['variable_entry']['taplev37_ERA5']['ok_min_mean_abs'] = ''
+Amon['variable_entry']['taplev37_ERA5']['out_name'] = 'ta'
+Amon['variable_entry']['taplev37_ERA5']['positive'] = ''
+Amon['variable_entry']['taplev37_ERA5']['standard_name'] = 'air_temperature'
+Amon['variable_entry']['taplev37_ERA5']['type'] = 'real'
+Amon['variable_entry']['taplev37_ERA5']['units'] = 'K'
+Amon['variable_entry']['taplev37_ERA5']['valid_max'] = ''
+Amon['variable_entry']['taplev37_ERA5']['valid_min'] = ''
+
+'''
+coordinate['plev37_ERA5'] = {}
+coordinate['plev37_ERA5']['axis'] = 'Z'
+coordinate['plev37_ERA5']['out_name'] = 'plev'
+coordinate['plev37_ERA5']['standard_name']='air_pressure'
+coordinate['plev37_ERA5']['long_name']='pressure'
+coordinate['plev37_ERA5']['stored_direction']='decreasing'
+coordinate['plev37_ERA5']['positive']='down'
+coordinate['plev37_ERA5']['units']='Pa'
+coordinate['plev37_ERA5']['bounds_values']= ''
+coordinate['plev37_ERA5']['climatology']= ''
+coordinate['plev37_ERA5']['generic_level_name']= ''
+coordinate['plev37_ERA5']['must_have_bounds']= 'no'
+coordinate['plev37_ERA5']['forumula']= ''
+coordinate['plev37_ERA5']["requested_bounds"]=""
+coordinate['plev37_ERA5']["standard_name"]="air_pressure"
+coordinate['plev37_ERA5']["stored_direction"]="decreasing"
+coordinate['plev37_ERA5']["tolerance"]=""
+coordinate['plev37_ERA5']["type"]="double"
+coordinate['plev37_ERA5']["units"]="Pa"
+coordinate['plev37_ERA5']["valid_max"]=""
+coordinate['plev37_ERA5']["valid_min"]=""
+coordinate['plev37_ERA5']["value"]=""
+coordinate['plev37_ERA5']["z_bounds_factors"]=""
+coordinate['plev37_ERA5']["z_factors"]=""
+coordinate['plev37_ERA5']['requested'] = [ "100000.", "97500.", "95000.", "92500.", "90000.", "87500.", "85000.", "82500.", "80000.", "77500.", "75000.", "70000.", "65000.", "60000.", "55000.", "50000.", "45000.", "40000.", "35000.", "30000.", "25000.", "22500.", "20000.", "17500.", "15000.", "12500.", "10000.", "7000.", "5000.", "3000.", "2000.", "1000.", "700.", "500.", "300.", "200.", "100."]
+'''
+ 
 #%% Write variables to files
 for jsonName in masterTargets:
     # Clean experiment formats
@@ -422,7 +530,7 @@ for jsonName in masterTargets:
         outFile = ''.join(['../PMPObs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
-        print 'File existing, purging:',outFile
+        print('File existing, purging:',outFile)
         os.remove(outFile)
     if not os.path.exists('../Tables'):
         os.mkdir('../Tables')
@@ -524,7 +632,7 @@ PMPObs_CV['CV']['activity_id'] = 'PMPObs'
 
 # Write demo PMPObs_CV.json
 if os.path.exists('Tables/PMPObs_CV.json'):
-    print 'File existing, purging:','PMPObs_CV.json'
+    print('File existing, purging:','PMPObs_CV.json')
     os.remove('Tables/PMPObs_CV.json')
 fH = open('Tables/PMPObs_CV.json','w')
 json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
@@ -532,7 +640,7 @@ fH.close()
 
 # Write ../Tables obs4MIPs_CV.json
 if os.path.exists('../Tables/PMPObs_CV.json'):
-    print 'File existing, purging:','PMPObs_CV.json'
+    print('File existing, purging:','PMPObs_CV.json')
     os.remove('../Tables/PMPObs_CV.json')
 fH = open('../Tables/PMPObs_CV.json','w')
 json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
@@ -544,7 +652,7 @@ os.chdir('Tables')
 for count,CV in enumerate(tableList):
     outFile = ''.join(['PMPObs_',CV,'.json'])
     if os.path.exists(outFile):
-        print 'File existing, purging:',outFile
+        print('File existing, purging:',outFile)
         os.remove(outFile)
     fH = open(outFile,'w')
     json.dump(eval(CV),fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
@@ -554,6 +662,13 @@ for count,CV in enumerate(tableList):
 del(coordinate,count,formula_terms,frequency,grid_label,homePath,institution_id,
     nominal_resolution,PMPObs_CV,product,realm,inputJson,tableList,
     required_global_attributes,table_id)
+
+
+inpath = os.getcwd()
+inpath = inpath.replace('demo/','')
+outpath = inpath.replace('input','Tables')
+shutil.copyfile(inpath + '/PMPObs_coordinate-AddNewLevsHere.json',outpath + '/PMPObs_coordinate.json')
+
 
 #%% Generate zip archive
 # Add machine local 7za to path - solve for @gleckler1

@@ -10,7 +10,7 @@ cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNob
 inputJson = 'TRMM_3B43v.7-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
 inputFilePathend = '/TRMM_3B43v.7_mo_03162018/python_rewrite/'
-inputFileName = ['3B42_1998-2017_mo.nc']
+inputFileName = ['3B42_1998-2017_mo.nc']  ### THIS DATA is mm/hr
 inputVarName = ['pr']
 outputVarName = ['pr']
 outputUnits = ['kg m-2 s-1']
@@ -22,7 +22,8 @@ for fi in range(len(inputVarName)):
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
-  d = f(inputVarName[fi])
+  d_tmp = f(inputVarName[fi])
+  d = 24.* d_tmp /86400. 
   cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()

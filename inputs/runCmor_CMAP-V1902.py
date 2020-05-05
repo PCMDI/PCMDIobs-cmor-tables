@@ -23,7 +23,10 @@ for fi in range(len(inputVarName)):
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName[fi])
-  d = f(inputVarName[fi])
+  dtmp = f(inputVarName[fi])
+  d = MV2.where(MV2.greater(dtmp,-10000.),dtmp,1.e20)
+  d.missing = 1.e20
+
   cdutil.times.setTimeBoundsMonthly(d)
   d = MV2.divide(d,86400.)  # CONVERT mm/day to kg m-2 s-1
   lat = d.getLatitude()

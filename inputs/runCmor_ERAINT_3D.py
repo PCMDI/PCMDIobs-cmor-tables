@@ -10,7 +10,7 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'ERAINT-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/ERA-INT/'
+inputFilePathend = '/ERA-INT_10082017/'
 inputFileName = ['va_era_interim.nc','ta_era_interim.nc','ua_era_interim.nc','hur_era_interim.nc','hus_era_interim.nc','zg_era_interim.nc']
 inputVarName = ['v','t','u','r','q','z']
 outputVarName = ['va','ta','ua','hur','hus','zg']

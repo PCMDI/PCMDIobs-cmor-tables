@@ -2,6 +2,8 @@ import cmor
 import cdms2 as cdm
 import numpy as np
 import cdutil
+import cdtime
+
 cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
 
@@ -9,13 +11,13 @@ cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate
 cmorTable = '../Tables/PMPObs_Amon.json' ; # Aday,Amon,Lmon,Omon,SImon,fx,monNobs,monStderr - Load target table, axis info (coordinates, grid*) and CVs
 inputJson = 'CERES4.1-input.json' ; # Update contents of this file to set your global_attributes
 inputFilePathbgn = '/p/user_pub/pmp/pmp_obs_preparation/orig/data/'
-inputFilePathend = '/CERES_EBAF4.1/'
+inputFilePathend = '/CERES_EBAF4.1/TOA_separatefile/'
 
 inputFileName = 'CERES_EBAF-TOA_Ed4.1_Subset_200003-201906.nc'
-inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_c_mon','toa_lw_clr_c_mon','toa_net_all_mon','solar_mon']   #,'toa_cre_lw_mon','toa_cre_sw_mon'
-outputVarName = ['rlut','rsut','rsutcs','rlutcs','rt','rsdt']   #,'rltcre','rstcre'
-outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']   #,'W m-2','W m-2'
-outpos = ['up','up','up','up','','down']   #,'up','up'
+inputVarName = ['toa_lw_all_mon','toa_sw_all_mon','toa_sw_clr_c_mon','toa_lw_clr_c_mon','toa_net_all_mon','solar_mon','toa_cre_lw_mon','toa_cre_sw_mon']
+outputVarName = ['rlut','rsut','rsutcs','rlutcs','rt','rsdt','rltcre','rstcre']
+outputUnits = ['W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2','W m-2']
+outpos = ['up','up','up','up','','down','up','up']
 
 #inputVarName = ['toa_cre_lw_mon']
 #outputVarName = ['rltcre']
@@ -25,27 +27,23 @@ outpos = ['up','up','up','up','','down']   #,'up','up'
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
+
+  inputFileName = 'CERES_EBAF-TOA_Ed4.1_Subset_200003-201906.nc' 
+  if inputVarName[fi] in ['toa_cre_lw_mon','toa_cre_sw_mon']: inputFileName = 'CERES_EBAF_Ed4.1_Subset_200003-201905-CRE.nc'
+
   print (fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
   f = cdm.open(inputFilePath+inputFileName)
-  d = f(inputVarName[fi])
-  cdutil.times.setTimeBoundsMonthly(d)
+  d = f(inputVarName[fi],time = (cdtime.comptime(2003,0),cdtime.comptime(2019,1)))
+# cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
   print (d.shape)
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
-
-# Deal with problematic "months since" calendar/time axis
-#####time_bounds = time.getBounds()
-#####time_bounds[:,0] = time[:]
-#####time_bounds[:-1,1] = time[1:]
-#####time_bounds[-1,1] = time_bounds[-1,0]+1
-#####time.setBounds() #####time_bounds)
-#####del(time_bounds) ; # Cleanup
   d.positive = outpos[fi]
 
 #%% Initialize and run CMOR
