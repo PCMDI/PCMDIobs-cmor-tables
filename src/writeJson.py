@@ -16,9 +16,11 @@ PJD 29 Jan 2018     - Updated product, realm and region format
 
 #%% Import statements
 import copy,gc,json,os,re,shutil,ssl,sys
+import shutil 
+
 #from durolib import readJsonCreateDict ; #getGitInfo
 
-from jsonFcns import readJsonCreateDict
+from jsonFcns_py2 import readJsonCreateDict
 
 
 #%% Determine path
@@ -660,6 +662,13 @@ for count,CV in enumerate(tableList):
 del(coordinate,count,formula_terms,frequency,grid_label,homePath,institution_id,
     nominal_resolution,PMPObs_CV,product,realm,inputJson,tableList,
     required_global_attributes,table_id)
+
+
+inpath = os.getcwd()
+inpath = inpath.replace('demo/','')
+outpath = inpath.replace('input','Tables')
+shutil.copyfile(inpath + '/PMPObs_coordinate-AddNewLevsHere.json',outpath + '/PMPObs_coordinate.json')
+
 
 #%% Generate zip archive
 # Add machine local 7za to path - solve for @gleckler1
