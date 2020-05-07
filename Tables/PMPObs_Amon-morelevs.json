@@ -253,6 +253,23 @@
             "valid_max":"",
             "valid_min":""
         },
+        "clisccp": {
+            "frequency": "mon", 
+            "standard_name": "cloud_area_fraction_in_atmosphere_layer", 
+            "units": "%", 
+            "cell_methods": "area: time: mean", 
+            "cell_measures": "area: areacella", 
+            "long_name": "ISCCP Cloud Area Percentage", 
+            "comment": "Percentage cloud cover in optical depth categories.", 
+            "dimensions": "longitude latitude plev7c tau time", 
+            "out_name": "clisccp", 
+            "type": "real", 
+            "positive": "", 
+            "valid_min": "", 
+            "valid_max": "", 
+            "ok_min_mean_abs": "", 
+            "ok_max_mean_abs": ""
+        }, 
         "clivi":{
             "cell_measures":"",
             "cell_methods":"area: time: mean",

@@ -234,6 +234,13 @@
                 "source_type":"satellite_blended",
                 "source_version_number":"4.1"
             },
+            "ISCCP":{
+                "region":"global",
+                "source":"ISCCP Cloud Radiative Properties. Monthly Averages",
+                "source_label":"ISCCP",
+                "source_type":"satellite_blended",
+                "source_version_number":"H"
+            },
             "CMAP-V1902":{
                 "region":"global",
                 "source":"CMAP V1902 (N/A): CMAP Precipitation",

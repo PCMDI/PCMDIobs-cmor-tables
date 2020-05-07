@@ -71,6 +71,22 @@
             ],
             "source_version_number":"4.1"
         },
+        "ISCCP":{
+            "institution_id":"NASA/LaRC",
+            "region":[
+                "global"
+            ],
+            "release_year":"2019",
+            "source_description":"ISCCP Cloud Radiative Properties. Monthly Averages",
+            "source_id":"ISCCP",
+            "source_label":"ISCCP",
+            "source_name":"ISCCP",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "clisccp"
+            ],
+            "source_version_number":"H"
+        },
         "CMAP-V1902":{
             "institution_id":"NOAA",
             "region":[
