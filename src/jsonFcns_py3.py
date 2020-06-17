@@ -81,8 +81,3 @@ def readJsonCreateDict(buildList):
 
     return jsonDict
 
-
-
-
-    return jsonDict
-

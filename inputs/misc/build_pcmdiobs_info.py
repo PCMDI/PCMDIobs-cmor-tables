@@ -106,7 +106,7 @@ obs_dic_in = {'rlut': {'default': 'CERES-EBAF-4-1','alternate1': 'CERES-EBAF-4-0
               'tos': {'default': 'UKMETOFFICE-HadISST-v1-1'},
               'zos': {'default': 'AVISO-1-0'},
               'sos': {'default': 'NODC-WOA09'},
-              'ts': {'default': 'HadISST1'},
+              'ts': {'default': 'ERA-5', 'alternate1':'HadISST-1-1','alternate2':'OISST-L4-AVHRR-only-v2'},
               'thetao': {'default': 'WOA13v2',
                          'alternate1': 'UCSD',
                          'alternate2': 'Hosoda-MOAA-PGV',
