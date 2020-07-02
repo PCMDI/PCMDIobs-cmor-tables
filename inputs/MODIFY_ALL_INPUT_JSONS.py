@@ -28,6 +28,7 @@ for l in lst:   #[0:2]:
    d['activity_id'] = 'PCMDIobs2'
    d['curation_provenance'] = 'work-in-progress'
    d['output_file_template'] = '<variable_id><frequency><source_id><variant_label><grid_label><version>'
+   d['
 
 ###########
 ### SAVE CHANGED VALUES
