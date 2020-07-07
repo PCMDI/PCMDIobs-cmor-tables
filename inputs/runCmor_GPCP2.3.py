@@ -20,7 +20,7 @@ outputUnits = ['kg m-2 s-1']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
-  print fi, inputVarName[fi]
+  print(fi, inputVarName[fi])
 # inputFilePath = inputFilePathbgn+outputVarName[fi]+inputFilePathend
   inputFilePath = inputFilePathbgn+ inputFilePathend
 
@@ -32,7 +32,7 @@ for fi in range(len(inputVarName)):
   cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
-  print d.shape
+  print(d.shape)
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 

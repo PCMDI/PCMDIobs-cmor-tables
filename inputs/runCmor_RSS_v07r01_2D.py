@@ -1,6 +1,7 @@
 import cmor
 import cdms2 as cdm
 import numpy as np
+import MV2
 import cdutil
 #cdm.setAutoBounds('on') # Caution, this attempts to automatically set coordinate bounds - please check outputs using this option
 #import pdb ; # Debug statement - import if enabling below
@@ -24,7 +25,10 @@ for fi in range(len(inputVarName)):
  inputFilePath = inputFilePathbgn+inputFilePathend
  f = cdm.open(inputFilePath+inputFileName[fi])
  d = f(inputVarName[fi])
- cdutil.times.setTimeBoundsMonthly(d)
+#cdutil.times.setTimeBoundsMonthly(d)
+ if inputVarName[fi] == 'wind_speed': 
+   d = MV2.where(MV2.less(d,0.),1.e20,d)
+
  lat = d.getLatitude()
  lon = d.getLongitude()
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
@@ -32,11 +36,11 @@ for fi in range(len(inputVarName)):
 
 # Deal with problematic "months since" calendar/time axis
  time_bounds = time.getBounds()
- time_bounds[:,0] = time[:]
- time_bounds[:-1,1] = time[1:]
- time_bounds[-1,1] = time_bounds[-1,0]+1
- time.setBounds(time_bounds)
- del(time_bounds) ; # Cleanup
+#time_bounds[:,0] = time[:]
+#time_bounds[:-1,1] = time[1:]
+#time_bounds[-1,1] = time_bounds[-1,0]+1
+#time.setBounds(time_bounds)
+#del(time_bounds) ; # Cleanup
 
 #%% Initialize and run CMOR
 # For more information see https://cmor.llnl.gov/mydoc_cmor3_api/

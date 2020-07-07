@@ -6,6 +6,7 @@ from regrid2 import Regridder
 dbver = 'PCMDIobs2'
 ver = 'v20200402'  #'v20200212'   #'v20200213'  #'v20200219'  #'v20200224'   #'v20200206'
 ver = 'v20200406'
+ver = 'v20200612'
 target = '1x1'
 
 pin = '/p/user_pub/PCMDIobs/' + dbver + '/atmos/mon/*/CERES-EBAF-4-1/gn/' + ver + '/'
@@ -15,7 +16,7 @@ lst = glob.glob(pin + '*.nc')
 
 # TARGET 1x1 grid
 
-fit = '/p/user_pub/PCMDIobs/PCMDIobs1.0/atm/mo/rlut/CERES/ac/rlut_CERES_000001-000012_ac.nc'
+fit = '/p/user_pub/PCMDIobs/PCMDIobs1/atm/mo/rlut/CERES/ac/rlut_CERES_000001-000012_ac.nc'
 fo = cdms2.open(fit)
 do = fo['rlut']
 tgrid = do.getGrid()

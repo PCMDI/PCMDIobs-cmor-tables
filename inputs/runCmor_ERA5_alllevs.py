@@ -55,7 +55,7 @@ for fi in range(len(inputVarName)):
  for i in range(40):
   yr = 1979 + i
 
-  print fi, inputVarName[fi]
+  print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend[fi]
 #%% Process variable (with time axis)
 # Open and read input netcdf file

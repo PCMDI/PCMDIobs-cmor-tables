@@ -18,7 +18,7 @@ outputUnits = ['m s-1','K','m s-1','%','kg kg**-1','m']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
-  print fi, inputVarName[fi]
+  print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
@@ -54,7 +54,7 @@ for fi in range(len(inputVarName)):
 # Pad data array with missing values
   d2 = np.ma.array(np.ma.ones([d1.shape[0],2,d1.shape[2],d1.shape[3]]),mask=True)*1e20
   d11 = d1[:,-1::-1,:,:]
-  print d2.shape,d11.shape
+  print(d2.shape,d11.shape)
   d = mv.concatenate((d11,d2),axis=1)
 
   del(d1,d11,d2,plev17) ; # Cleanup
