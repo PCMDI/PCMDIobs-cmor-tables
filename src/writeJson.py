@@ -23,7 +23,7 @@ import shutil
 #from jsonFcns_py2 import readJsonCreateDict
 
 #######################################################################
-def readJsonCreateDict(buildList):
+def readJsonCreateDict_dep(buildList):
     """
     Documentation for readJsonCreateDict(buildList):
     -------
@@ -49,9 +49,9 @@ def readJsonCreateDict(buildList):
 
     import os, json, ssl  #, urllib2   # urllib.request this is for PY3
 
-    import urllib2  # PY2
-##    import urllib.request  PY3
-##    from urllib.request import urlopen PY3
+#   import urllib2  # PY2
+    import urllib.request  # PY3
+    from urllib.request import urlopen #PY3
 
     # Test for list input of length == 2
     if len(buildList[0]) != 2:
@@ -66,8 +66,8 @@ def readJsonCreateDict(buildList):
     for count,table in enumerate(buildList):
         #print 'Processing:',table[0]
         # Read web file
-        jsonOutput = urllib2.urlopen(table[1], context=ctx) # Py2
-#       jsonOutput = urlopen(table[1], context=ctx) # Py3
+#       jsonOutput = urllib2.urlopen(table[1], context=ctx) # Py2
+        jsonOutput = urlopen(table[1], context=ctx) # Py3
         tmp = jsonOutput.read()
         vars()[table[0]] = tmp
         jsonOutput.close()
@@ -82,7 +82,47 @@ def readJsonCreateDict(buildList):
 
     return jsonDict
 
+def readJsonCreateDict(buildList):
 
+    import os, json, ssl  #, urllib2   # urllib.request this is for PY3
+
+#   import urllib2  # PY2
+    import urllib.request  # PY3
+    from urllib.request import urlopen #PY3
+
+    # Test for list input of length == 2
+    if len(buildList[0]) != 2:
+        print('Invalid inputs, exiting..')
+        sys.exit()
+    # Create urllib2 context to deal with lab/LLNL web certificates
+    ctx                 = ssl.create_default_context()
+    ctx.check_hostname  = False
+    ctx.verify_mode     = ssl.CERT_NONE
+    # Iterate through buildList and write results to jsonDict
+    jsonDict = {}
+    for count,table in enumerate(buildList):
+        print('Processing:',table[0])
+        # Read web file
+#       jsonOutput = urllib2.urlopen(table[1], context=ctx) # Py2
+        jsonOutput = urlopen(table[1], context=ctx) # Py3
+        tmp = jsonOutput.read()
+
+#       vars()[table[0]] = tmp
+#       jsonOutput.close()
+#       # Write local json
+#       tmpFile = open('tmp.json','w')
+#       tmpFile.write(eval(table[0]))
+#       tmpFile.close()
+#       # Read local json
+#       vars()[table[0]] = json.load(open('tmp.json','r'))
+#       res = urllib.request.urlopen(pth)
+#       res_body = res.read()
+#       j = json.loads(res_body.decode("utf-8"))
+#       os.remove('tmp.json')
+ 
+        jsonDict[table[0]] = tmp #eval(table[0]) ; # Write to dictionary
+
+    return jsonDict
 
 
 
@@ -152,27 +192,31 @@ tableSource = [
 
 #%% Loop through tables and create in-memory objects
 # Loop through tableSource and create output tables
+
+
 tmp = readJsonCreateDict(tableSource)
 tmpy = tmp
 print(type(tmp))
 print(tmp.keys())
 
-w = sys.stdin.readline()
-
+#w = sys.stdin.readline()
 
 for count,table in enumerate(tmp.keys()):
     #print('table:', table)
-    if table in ['frequency','grid_label','nominal_resolution','product',
-                 'realm','region']:
-        vars()[table] = tmp[table].get(table)
-    else:
+#   if table in ['frequency','grid_label','nominal_resolution','product',
+#                'realm','region']:
+#       vars()[table] = tmp[table].get(table)
+#   else:
+#       vars()[table] = tmp[table]
         vars()[table] = tmp[table]
+
 del(tmp,count,table) ; gc.collect()
 
 # Cleanup table_id values
+'''
 for table in ['Amon','Aday','A3hr','Lmon','Omon','SImon','fx']:
     eval(table)['Header']['table_id']  = ''.join(['Table PMPObs_',table]) ; # Cleanup from upstream
-
+'''
 #%% Coordinate
 
 #%% Frequency
@@ -188,7 +232,10 @@ institution_id = readJsonCreateDict(tmp)
 institution_id = institution_id.get('institution_id')
 
 # Fix issues
-execfile('institution_ids.py')
+#execfile('institution_ids.py')
+
+exec(open("./institution_ids.py").read())
+
 
 '''
 List from https://goo.gl/GySZ56 to be updated
@@ -268,7 +315,8 @@ source_id = source_id.get('source_id')
 
 # Enter fixes or additions below
 
-execfile('source_ids.py')
+#execfile('source_ids.py')
+exec(open("./source_ids.py").read())
 
 '''
 List from https://goo.gl/GySZ56 to be updated
@@ -392,10 +440,17 @@ for key in source_id['source_id'].keys():
     # Validate region
     vals = source_id['source_id'][key]['region']
     for val in vals:
-        if val not in region: #['region']:
+        if val not in eval(region)['region']: #['region']:
             print('Invalid region for entry:',key,'- aborting')
             sys.exit()
 
+Amon = eval(Amon)
+Aday = eval(Aday)
+A3hr = eval(A3hr)
+Lmon = eval(Lmon)
+Omon = eval(Omon)
+SImon = eval(SImon)
+fx = eval(fx)
 
 # Add new variables
 # Variable sponsor - NOAA-NCEI; Jim Baird (JimBiardCics)
@@ -580,7 +635,7 @@ coordinate['plev37_ERA5']['requested'] = [ "100000.", "97500.", "95000.", "92500
 #%% Write variables to files
 for jsonName in masterTargets:
     # Clean experiment formats
-    if jsonName in ['coordinate','grids']: #,'Amon','Lmon','Omon','SImon']:
+    if jsonName  in []:  #['coordinate','grids']: #,'Amon','Lmon','Omon','SImon']:
         dictToClean = eval(jsonName)
         for key, value1 in dictToClean.iteritems():
             for value2 in value1.iteritems():
@@ -622,7 +677,22 @@ for jsonName in masterTargets:
     else:
         jsonDict = eval(jsonName)
     fH = open(outFile,'w')
-    json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+    if jsonName in ['coordinate','formula_terms','grids']: jsonDict = eval(jsonDict)
+    if jsonName in ['frequency']: jsonDict['frequency']  = eval(jsonDict['frequency'])
+    if jsonName in ['grid_label']: jsonDict['grid_label']  = eval(jsonDict['grid_label'])
+    if jsonName in ['nominal_resolution']: jsonDict['nominal_resolution']  = eval(jsonDict['nominal_resolution'])
+    if jsonName in ['product']: jsonDict['product']  = eval(jsonDict['product'])
+    if jsonName in ['realm']: jsonDict['realm']  = eval(jsonDict['realm'])
+    if jsonName in ['region']: jsonDict['region']  = eval(jsonDict['region'])
+
+
+    print('starting ', fH,' ', jsonDict.keys(),' ' ,type(jsonDict))
+
+#   if jsonName in ['frequency']: jsonDict['frequency']
+#   print('dumping ', fH,' ', jsonDict.keys())
+#   json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+    json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))
+    print(fH,' ','DONE------------------')
     fH.close()
 
 del(jsonName,outFile) ; gc.collect()
@@ -677,7 +747,7 @@ for count,CV in enumerate(CVJsonList):
     if CV == 'source_id':
         source_id_ = source_id['source_id']
         PMPObs_CV['CV']['source_id'] = {}
-        for key,values in source_id_.iteritems():
+        for key,values in source_id_.items():
             PMPObs_CV['CV']['source_id'][key] = {}
             string = ''.join([source_id_[key]['source_label'],' ',
                               source_id_[key]['source_version_number'],' (',
@@ -707,11 +777,17 @@ PMPObs_CV['CV']['activity_id'] = 'PMPObs'
 #tagTxt = tagTxt[0:tagInd].replace('latest_tagPoint: ','').strip()
 
 # Write demo PMPObs_CV.json
+
+for p in PMPObs_CV['CV'].keys():
+  print(p,'  ',type(PMPObs_CV['CV'][p]))
+# PMPObs_CV['CV'][p] = eval(PMPObs_CV['CV'][p])
+
 if os.path.exists('Tables/PMPObs_CV.json'):
     print('File existing, purging:','PMPObs_CV.json')
     os.remove('Tables/PMPObs_CV.json')
 fH = open('Tables/PMPObs_CV.json','w')
-json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+#json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))
 fH.close()
 
 # Write ../Tables obs4MIPs_CV.json
@@ -719,7 +795,8 @@ if os.path.exists('../Tables/PMPObs_CV.json'):
     print('File existing, purging:','PMPObs_CV.json')
     os.remove('../Tables/PMPObs_CV.json')
 fH = open('../Tables/PMPObs_CV.json','w')
-json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+#json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+json.dump(PMPObs_CV,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))
 fH.close()
 
 # Loop and write all other files
@@ -731,7 +808,8 @@ for count,CV in enumerate(tableList):
         print('File existing, purging:',outFile)
         os.remove(outFile)
     fH = open(outFile,'w')
-    json.dump(eval(CV),fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+#   json.dump(eval(CV),fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+    json.dump(eval(CV),fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))
     fH.close()
 
 # Cleanup
