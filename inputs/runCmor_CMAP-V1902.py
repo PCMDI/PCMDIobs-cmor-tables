@@ -18,7 +18,7 @@ outputUnits = ['kg m-2 s-1']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
-  print fi, inputVarName[fi]
+  print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
@@ -31,7 +31,7 @@ for fi in range(len(inputVarName)):
   d = MV2.divide(d,86400.)  # CONVERT mm/day to kg m-2 s-1
   lat = d.getLatitude()
   lon = d.getLongitude()
-  print d.shape
+  print(d.shape)
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
@@ -78,10 +78,10 @@ for fi in range(len(inputVarName)):
   #cmor.set_variable_attribute(varid,'valid_max',3.0)
 
 # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
-  print 'ABOVE WRITE'
+  print('ABOVE WRITE')
   cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
   cmor.write(varid,values,time_vals=time[:],time_bnds=time_bounds)  #time.getBounds()) ; # Write variable with time axis
-  print 'BELOW WRITE'
+  print('BELOW WRITE')
   f.close()
 
   cmor.close()

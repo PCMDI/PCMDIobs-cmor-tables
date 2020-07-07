@@ -28,6 +28,9 @@ for l in lst:   #[0:2]:
    d['activity_id'] = 'PCMDIobs2'
    d['curation_provenance'] = 'work-in-progress'
    d['output_file_template'] = '<variable_id><frequency><source_id><variant_label><grid_label><version>'
+   d['_controlled_vocabulary_file'] = d['_control_vocabulary_file']
+
+   d.pop('_control_vocabulary_file')
 
 ###########
 ### SAVE CHANGED VALUES
@@ -36,7 +39,8 @@ for l in lst:   #[0:2]:
    print(l,' ', d.keys())
    print('---------------------------')
 #  json.dumps(d,g)
-   json.dump(d,g,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+#  json.dump(d,g,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+   json.dump(d,g,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))
    g.close()
  except:
    print('failed with ', l)

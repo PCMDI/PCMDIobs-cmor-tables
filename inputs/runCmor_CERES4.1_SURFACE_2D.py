@@ -23,7 +23,7 @@ for fi in range(len(inputVarName)):
   inputFileName = 'CERES_EBAF-SURFACE_Ed4.1_Subset_200003-201905.nc'
   if inputVarName[fi] in ['sfc_cre_net_sw_mon','sfc_cre_net_lw_mon','sfc_cre_net_tot_mon']: inputFileName = 'CERES_EBAF_SurfaceCRE_Ed4.1_Subset_200003-201905.nc' 
 
-  print (fi, inputVarName[fi])
+  print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
@@ -33,7 +33,7 @@ for fi in range(len(inputVarName)):
   cdutil.times.setTimeBoundsMonthly(d)
   lat = d.getLatitude()
   lon = d.getLongitude()
-  print (d.shape)
+  print(d.shape)
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 

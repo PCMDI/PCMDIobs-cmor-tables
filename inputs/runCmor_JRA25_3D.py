@@ -18,7 +18,7 @@ outputUnits = ['m s-1','K','m s-1','m']
 
 ### BETTER IF THE USER DOES NOT CHANGE ANYTHING BELOW THIS LINE...
 for fi in range(len(inputVarName)):
-  print fi, inputVarName[fi]
+  print(fi, inputVarName[fi])
   inputFilePath = inputFilePathbgn+inputFilePathend
 #%% Process variable (with time axis)
 # Open and read input netcdf file
