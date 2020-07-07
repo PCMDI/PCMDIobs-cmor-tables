@@ -217,6 +217,7 @@ del(tmp,count,table) ; gc.collect()
 for table in ['Amon','Aday','A3hr','Lmon','Omon','SImon','fx']:
     eval(table)['Header']['table_id']  = ''.join(['Table PMPObs_',table]) ; # Cleanup from upstream
 '''
+
 #%% Coordinate
 
 #%% Frequency
@@ -451,6 +452,18 @@ Lmon = eval(Lmon)
 Omon = eval(Omon)
 SImon = eval(SImon)
 fx = eval(fx)
+
+for table in [Amon,Aday,A3hr,Lmon,Omon,SImon,fx]:
+    if table == Amon: tname = 'Amon'
+    if table == Aday: tname = 'Aday'
+    if table == A3hr: tname = 'A3hr'
+    if table == Lmon: tname = 'Lmon'
+    if table == Omon: tname = 'Omon'
+    if table == SImon: tname = 'SImon'
+    if table == fx: tname = 'fx'
+
+    table['Header']['table_id']  = ''.join(['Table PMPObs_',tname]) 
+
 
 # Add new variables
 # Variable sponsor - NOAA-NCEI; Jim Baird (JimBiardCics)

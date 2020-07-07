@@ -12,7 +12,7 @@
         "product":"observations",
         "realm":"seaIce",
         "table_date":"02 June 2020",
-        "table_id":"Table obs4MIPs_SImon"
+        "table_id":"Table PMPObs_SImon"
     },
     "variable_entry":{
         "sfdsi":{

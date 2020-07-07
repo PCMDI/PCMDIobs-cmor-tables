@@ -12,7 +12,7 @@
         "product":"observations",
         "realm":"ocean",
         "table_date":"02 June 2020",
-        "table_id":"Table obs4MIPs_Omon"
+        "table_id":"Table PMPObs_Omon"
     },
     "variable_entry":{
         "agessc":{
