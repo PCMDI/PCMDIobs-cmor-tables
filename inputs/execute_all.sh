@@ -46,5 +46,5 @@ python runCmor_ERA5_alllevs_CREATEIP.py
 
 
 ######################
-chmod -R 777 /p/user_pub/PCMDIobs/PCMDIobs2
+chmod -R 755 /p/user_pub/PCMDIobs/PCMDIobs2
 
