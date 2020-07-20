@@ -210,6 +210,22 @@
             ],
             "source_version_number":"2.3"
         },
+        "GPCP-IP":{
+            "institution_id":"NOAA",
+            "region":[
+                "global"
+            ],
+            "release_year":"N/A",
+            "source_description":"Merged Precipitation",
+            "source_id":"GPCP-IP",
+            "source_label":"GPCP",
+            "source_name":"GPCP",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "pr"
+            ],
+            "source_version_number":"IP"
+        },
         "HadISST-1-1":{
             "institution_id":"MOHC",
             "region":[

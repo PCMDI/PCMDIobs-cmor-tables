@@ -332,6 +332,13 @@
                 "source_type":"satellite_blended",
                 "source_version_number":"2.3"
             },
+            "GPCP-IP":{
+                "region":"global",
+                "source":"GPCP IP (N/A): Merged Precipitation",
+                "source_label":"GPCP",
+                "source_type":"satellite_blended",
+                "source_version_number":"IP"
+            },
             "HadISST-1-1":{
                 "region":"global_ocean",
                 "source":"HadISST-1-1 1-1 (2016): HadISST 1.1 monthly average sea surface temperature",
