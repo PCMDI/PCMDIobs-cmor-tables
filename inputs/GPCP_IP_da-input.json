@@ -21,6 +21,7 @@
     "references":"",
     "source_id":"GPCP-IP",
     "title":"GPCP daily data prepared for PMPObs (ODS-v2.1.0)",
+    "origins":"FROGS DATABASE, https://doi.org/10.5194/essd-11-1017-2019"
     "tracking_prefix":"hdl:21.14102",
     "variant_info":"Best Estimate",
     "variant_label":"BE"
