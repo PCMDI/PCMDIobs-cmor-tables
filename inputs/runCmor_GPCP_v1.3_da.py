@@ -25,6 +25,9 @@ for fi in range(len(inputVarName)):
   lat = d.getLatitude()
   lon = d.getLongitude()
   print(d.shape)
+
+  d.mask = np.array(d==d.missing_value) # SUGGESTION FROM Min-Seop Ahn
+
 #time = d.getTime() ; # Assumes variable is named 'time', for the demo file this is named 'months'
   time = d.getAxis(0) ; # Rather use a file dimension-based load statement
 
