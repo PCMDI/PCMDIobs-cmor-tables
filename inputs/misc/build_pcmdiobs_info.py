@@ -224,13 +224,22 @@ gc.collect()
 #gc.collect()
 
 # Save dictionary locally and in doc subdir
-if datatype == 'clim':  json_name = pathout + 'pcmdiobs2_clims_byVar_catalogue_' + ver + '.json'
-if datatype == 'monthly':  json_name = pathout + 'pcmdiobs_monthly_byVar_catalogue_' + ver + '.json'
-if datatype == 'day':  json_name = pathout + 'pcmdiobs_day_byVar_catalogue_' + ver + '.json'
-if datatype == '3hr':  json_name = pathout + 'pcmdiobs_3hr_byVar_catalogue_' + ver + '.json'
-
+if datatype == 'clim':  
+  json_name = pathout + 'pcmdiobs2_clims_byVar_catalogue_' + ver + '.json'
+  json_name_GH = '../../catalogue/' + 'pcmdiobs2_clims_byVar_catalogue_' + ver + '.json'
+if datatype == 'monthly':  
+  json_name = pathout + 'pcmdiobs_monthly_byVar_catalogue_' + ver + '.json'
+  json_name_GH = '../../catalogue/' + 'pcmdiobs_monthly_byVar_catalogue_' + ver + '.json'
+if datatype == 'day':  
+  json_name = pathout + 'pcmdiobs_day_byVar_catalogue_' + ver + '.json'
+  json_name_GH = '../../catalogue/' + 'pcmdiobs_day_byVar_catalogue_' + ver + '.json'
+if datatype == '3hr':  
+  json_name = pathout + 'pcmdiobs_3hr_byVar_catalogue_' + ver + '.json'
+  json_name_GH = '../../catalogue/'  + 'pcmdiobs_3hr_byVar_catalogue_' + ver + '.json'
 
 json.dump(obs_dic, open(json_name, 'w'), sort_keys=True, indent=4,
+          separators=(',', ': '))
+json.dump(obs_dic, open(json_name_GH, 'w'), sort_keys=True, indent=4,
           separators=(',', ': '))
 
 time.sleep(2)
@@ -238,10 +247,12 @@ time.sleep(2)
 ### REMAP JSON BY SOURCE
 
 catalogue_json_bySourceID = json_name.replace('byVar','bySource')
+catalogue_json_bySourceID_GH = json_name_GH.replace('byVar','bySource')
 
 print(catalogue_json_bySourceID)
 
 f_catalogue  = open(json_name)  #open(catalogue_json)
+f_catalogue_GH = open(json_name_GH)
 dict_catalogue = json.loads(f_catalogue.read())
 
 #
@@ -284,6 +295,8 @@ for data_source in data_source_list:
 #
 with open(catalogue_json_bySourceID, "w") as f_catalogue_new:
     json.dump(dict_catalogue_new, f_catalogue_new, indent=4, sort_keys=True)
+with open(catalogue_json_bySourceID_GH, "w") as f_catalogue_new_GH:
+    json.dump(dict_catalogue_new, f_catalogue_new_GH, indent=4, sort_keys=True)
 
 
 
