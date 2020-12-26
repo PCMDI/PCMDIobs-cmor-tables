@@ -2,6 +2,9 @@ import cdms2
 import glob
 import os
 from regrid2 import Regridder
+import datetime
+
+ver_out = datetime.datetime.now().strftime('v%Y%m%d')
 
 dbver = 'PCMDIobs2'
 ver = 'v20200612'
@@ -25,6 +28,7 @@ for l in lst:   #[0:2]:
 #print(l)
 
  newfile = l.replace('gn',target)
+ newfile = newfile.replace(ver,ver_out)
  newdir_tmp = newfile.split('/')[0:9]  
  var = newfile.split('/')[7] 
  rep = '/'
@@ -37,7 +41,7 @@ for l in lst:   #[0:2]:
   print('cant make dir ' + newdir + '/' + target)
 
  try:
-  os.mkdir(newdir + '/' + target + '/' + ver + '/')
+  os.mkdir(newdir + '/' + target + '/' + ver_out + '/')
  except:
   pass
 
